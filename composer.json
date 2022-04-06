@@ -1,0 +1,17 @@
+{
+    "name": "prs/prs",
+    "type": "project",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "PRS\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "munenepeter",
+            "email": "peternjega7@gmail.com"
+        }
+    ],
+    "require": {}
+}
