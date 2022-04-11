@@ -12,6 +12,6 @@ return [
     ],
 
     'sqlite' => [
-        'path' => 'src/Core/Database/prs.db'
+        'path' => __DIR__.'/src/Core/Database/DB/prs.sqlite'
     ]
 ];
