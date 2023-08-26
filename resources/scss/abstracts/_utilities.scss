@@ -1,0 +1,20 @@
+// image placeholder
+img[data-src][src*='data:image'] {
+	background: rgba(0, 0, 0, 0.1);
+}
+
+.uk-overflow-y-auto {
+	overflow-y: auto;
+}
+
+.uk-flex-shrink-none {
+	flex-shrink: 0;
+}
+
+.uk-border-bottom {
+	border-bottom: 1px solid rgba($global-border, .56)
+}
+
+.uk-position-z-index-large {
+	z-index: 99999;
+}

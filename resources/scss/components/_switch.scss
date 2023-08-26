@@ -1,0 +1,77 @@
+.switch {
+	position: relative;
+	display: inline-block;
+	height: 2.125rem;
+	width: 3.75rem;
+
+	& input {
+		display: none;
+	}
+}
+
+.switch-slider {
+	background-color: rgba(0, 0, 0, 0.22);
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	border-radius: 31.25rem;
+	bottom: 0;
+	cursor: pointer;
+	transition-property: background-color;
+	transition-duration: .2s;
+	box-shadow: inset 0 0 2px rgba(0, 0, 0, 0.07);
+
+	/* Switch pointer */
+	&:before {
+		content: '';
+		background-color: $global-inverse-color;
+		position: absolute;
+		width: 1.875rem;
+		height: 1.875rem;
+		left: 0.125rem;
+		bottom: 0.125rem;
+		border-radius: 50%;
+		transition-property: transform, box-shadow;
+		transition-duration: .2s;
+	}
+	
+}
+
+/* Slider active color */
+input:checked + .uk-switch-slider {
+	background-color: $global-primary-background !important;
+}
+
+/* Pointer active animation */
+input:checked + .uk-switch-slider:before {
+	transform: translateX(1.625rem);
+}
+
+/* Modifiers */
+.switch-slider.switch-on-off {
+	background-color: $global-danger-background;
+}
+
+input:checked + .switch-slider.switch-on-off {
+	background-color: $global-success-background !important;
+}
+
+/* Style Modifier */
+.switch-slider.switch-big:before {
+	transform: scale(1.2);
+	box-shadow: 0 0 6px rgba(0, 0, 0, 0.22);
+}
+
+.switch-slider.switch-small:before {
+	box-shadow: 0 0 6px rgba(0, 0, 0, 0.22);
+}
+
+input:checked + .switch-slider.switch-big:before {
+	transform: translateX(1.625rem) scale(1.2);
+}
+
+/* Inverse Modifier - affects only default */
+.light .switch-slider:not(.switch-on-off) {
+	background-color: rgba(255, 255, 255, 0.22);
+}

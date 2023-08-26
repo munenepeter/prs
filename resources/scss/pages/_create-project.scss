@@ -1,0 +1,17 @@
+.remove-task {
+	color: $global-background;
+}
+
+.remove-employee {
+	color: $global-emphasis-color
+}
+
+.remove-employee, .remove-task {
+	&:hover {
+		color: $global-danger-background;
+	}
+}
+
+.task-preview {
+	padding: 0.125rem 0.2rem;
+}

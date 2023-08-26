@@ -1,0 +1,431 @@
+@mixin hook-text-background() {
+	background-color: $global-primary-background;
+	color: transparent !important;
+	background-image: linear-gradient(90deg, $global-primary-background 0, #0eb382 100%)
+}
+
+@mixin hook-button() {
+	transition: .1s ease-in-out;
+	transition-property: color, background-color, background-position, background-size, border-color, box-shadow;
+	font-weight: 400;
+	border-radius: 0.1875rem;
+	background-origin: border-box;
+}
+
+@mixin hook-button-default() {
+	border: $global-border-width solid $global-border;
+}
+
+@mixin hook-button-default-hover() {
+	border-color: $global-secondary-background;
+}
+
+@mixin hook-button-default-active() {
+	border-color: #2b7726;
+}
+
+@mixin hook-button-primary() {
+	border: $global-border-width solid transparent;
+}
+
+@mixin hook-button-primary-hover() {
+	color: $global-emphasis-color;
+	border-color: $global-primary-background;
+}
+
+@mixin hook-button-primary-active() {
+	color: $global-emphasis-color;
+	border-color: $global-primary-background;
+}
+
+@mixin hook-button-secondary() {
+	color: $global-emphasis-color;
+	border: $global-border-width solid $global-secondary-background;
+}
+
+@mixin hook-button-secondary-hover() {
+	border-color: transparent;
+}
+
+@mixin hook-button-secondary-active() {
+	@include hook-button-secondary-hover();
+}
+
+@mixin hook-button-danger() {
+	border: $global-border-width solid $global-danger-background;
+}
+
+@mixin hook-button-hover-danger() {
+	border-color: transparent;
+}
+
+@mixin hook-button-danger-active() {
+	@include hook-button-danger-hover();
+}
+
+@mixin hook-button-disabled() {
+	border: 1px solid transparent;
+	background-image: none;
+	box-shadow: none;
+	cursor: not-allowed;
+}
+
+@mixin hook-button-text() {
+	position: relative;
+	padding-right: 1.6875rem;
+	border-radius: 0;
+
+	&::before {
+		content: "";
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		right: 0;
+		width: 22px;
+		background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2211%22%20viewBox%3D%220%200%2016%2011%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%09%3Cpolyline%20fill%3D%22none%22%20stroke%3D%22%23121812%22%20points%3D%2210%2C1%2015%2C5.5%2010%2C10%20%22%2F%3E%0A%09%3Cline%20fill%3D%22none%22%20stroke%3D%22%23121812%22%20x1%3D%220%22%20y1%3D%225.5%22%20x2%3D%2215%22%20y2%3D%225.5%22%2F%3E%0A%3C%2Fsvg%3E%0A");
+		background-repeat: no-repeat;
+		background-position: calc(100% - 5px) 50%;
+		transition: background-position .2s ease-out
+	}
+}
+
+@mixin hook-button-text-hover() {
+	color: $global-emphasis-color;
+
+	&::before {
+		background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2211%22%20viewBox%3D%220%200%2016%2011%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%09%3Cpolyline%20fill%3D%22none%22%20stroke%3D%22%23121812%22%20points%3D%2210%2C1%2015%2C5.5%2010%2C10%20%22%2F%3E%0A%09%3Cline%20fill%3D%22none%22%20stroke%3D%22%23121812%22%20x1%3D%220%22%20y1%3D%225.5%22%20x2%3D%2215%22%20y2%3D%225.5%22%2F%3E%0A%3C%2Fsvg%3E%0A");
+		background-position: 100% 50%;
+	}
+}
+
+
+// navbar
+@mixin hook-navbar-nav-item() {
+	color: $global-emphasis-color;
+	transition: 0.1s ease-in-out;
+	transition-property: color, background-color, border-color, box-shadow;
+	position: relative;
+	z-index: 1;
+	font-weight: 400;
+	text-transform: uppercase;
+
+	&::before {
+		content: "";
+		display: block;
+		position: absolute;
+		z-index: -1;
+		bottom: 0;
+		height: 0.1875rem;
+		background-color: transparent;
+		transition: 0.35s ease-in-out;
+		transition-property: background-color, border-color, box-shadow, height,
+		left, right, opacity;
+		left: 0.625rem;
+		left: 50%;
+		right: 50%;
+		opacity: 0;
+	}
+}
+
+@mixin hook-navbar-nav-item-hover() {
+	color: $global-primary-background;
+
+	&::before {
+		left: 0.625rem;
+		right: 0.625rem;
+		background-color: $global-primary-background;
+		opacity: 1;
+	}
+}
+
+@mixin hook-navbar-nav-item-onclick() {
+	color: $global-primary-background;
+
+	&::before {
+		background-color: $global-primary-background;
+	}
+}
+
+@mixin hook-navbar-nav-item-active() {
+	&::before {
+		left: 0.625rem;
+		right: 0.625rem;
+		background-color: $global-primary-background;
+		opacity: 1;
+	}
+}
+
+@mixin hook-margin-misc() {
+	.uk-margin-vertical {
+		margin: $global-margin 0;
+	}
+
+	.uk-margin-horizontal {
+		margin: 0 $global-margin;
+	}
+
+	.uk-margin-xsmall {
+		margin-bottom: $global-xsmall-margin;
+	}
+	* + .uk-margin-xsmall {
+		margin-top: $global-xsmall-margin !important;
+	}
+
+	.uk-margin-xsmall-top {
+		margin-top: $global-xsmall-margin !important;
+	}
+	.uk-margin-xsmall-bottom {
+		margin-bottom: $global-xsmall-margin !important;
+	}
+	.uk-margin-xsmall-left {
+		margin-left: $global-xsmall-margin !important;
+	}
+	.uk-margin-xsmall-right {
+		margin-right: $global-xsmall-margin !important;
+	}
+	.uk-margin-xsmall {
+		margin: $global-xsmall-margin;
+	}
+}
+
+
+@mixin hook-padding-misc() {
+	.uk-padding-xsmall {
+		padding: $global-xsmall-gutter;
+	}
+	.uk-padding-xsmall-vertical {
+		padding: $global-xsmall-gutter 0;
+	}
+	.uk-padding-xsmall-horizontal {
+		padding: 0 $global-xsmall-gutter;
+	}
+	.uk-padding-xsmall-top {
+		padding-top: $global-xsmall-gutter;
+	}
+	.uk-padding-xsmall-bottom {
+		padding-bottom: $global-xsmall-gutter;
+	}
+	.uk-padding-xsmall-left {
+		padding-left: $global-xsmall-gutter;
+	}
+	.uk-padding-xsmall-right {
+		padding-right: $global-xsmall-gutter;
+	}
+
+	.uk-padding-vertical-small {
+		padding: $global-small-gutter 0;
+	}
+	.uk-padding-horizontal-small {
+		padding: 0 $global-small-gutter;
+	}
+	.uk-padding-small-top {
+		padding-top: $global-small-gutter;
+	}
+	.uk-padding-small-bottom {
+		padding-bottom: $global-small-gutter;
+	}
+	.uk-padding-small-left {
+		padding-left: $global-small-gutter;
+	}
+	.uk-padding-small-right {
+		padding-right: $global-small-gutter;
+	}
+
+	.uk-padding-medium-vertical {
+		padding: $global-medium-gutter 0;
+	}
+	.uk-padding-medium-horizontal {
+		padding: 0 $global-medium-gutter;
+	}
+	.uk-padding-medium-top {
+		padding-top: $global-medium-gutter;
+	}
+	.uk-padding-medium-bottom {
+		padding-bottom: $global-medium-gutter;
+	}
+	.uk-padding-medium-left {
+		padding-left: $global-medium-gutter;
+	}
+	.uk-padding-medium-right {
+		padding-right: $global-medium-gutter;
+	}
+
+	.uk-padding-large-vertical {
+		padding: $global-large-gutter 0;
+	}
+	.uk-padding-large-horizontal {
+		padding: 0 $global-large-gutter;
+	}
+	.uk-padding-large-top {
+		padding-top: $global-large-gutter;
+	}
+	.uk-padding-large-bottom {
+		padding-bottom: $global-large-gutter;
+	}
+	.uk-padding-large-left {
+		padding-left: $global-large-gutter;
+	}
+	.uk-padding-large-right {
+		padding-right: $global-large-gutter;
+	}
+
+
+	.uk-padding-xlarge {
+		padding: $global-xlarge-gutter;
+	}
+
+	.uk-padding-xlarge {
+		padding: $global-xlarge-gutter;
+	}
+
+	/* Desktop and bigger */
+	@media (min-width: $breakpoint-large) {
+
+		.uk-padding-xlarge {
+			padding: $global-xlarge-gutter;
+		}
+
+	}
+}
+
+@mixin hook-notification-message() {
+	border: 1px solid $global-secondary-background;
+	border-radius: 0.1875rem;
+	box-shadow: 0 0.25rem 0.9375rem rgba(0, 0, 0, .07)
+}
+
+@mixin hook-notification-message-primary() {
+	background-color: #fbfcfc;
+	border-color: $global-primary-background;
+}
+
+
+@mixin hook-notification-message-secondary() {
+	background-color: #fbfcfc;
+	border-color: $global-secondary-background;
+}
+
+@mixin hook-notification-message-success() {
+	background-color: #fbfcfc;
+	border-color: $global-success-background;
+}
+
+@mixin hook-notification-message-danger() {
+	background-color: #fbfcfc;
+	border-color: $global-danger-background;
+}
+
+@mixin hook-notification-message-warning() {
+	background-color: #fbfcfc;
+	border-color: $global-warning-background;
+}
+
+@mixin hook-text-misc() {
+	.uk-text-white {
+		color: $global-background !important;
+	}
+}
+
+@mixin hook-nav-secondary-item-hover() {
+	background-color: rgba($global-primary-background, 0.65);
+	color: $global-inverse-color;
+}
+
+@mixin hook-nav-secondary-item-active() {
+	@include hook-nav-secondary-item-hover();
+}
+
+@mixin hook-pagination-item() {
+	box-sizing: border-box;
+	min-width: 0;
+	line-height: 1.5;
+	text-align: center;
+	transition: .1s ease-in-out;
+	transition-property: color, background-color, border-color, box-shadow;
+	font-size: 0.875rem;
+	border-bottom: 1px solid transparent
+}
+
+@mixin hook-pagination-item-hover() {
+	text-decoration: none;
+	border-bottom-color: transparent
+}
+
+@mixin hook-pagination-item-active() {
+	color: $global-emphasis-color;
+	border-bottom-color: $global-emphasis-color;
+}
+
+@mixin hook-pagination-item-disabled() {
+	border-bottom-color: transparent;
+}
+
+@mixin hook-notification() {
+	@extend .uk-position-z-index-large;
+}
+
+@mixin hook-notification-close() {
+	color: inherit;
+}
+
+@mixin hook-notification-message() {
+	border-radius: 0.5rem;
+	font-size: .875rem;
+	line-height: 1.25rem;
+	.uk-close:hover {
+		color: darken($global-inverse-color, 95%);
+	}
+}
+
+@mixin hook-notification-message-primary() {
+	color: $global-inverse-color;
+	background: lighten($global-primary-background, 10%);
+
+}
+
+@mixin hook-notification-message-success() {
+	color: $global-inverse-color;
+	background: lighten($global-success-background, 10%);
+}
+
+@mixin hook-notification-message-warning() {
+	color: $global-inverse-color;
+	background: lighten($global-warning-background, 10%);
+	border-color: $global-warning-background;
+}
+
+@mixin hook-notification-message-danger() {
+	color: $global-inverse-color;
+	background: lighten($global-danger-background, 10%);
+	border-color: $global-danger-background;
+}
+
+@mixin hook-notification-misc() {
+	.uk-notification-message-secondary {
+		color: $global-inverse-color;
+		background: lighten($global-secondary-background, 10%);
+		border-color: $global-secondary-background;
+	}
+}
+
+@mixin hook-label-misc() {
+	.uk-label-primary, .uk-label-secondary, .uk-label-amber {
+		color: $global-inverse-color;
+	}
+	.uk-label-primary {
+		background-color: $global-primary-background
+	}
+
+	.uk-label-secondary {
+		background-color: $global-secondary-background
+	}
+
+	.uk-label-muted {
+		background-color: $global-muted-background;
+		color: $global-color;
+	}
+
+	.uk-label-amber {
+		background-color: #F59E0B;
+	}
+}

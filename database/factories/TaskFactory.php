@@ -1,0 +1,26 @@
+<?php
+
+namespace Database\Factories;
+
+use Illuminate\Support\Arr;
+use App\Enums\TaskUnitTypes;
+use Illuminate\Database\Eloquent\Factories\Factory;
+
+/**
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Task>
+ */
+class TaskFactory extends Factory
+{
+    /**
+     * Define the model's default state.
+     *
+     * @return array<string, mixed>
+     */
+    public function definition()
+    {
+        return [
+            'name' => $this->faker->unique()->words(nb: random_int(1, 4), asText: true),
+            'unit_type' => Arr::random(TaskUnitTypes::cases()),
+        ];
+    }
+}

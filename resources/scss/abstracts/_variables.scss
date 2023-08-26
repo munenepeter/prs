@@ -1,0 +1,215 @@
+//
+// Component:       Variables
+// Description:     Defines common values which are used across all components
+//
+// ========================================================================
+
+// Breakpoints
+// ========================================================================
+
+$breakpoint-small: 640px !default;
+$breakpoint-medium: 960px !default;
+$breakpoint-large: 1200px !default;
+$breakpoint-xlarge: 1600px !default;
+$breakpoint-xsmall-max: ($breakpoint-small - 1) !default;
+$breakpoint-small-max: ($breakpoint-medium - 1) !default;
+$breakpoint-medium-max: ($breakpoint-large - 1) !default;
+$breakpoint-large-max: ($breakpoint-xlarge - 1) !default;
+
+// Global variables
+// ========================================================================
+
+//
+// Typography
+//
+$global-font-family: 'khula', sans-serif !default;
+$global-font-size: 1rem !default;
+$global-line-height: 1.6 !default;
+$global-2xlarge-font-size: 42px !default;
+$global-xlarge-font-size: 32px !default;
+$global-large-font-size: 24px !default;
+$global-medium-font-size: 20px !default;
+$global-small-font-size: 14px !default;
+$global-xsmall-font-size: 12px !default;
+
+//
+// Colors
+//
+$global-color: #4c524c !default;
+$global-emphasis-color: #121812 !default;
+$global-muted-color: #999 !default;
+$global-link-color: #52c74e !default;
+$global-link-hover-color: #41bf3c !default;
+$global-inverse-color: #fff !default;
+$base-code-color: #4c524c;
+// Backgrounds
+//
+$global-background: #fbfcfc !default;
+$global-muted-background: #f8f8f8 !default;
+$global-primary-background: #0eb314 !default;
+$global-secondary-background: #081607 !default;
+
+$global-success-background: #1fd562 !default;
+$global-warning-background: #ffa63b !default;
+$global-danger-background: #e21c4a !default;
+
+//
+// Borders
+//
+$global-border-width: 1px !default;
+$global-border: #eee !default;
+$divider-small-border: $global-primary-background;
+$placeholder-border: rgba($global-emphasis-color, .7);
+//
+// Box-Shadows
+//
+$global-small-box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08) !default;
+$global-medium-box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08) !default;
+$global-large-box-shadow: 0 14px 25px rgba(0, 0, 0, 0.16) !default;
+$global-xlarge-box-shadow: 0 28px 50px rgba(0, 0, 0, 0.16) !default;
+
+//
+// Margin
+//
+$global-margin: 20px !default;
+$global-xsmall-margin: 5px !default;
+$global-small-margin: 10px !default;
+$global-medium-margin: 40px !default;
+$global-large-margin: 70px !default;
+$global-xlarge-margin: 140px !default;
+
+//
+// Gutters
+//
+$global-gutter: 30px !default;
+$global-xsmall-gutter: 7.5px !default;
+$global-small-gutter: 15px !default;
+$global-medium-gutter: 40px !default;
+$global-large-gutter: 70px !default;
+$global-xlarge-gutter: 140px !default;
+
+//
+// Controls
+//
+$global-control-height: 40px !default;
+$global-control-small-height: 30px !default;
+$global-control-large-height: 55px !default;
+
+//
+// Z-index
+//
+$global-z-index: 1000 !default;
+
+//
+// Inverse
+//
+$inverse-global-color-mode: light !default;
+$inverse-global-color: rgba($global-inverse-color, 0.7) !default;
+$inverse-global-emphasis-color: $global-inverse-color !default;
+$inverse-global-muted-color: rgba($global-inverse-color, 0.5) !default;
+$inverse-global-inverse-color: $global-color !default;
+$inverse-global-primary-background: $global-inverse-color !default;
+$inverse-global-muted-background: rgba($global-inverse-color, 0.1) !default;
+$inverse-global-border: rgba($global-inverse-color, 0.2) !default;
+
+//@mixin hook-inverse(){}
+
+// custom variables
+$base-selection-background: #acd5ea !default;
+$base-selection-color: $global-emphasis-color;
+$button-default-background: transparent;
+$button-default-hover-background: transparent;
+$button-default-active-background: transparent;
+$button-primary-hover-background: transparent;
+$button-default-active-background: transparent;
+$button-default-active-color: #496149;
+$button-secondary-background: transparent;
+$button-secondary-hover-background: $global-secondary-background;
+$button-secondary-active-background: #163d13;
+$button-danger-background: transparent;
+$button-text-disabled-color: $global-muted-color;
+$navbar-background: #fbfcfc;
+$navbar-item-color: $global-emphasis-color;
+$navbar-nav-item-hover-color: $global-primary-background;
+$navbar-nav-item-active-color: $global-primary-background;
+$navbar-toggle-color: $global-emphasis-color;
+$navbar-toggle-hover-color: $global-primary-background;
+$form-border: darken($global-border, 10%);
+$button-danger-color: $global-emphasis-color;
+$button-danger-hover-background: $global-danger-background;
+$button-danger-active-background: $global-danger-background;
+//
+//$base-selection-background: $global-primary-background;
+//$primary-linear-gradient: linear-gradient(51deg,
+//    #1865e0 50%,
+//    #199ef2 80%,
+//    #16b6f5 100%);
+//$primary-active-linear-gradient: linear-gradient(51deg,
+//    #005cd7 50%,
+//    #0093e6 80%,
+//    #00aae8 100%);
+//
+//$secondary-linear-gradient: linear-gradient(51deg,
+//    #1865e0 0,
+//    #199ef2 30%,
+//    #16b6f5 50%);
+//
+//$secondary-hover-linear-gradient: linear-gradient(51deg,
+//    #005cd7 0,
+//    #0093e6 30%,
+//    #00aae8 50%);
+//
+//$navbar-item-hover-linear-gradient: linear-gradient(90deg,
+//    #1865e0 0,
+//    #199ef2 50%,
+//    #16b6f5 100%);
+//
+//$text-linear-gradient: linear-gradient(40deg,
+//    #1865e0 0,
+//    #199ef2 50%,
+//    #16b6f5 100%);
+//
+//$placeholder-border: lighten($global-primary-background, 25%);
+//
+//
+//$navbar-nav-item-active-color: $global-primary-background;
+//$navbar-dropdown-background: $global-background;
+//$navbar-dropdown-nav-item-color: $global-emphasis-color;
+//$navbar-dropdown-nav-item-hover-color: $global-primary-background;
+//$navbar-dropdown-nav-item-active-color: $global-primary-background;
+//$navbar-dropdown-nav-header-color: $global-emphasis-color;
+//
+//$button-default-active-background: $global-color;
+//$button-default-hover-background: $global-color;
+//$button-default-background: $global-color;
+//$button-default-color: $global-emphasis-color;
+//$button-default-hover-color: $global-primary-background;
+//$button-default-active-color: $global-primary-background;
+//$button-primary-hover-background: #1084dd;
+//
+//$button-text-hover-color: $global-primary-background;
+//$button-link-hover-color: $global-primary-background;
+//
+//$card-hover-background: $global-background;
+//$card-default-background: $global-background;
+//$card-default-hover-background: $global-background;
+//
+//$heading-bullet-border: $global-primary-background;
+//$divider-small-border: $global-primary-background;
+//$divider-vertical-border: $global-primary-background;
+//$divider-icon-color: $global-primary-background;
+//
+//$internal-list-bullet-image: "data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2212%22%20height%3D%2212%22%20viewBox%3D%220%200%2012%2012%22%3E%0A%20%20%20%20%3Ccircle%20stroke%3D%22%2326B9C4%22%20cx%3D%226%22%20cy%3D%226%22%20r%3D%223.5%22%20fill%3D%22none%22%20%2F%3E%0A%3C%2Fsvg%3E%0A";
+//$accordion-icon-color: $global-primary-background;
+//
+//$inverse-nav-default-item-color: rgba($global-inverse-color, 0.7);
+//$inverse-base-link-color: rgba($global-inverse-color, 0.7);
+//$inverse-icon-link-color: rgba($global-inverse-color, 0.7);
+//$inverse-iconnav-item-color: rgba($global-inverse-color, 0.7);
+//
+//$inverse-nav-default-item-hover-color: $global-inverse-color;
+//$inverse-base-link-hover-color: $global-inverse-color;
+//$inverse-nav-default-item-active-color: $global-inverse-color;
+//
+//$inverse-icon-link-hover-color: $global-inverse-color;
+//$inverse-icon-link-active-color: $global-inverse-color;
