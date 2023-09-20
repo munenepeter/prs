@@ -1,5 +1,5 @@
 <div>
-	<h1>Edit {{ $user->name }}</h1>
+	<h1>Editing {{ $user->firstname }}</h1>
 
 	<form wire:submit.prevent="edit"
 		  class="uk-grid uk-grid-medium uk-child-width-1-1 uk-form-horizontal"
@@ -29,17 +29,16 @@
 			<x-form-error input="user.lastname" />
 		</div>
 
-		{{--		<div class="uk-grid-margin uk-first-column">--}}
-		{{--			<x-label for="email"--}}
-		{{--					 value="Email of the user"--}}
-		{{--			/>--}}
-		{{--			<x-input id="email"--}}
-		{{--					 type="email"--}}
-		{{--					 wire:model.defer="email"--}}
-		{{--				--}}{{-- 					 required --}}
-		{{--			/>--}}
-		{{--			<x-form-error input="email" />--}}
-		{{--		</div>--}}
+				<div class="uk-grid-margin uk-first-column">
+					<x-label for="phone_number"
+							 value="Phone Number of the user"
+					/>
+					<x-input id="phone_number"
+							 type="text"
+							 wire:model.defer="user.phone_number" required
+					/>
+					<x-form-error input="user.phone_number" />
+				</div>
 
 		<div class="uk-grid-margin uk-first-column">
 			<x-label for="role"

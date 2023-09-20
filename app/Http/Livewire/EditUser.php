@@ -67,6 +67,11 @@ class EditUser extends Component
                 'string',
                 'min:3'
             ],
+            'user.phone_number' => [
+                'required',
+                'string',
+                'min:10'
+            ],
             'role' => [
                 'required',
                 new Enum(Roles::class)

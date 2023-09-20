@@ -21,6 +21,8 @@ class CreateNewUser extends Component
 
     public string $email = '';
 
+    public string $phone_number = '';
+
 
     public function create()
     {
@@ -32,6 +34,7 @@ class CreateNewUser extends Component
             'firstname' => $validated['firstname'],
             'lastname' => $validated['lastname'],
             'email' => $validated['email'],
+            'phone_number' => $validated['phone_number'],
             'password' => Hash::make($random_password),
         ]);
 
@@ -58,6 +61,7 @@ class CreateNewUser extends Component
             'firstname' => ['required', 'string', 'max:255'],
             'lastname' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'phone_number' => ['required', 'string', 'min:10'],
             'role' =>  [
                     'required',
                     new Enum(Roles::class),
