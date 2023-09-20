@@ -21,6 +21,11 @@
                     Users</label>
             </div>
         </div>
+        @php
+            $usersCount = 0;
+            $managersCount = 0;
+            $adminsCount = 0;
+        @endphp
 
         <table class="uk-table uk-table-small uk-table-divider uk-table-middle uk-table-striped uk-table-responsive">
 
@@ -40,6 +45,32 @@
                             {{ $user->email }}
                         </td>
                         <td class="uk-text-uppercase uk-table-shrink">
+                            @php
+                                switch ($user->roles->implode('name.value', ', ')) {
+                                    case 'admin':
+                                        $adminsCount++;
+                                        break;
+                                    case 'admin, user':
+                                        $adminsCount++;
+                                        $usersCount++;
+                                        break;
+                                    case 'project_manager':
+                                        $managersCount++;
+                                        break;
+                                    case 'project_manager, user':
+                                        $managersCount++;
+                                        $usersCount++;
+                                        break;
+                                    case 'user':
+                                        $usersCount++;
+                                        break;
+                                
+                                    default:
+                                        $usersCount++;
+                                        break;
+                                }
+                                
+                            @endphp
                             {{ $user->roles->implode('name.value', ', ') ?? 'Users' }}
                         </td>
                         <td class="uk-table-expand">
@@ -75,6 +106,12 @@
                 @endforelse
             </tbody>
             <tfoot>
+                <tr>
+                    <td style="font-weight: 800">Total: {{ $users->total() }}</td>
+                    <td style="font-weight: 800">Users: {{ $usersCount }} </td>
+                    <td style="font-weight: 800">Managers: {{ $managersCount }} </td>
+                    <td style="font-weight: 800">Admins: {{ $adminsCount }} </td>
+                </tr>
                 <tr>
                     <td colspan="7">
                         {{ $users->links() }}
