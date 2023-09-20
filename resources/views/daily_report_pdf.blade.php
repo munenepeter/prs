@@ -76,6 +76,9 @@
         .uk-background-default {
             background-color: #f2f2f2;
         }
+        .uk-background-amber{
+            background-color: #F59E0B;
+        }
 
         .empty-row {
             text-align: center;
@@ -155,12 +158,12 @@
         <table class="report-table">
             <thead>
                 <tr>
-                    <th>Project Name</th>
-                    <th>Task Name</th>
+                    <th>Project</th>
+                    <th>Task</th>
                     <th>Unit Type</th>
                     <th>Completed Tasks</th>
                     <th>Duration</th>
-                    <th>Units cplt' /hr</th>
+                    <th>Units/hr</th>
                     <th>Start</th>
                     <th>End</th>
                     <th>Date</th>

@@ -93,7 +93,6 @@
             <tbody>
                 @forelse ($reports as $report)
                     @php
-                        // dd(DateInterval::createFromDateString($report->duration)->format('%d%h%i%s'));
                         $totalCompletedTasks += $report->units_completed;
                         $totalUnitshr += $report->hourlyRate;
                         $totalDuration = $totalDuration->add($report->duration); // Add the durations together
