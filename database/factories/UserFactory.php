@@ -10,6 +10,9 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class UserFactory extends Factory
 {
+
+  
+
     /**
      * Define the model's default state.
      *
@@ -17,10 +20,16 @@ class UserFactory extends Factory
      */
     public function definition()
     {
+        $firstName = fake()->firstName();
+        $lastName = fake()->lastName();
+
+        $email = strtolower("$firstName.$lastName@prs.com");
+
         return [
-            'firstname' => fake()->firstName(),
-            'lastname' => fake()->lastName(),
-            'email' => fake()->safeEmail(),
+            'firstname' => $firstName,
+            'lastname' => $lastName,
+            'email' => $email,
+            'phone_number' => '+254 7' . fake()->numerify('##') . ' ' . fake()->numerify('###') . ' ' . fake()->numerify('###'),
             'email_verified_at' => now(),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
             'remember_token' => Str::random(10),

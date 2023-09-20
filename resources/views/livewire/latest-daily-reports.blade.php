@@ -196,6 +196,7 @@
 				@endforelse
 			</tbody>
 			<tfoot>
+			
 				<tr>
 					<td colspan="8">
 						{{ $reports->links() }}

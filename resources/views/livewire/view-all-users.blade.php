@@ -42,7 +42,8 @@
                     <tr>
                         <td class="uk-text-capitalize">{{ $user->fullname }}</td>
                         <td>
-                            {{ $user->email }}
+                            <p>{{ $user->email }}</p>
+                            <p class="uk-text-meta">{{ $user->phone_number }}</p>
                         </td>
                         <td class="uk-text-uppercase uk-table-shrink">
                             @php
