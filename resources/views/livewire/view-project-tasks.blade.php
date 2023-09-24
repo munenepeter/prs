@@ -13,8 +13,9 @@
 		<table class="uk-table uk-table-hover uk-table-middle uk-table-divider">
 			<thead>
 				<tr>
-					<th class="uk-table-shrink"></th>
+					<th class="uk-table-shrink">#</th>
 					<th class="uk-table-expand">Name</th>
+					<th class="uk-table-expand">Target</th>
 					<th class="uk-width-small">Unit type</th>
 					<th>Actions</th>
 				</tr>
@@ -24,6 +25,7 @@
 					<tr>
 						<td>{{ $loop->iteration }}</td>
 						<td>{{ $task->name }}</td>
+						<td>{{ 0 }}</td>
 						<td>{{ $task->unit_type->name }}</td>
 						<td>
 							<div class="uk-button-group">
