@@ -122,7 +122,7 @@
                             <div class="uk-button-group">
                                 <a href="{{ route('reports.edit', $report) }}"
                                     class="uk-button uk-button-secondary uk-margin-small-right">Edit</a>
-                                <button type="button" wire:click="delete({{ $report->id }})"
+                                <button  onclick="confirm('Are you sure you want to delete this report?') || event.stopImmediatePropagation()" type="button" wire:click="delete({{ $report->id }})"
                                     class="uk-button uk-button-danger">
                                     Delete
                                 </button>

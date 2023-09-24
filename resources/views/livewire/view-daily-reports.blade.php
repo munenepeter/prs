@@ -105,9 +105,9 @@
                                 {{ $report->task->unit_type->name }}
                             </span>
                         </td>
-                        <td>{{ $report->units_completed }}</td>
+                        <td>{{ $report->reported_at->isFuture() ? "Pending" : $report->units_completed }}</td>
                         <td>{{ $report->duration }}</td>
-                        <td>{{ $report->hourlyRate }}</td>
+                        <td>{{ $report->reported_at->isFuture() ? "Pending" : $report->hourlyRate }}</td>
                         <td>{{ $report->started_at->format('H:i:s') }}</td>
                         <td>{{ $report->ended_at->format('H:i:s') }}</td>
                         <td>{{ $report->reported_at->format('d/m/Y') }}</td>
@@ -115,7 +115,7 @@
                             <div class="uk-button-group">
                                 <a href="{{ route('reports.edit', $report) }}"
                                     class="uk-button uk-button-secondary uk-margin-small-right">Edit</a>
-                                <button type="button" wire:click="delete({{ $report->id }})"
+                                <button  onclick="confirm('Are you sure you want to delete this report?') || event.stopImmediatePropagation()" type="button" wire:click="delete({{ $report->id }})"
                                     class="uk-button uk-button-danger uk-margin-small-right">
                                     Delete
                                 </button>
@@ -141,8 +141,7 @@
                     <td style="font-weight: 800" colspan="3">Total Completed Tasks: {{ $totalCompletedTasks }}</td>
                     <td style="font-weight: 800" colspan="3">Total Duration: {{ $totalDuration }}
                     </td>
-                    <td style="font-weight: 800" colspan="2">Total Units/hr: {{ $totalUnitshr }} </td>
-                    <td></td>
+                    <td style="font-weight: 800" colspan="3">Total Units/hr: {{ $report->reported_at->isFuture() ? "Pending" : $totalUnitshr }} </td>
                  
                     <td></td>
                 </tr>
