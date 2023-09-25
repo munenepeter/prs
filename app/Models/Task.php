@@ -14,6 +14,7 @@ class Task extends Model
     protected $fillable = [
         'name',
         'unit_type',
+        'target'
     ];
 
     protected $casts = [

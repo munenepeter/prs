@@ -21,6 +21,7 @@ class TaskFactory extends Factory
         return [
             'name' => $this->faker->unique()->words(nb: random_int(1, 4), asText: true),
             'unit_type' => Arr::random(TaskUnitTypes::cases()),
+            'target' => $this->faker->numberBetween(0, 400),
         ];
     }
 }

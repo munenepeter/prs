@@ -23,6 +23,7 @@ return new class () extends Migration {
             $table->unsignedTinyInteger('unit_type')
                 ->comment('Represents task unit type. It will be backed up by UnitType enum')
                 ->default(\App\Enums\TaskUnitTypes::HOUR->value);
+            $table->unsignedSmallInteger('target');
             $table->timestamps();
         });
     }

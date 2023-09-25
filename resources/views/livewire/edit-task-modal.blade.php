@@ -46,6 +46,16 @@
 					/>
 					<x-form-error input="task.unit_type" />
 				</div>
+				<div>
+					<x-label for="target"
+							 value="Target"
+					/>
+					<x-input id="target"
+							  wire:model.defer="task.target"
+							  :hasError="$errors->has('task.target')"
+					/>
+					<x-form-error input="task.target" />
+				</div>
 
 				<div>
 					<button type="submit"
