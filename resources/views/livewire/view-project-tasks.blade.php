@@ -25,7 +25,7 @@
 					<tr>
 						<td>{{ $loop->iteration }}</td>
 						<td>{{ $task->name }}</td>
-						<td>{{ 0 }}</td>
+						<td>{{ $task->target }}</td>
 						<td>{{ $task->unit_type->name }}</td>
 						<td>
 							<div class="uk-button-group">
