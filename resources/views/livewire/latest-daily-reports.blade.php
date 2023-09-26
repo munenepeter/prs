@@ -62,7 +62,7 @@
                         Export as Excel
                     </button> --}}
 
-					<button type="button" wire:click.prevent="exportPdf" wire:loading.attr="disabled"
+                    <button type="button" wire:click.prevent="exportPdf" wire:loading.attr="disabled"
                         wire:target="exportPdf" class="uk-button uk-button-danger uk-width-1-1 uk-margin-top"
                         @disabled($reports->isEmpty())>
                         Export as PDF
@@ -87,6 +87,7 @@
                     <th class="uk-table-shrink">Completed Tasks</th>
                     <th class="uk-width-small">Duration</th>
                     <th class="uk-width-small">Units/hr</th>
+                    <th class="uk-width-small">Perfomance</th>
                     <th class="uk-table-shrink">Start</th>
                     <th class="uk-table-shrink">End</th>
                     <th class="uk-table-shrink">Date</th>
@@ -112,9 +113,42 @@
                                 {{ $report->task->unit_type->name }}
                             </span>
                         </td>
-                        <td>{{ $report->units_completed . ' - ' . $report->task->target}}</td>
+                        <td>{{ $report->units_completed }} </td>
                         <td>{{ $report->duration }}</td>
                         <td>{{ $report->hourlyRate }}</td>
+                        <td>
+
+
+                            @php
+                                // Calculate performance score (units completed per hour)
+                                $durationInMinutes = $report->duration->totalMinutes;
+                                $performanceScore = $report->units_completed / ($durationInMinutes / 60); // units per hour
+                                
+                                // Get the individual target for this associate
+                                $individualTarget = $report->task->target;
+                                
+                                // Calculate the percentage difference from the target
+                                $percentageDifference = number_format((($performanceScore - $individualTarget) / $individualTarget) * 100, 1);
+                                
+                                // Determine if performance is above or below the target
+                                if ($percentageDifference > 0) {
+                                    $performanceStatus = $percentageDifference . '% Above Target';
+                                    $color = 'green';
+                                } elseif ($percentageDifference < 0) {
+                                    $performanceStatus = abs($percentageDifference) . '% Below Target';
+                                    $color = 'red';
+                                } else {
+                                    $performanceStatus = 'On Target';
+                                    $color = 'blue';
+                                }
+                            @endphp
+
+                            <span class="" style="color: {{ $color }}">
+                                Score:{{ number_format($performanceScore,2) }} 
+                                {{ $performanceStatus }}
+                            </span>
+                            <span>(Target: {{ $individualTarget }})</span>
+                        </td>
                         <td>{{ $report->started_at->format('H:i:s') }}</td>
                         <td>{{ $report->ended_at->format('H:i:s') }}</td>
                         <td>{{ $report->reported_at->format('d/m/Y') }}</td>
@@ -122,7 +156,9 @@
                             <div class="uk-button-group">
                                 <a href="{{ route('reports.edit', $report) }}"
                                     class="uk-button uk-button-secondary uk-margin-small-right">Edit</a>
-                                <button  onclick="confirm('Are you sure you want to delete this report?') || event.stopImmediatePropagation()" type="button" wire:click="delete({{ $report->id }})"
+                                <button
+                                    onclick="confirm('Are you sure you want to delete this report?') || event.stopImmediatePropagation()"
+                                    type="button" wire:click="delete({{ $report->id }})"
                                     class="uk-button uk-button-danger">
                                     Delete
                                 </button>
