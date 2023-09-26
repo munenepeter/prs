@@ -112,7 +112,7 @@
                                 {{ $report->task->unit_type->name }}
                             </span>
                         </td>
-                        <td>{{ $report->units_completed }}</td>
+                        <td>{{ $report->units_completed . ' - ' . $report->task->target}}</td>
                         <td>{{ $report->duration }}</td>
                         <td>{{ $report->hourlyRate }}</td>
                         <td>{{ $report->started_at->format('H:i:s') }}</td>

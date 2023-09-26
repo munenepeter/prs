@@ -10,47 +10,40 @@ use Illuminate\Database\Eloquent\Builder;
 use App\Http\Livewire\Concerns\HasDailyReportFilters;
 use App\Http\Livewire\Concerns\WithExportDailyReport;
 
-class LatestDailyReports extends Component
-{
+class LatestDailyReports extends Component {
     use HasDailyReportFilters;
     use WithExportDailyReport;
 
     public int $user = -1;
 
 
-    public function clearFilters(): void
-    {
+    public function clearFilters(): void {
         $this->repopulateReports();
 
         $this->reset('user');
     }
 
-    public function filter(): void
-    {
+    public function filter(): void {
         $validated = $this->validate();
 
         $this->resetPage();
 
         $this->has_filter = true;
-
     }
 
-    public function getUsersProperty()
-    {
+    public function getUsersProperty() {
         return User::query()
             ->notAdminOrProjectManager()
             ->get()->pluck('fullname', 'id');
     }
 
-    public function render()
-    {
+    public function render() {
         $this->reports = $this->resolveReports();
 
         return view('livewire.latest-daily-reports', ['reports' => $this->reports]);
     }
 
-    protected function applyFilters()
-    {
+    protected function applyFilters() {
         return  DailyReport::query()
             ->when(
                 filled($this->user) && $this->user !== -1,
@@ -132,14 +125,13 @@ class LatestDailyReports extends Component
             )
             ->with([
                 'project:id,name,slug',
-                'task:id,name,unit_type',
+                'task:id,name,target,unit_type',
                 'user:id,firstname,lastname'
             ])
             ->orderBy('reported_at', 'DESC');
     }
 
-    protected function populateReports(): Builder
-    {
+    protected function populateReports(): Builder {
         return DailyReport::query()
             ->select([
                 'id', 'project_id', 'user_id', 'task_id', 'units_completed',
@@ -154,14 +146,13 @@ class LatestDailyReports extends Component
             )
             ->with([
                 'project:id,name,slug',
-                'task:id,name,unit_type',
+                'task:id,name,target,unit_type',
                 'user:id,firstname,lastname'
             ])
             ->orderBy('reported_at', 'DESC');
     }
 
-    protected function rules(): array
-    {
+    protected function rules(): array {
         return array_merge(
             $this->defaultRules(),
             [
