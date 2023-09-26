@@ -147,7 +147,7 @@
                                 Score: {{ number_format($performanceScore, 2) }}<br>
                                 {{ $performanceStatus }}
                             </span><br>
-                            <span class="uk-text-small">Target: {{ $individualTarget }}</span>
+                            <span class="uk-text-small">Target: {{ $report->task->target }}</span>
                         </td>
                         <td>{{ $report->started_at->format('H:i:s') }}</td>
                         <td>{{ $report->ended_at->format('H:i:s') }}</td>
