@@ -114,7 +114,7 @@
                             </span>
                         </td>
                         <td>{{ $report->units_completed }} </td>
-                        <td>{{ $report->duration }}</td>
+                        <td>{{ $report->duration->forHumans(['short' => true]) }}</td>
                         <td>{{ $report->hourlyRate }}</td>
                         <td>
 
@@ -144,10 +144,10 @@
                             @endphp
 
                             <span class="" style="color: {{ $color }}">
-                                Score:{{ number_format($performanceScore,2) }} 
+                                Score:{{ number_format($performanceScore, 2) }}
                                 {{ $performanceStatus }}
-                            </span>
-                            <span>(Target: {{ $individualTarget }})</span>
+                            </span><br>
+                            <span class="uk-text-small">Target: {{ $individualTarget }}</span>
                         </td>
                         <td>{{ $report->started_at->format('H:i:s') }}</td>
                         <td>{{ $report->ended_at->format('H:i:s') }}</td>
