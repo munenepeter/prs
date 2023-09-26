@@ -87,7 +87,7 @@
                     <th class="uk-table-shrink">Completed Tasks</th>
                     <th class="uk-width-small">Duration</th>
                     <th class="uk-width-small">Units/hr</th>
-                    <th class="uk-width-small">Perfomance</th>
+                    <th class="uk-table-expand">Perfomance</th>
                     <th class="uk-table-shrink">Start</th>
                     <th class="uk-table-shrink">End</th>
                     <th class="uk-table-shrink">Date</th>
@@ -107,7 +107,7 @@
                             <a
                                 href="{{ route('projects.tasks.show', $report->project->slug) }}">{{ ucfirst($report->project->name) }}</a>
                         </td>
-                        <td>{{ ucfirst($report->task->name) }}</td>
+                        <td >{{ ucfirst($report->task->name) }}</td>
                         <td>
                             <span class="uk-label uk-label-{{ $report->task->unit_type->color() }}">
                                 {{ $report->task->unit_type->name }}
@@ -132,10 +132,10 @@
                                 
                                 // Determine if performance is above or below the target
                                 if ($percentageDifference > 0) {
-                                    $performanceStatus = $percentageDifference . '% Above Target';
+                                    $performanceStatus = $percentageDifference . '% Above';
                                     $color = 'green';
                                 } elseif ($percentageDifference < 0) {
-                                    $performanceStatus = abs($percentageDifference) . '% Below Target';
+                                    $performanceStatus = abs($percentageDifference) . '% Below';
                                     $color = 'red';
                                 } else {
                                     $performanceStatus = 'On Target';
@@ -144,7 +144,7 @@
                             @endphp
 
                             <span class="" style="color: {{ $color }}">
-                                Score:{{ number_format($performanceScore, 2) }}
+                                Score: {{ number_format($performanceScore, 2) }}<br>
                                 {{ $performanceStatus }}
                             </span><br>
                             <span class="uk-text-small">Target: {{ $individualTarget }}</span>
