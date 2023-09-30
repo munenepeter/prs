@@ -106,9 +106,11 @@ class User extends Authenticatable {
     protected static function boot() {
         parent::boot();
 
-        // Listen for the creating event and set the custom ID
         static::creating(function ($user) {
-            $user->id = 'NBO' . $user->id;
+            $latestUser = self::latest('id')->first();
+            $latestId = $latestUser ? (int)substr($latestUser->id, 3) : 0;
+            $newId = 'NBO' . ($latestId + 1);
+            $user->nbo_id = $newId;
         });
     }
 }
