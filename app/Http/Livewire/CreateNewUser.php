@@ -42,7 +42,7 @@ class CreateNewUser extends Component {
         );
 
 
-        //$user->sendNewUserCreatedNotification($random_password);
+        $user->sendNewUserCreatedNotification($random_password);
 
         session()->flash('success', "$user->fullname has been created successfully.");
 

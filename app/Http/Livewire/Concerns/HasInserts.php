@@ -7,8 +7,7 @@ use App\Models\Client;
 use App\Enums\ProjectStatuses;
 use Illuminate\Support\Collection;
 
-trait HasInserts
-{
+trait HasInserts {
     public string $task = '';
     public int $target = 0;
 
@@ -22,44 +21,38 @@ trait HasInserts
 
     abstract public function removeTask(int $task): void;
 
-    public function getProjectStatusesProperty(): array
-    {
+    public function getProjectStatusesProperty(): array {
         return ProjectStatuses::pluck('name', 'value');
     }
 
-    public function getClientsProperty(): Collection
-    {
+    public function getClientsProperty(): Collection {
         return Client::query()->pluck(column: 'name', key: 'id');
     }
 
-    public function getProjectManagersProperty(): Collection
-    {
+    public function getProjectManagersProperty(): Collection {
         return User::query()->projectManagers()
             ->get()
             ->pluck('fullname', 'id');
     }
 
-    public function taskExistsBrowserEvent(): void
-    {
+    public function taskExistsBrowserEvent(): void {
         $this->dispatchBrowserEvent(
             event: 'task-exists',
             data: ['message' => 'You have already created this task']
         );
     }
 
-    public function taskDoesntExistBrowserEvent(): void
-    {
+    public function taskDoesntExistBrowserEvent(): void {
         $this->dispatchBrowserEvent(
             event: 'task-doesnt-exists',
             data: ['message' => 'This task does not exist.']
         );
     }
 
-    public function taskRemovedBrowserEvent(): void
-    {
+    public function taskRemovedBrowserEvent(): void {
         $this->dispatchBrowserEvent(
-            event:'task-removed',
-            data:['message' => 'Task has been successfully removed']
+            event: 'task-removed',
+            data: ['message' => 'Task has been successfully removed']
         );
     }
 }
