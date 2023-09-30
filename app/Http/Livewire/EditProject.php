@@ -39,13 +39,17 @@ class EditProject extends Component
 
         $this->validateOnly('task');
 
-        $this->project->tasks()->create(['name' => $this->task]);
+        $this->project->tasks()->create([
+            'name' => $this->task,
+            'target' => $this->target
+        ]);
 
         $this->isTasksCollectionChanged = true;
 
         $this->project->refresh();
 
         $this->reset('task');
+        $this->reset('target');
     }
 
     public function removeTask(int $task): void

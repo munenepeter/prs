@@ -10,6 +10,7 @@ use Illuminate\Support\Collection;
 trait HasInserts
 {
     public string $task = '';
+    public int $target = 0;
 
     public ?string $new_client = null;
 
