@@ -73,17 +73,18 @@
         $totalDuration = \Carbon\CarbonInterval::create(0, 0, 0, 0); // Initialize the totalDuration as a CarbonInterval;
         $totalUnitshr = 0;
     @endphp
-
     <div class="uk-overflow-auto">
         <table class="uk-table uk-table-small uk-table-divider uk-table-middle uk-table-striped uk-table-responsive">
             <thead>
                 <tr>
+                    <th class="uk-width-small">User</th>
                     <th class="uk-width-small">Project</th>
                     <th class="uk-width-small">Task</th>
                     <th class="uk-table-shrink">Unit type</th>
                     <th class="uk-table-shrink">Completed Tasks</th>
                     <th class="uk-width-small">Duration</th>
                     <th class="uk-width-small">Units/hr</th>
+                    <th class="uk-table-expand">Perfomance</th>
                     <th class="uk-table-shrink">Start</th>
                     <th class="uk-table-shrink">End</th>
                     <th class="uk-table-shrink">Date</th>
@@ -98,16 +99,53 @@
                         $totalDuration = $totalDuration->add($report->duration); // Add the durations together
                     @endphp
                     <tr>
-                        <td class="uk-table-link">{{ ucfirst($report->project->name) }}</td>
+                        <td>{{ ucfirst($report->user->fullname) }}</td>
+                        <td class="uk-table-link">
+                            <a
+                                href="{{ route('projects.tasks.show', $report->project->slug) }}">{{ ucfirst($report->project->name) }}</a>
+                        </td>
                         <td>{{ ucfirst($report->task->name) }}</td>
                         <td>
                             <span class="uk-label uk-label-{{ $report->task->unit_type->color() }}">
                                 {{ $report->task->unit_type->name }}
                             </span>
                         </td>
-                        <td>{{ $report->reported_at->isFuture() ? "Pending" : $report->units_completed }}</td>
-                        <td>{{ $report->duration }}</td>
-                        <td>{{ $report->reported_at->isFuture() ? "Pending" : $report->hourlyRate }}</td>
+                        <td>{{ $report->units_completed }} </td>
+                        <td>{{ $report->duration->forHumans(['short' => true]) }}</td>
+                        <td>{{ $report->hourlyRate }}</td>
+                        <td>
+
+
+                            @php
+                                // Calculate performance score (units completed per hour)
+                                $durationInMinutes = $report->duration->totalMinutes;
+                                $performanceScore = $report->units_completed / ($durationInMinutes / 60); // units per hour
+                                
+                                // Get the individual target for this associate
+                                $individualTarget = $report->task->target;
+                                
+                                // Calculate the percentage difference from the target
+                                $percentageDifference = number_format((($performanceScore - $individualTarget) / $individualTarget) * 100, 1);
+                                
+                                // Determine if performance is above or below the target
+                                if ($percentageDifference > 0) {
+                                    $performanceStatus = $percentageDifference . '% Above';
+                                    $color = 'green';
+                                } elseif ($percentageDifference < 0) {
+                                    $performanceStatus = abs($percentageDifference) . '% Below';
+                                    $color = 'red';
+                                } else {
+                                    $performanceStatus = 'On Target';
+                                    $color = 'blue';
+                                }
+                            @endphp
+
+                            <span class="" style="color: {{ $color }}">
+                                Score: {{ number_format($performanceScore, 2) }}<br>
+                                {{ $performanceStatus }}
+                            </span><br>
+                            <span class="uk-text-small">Target: {{ $report->task->target }}</span>
+                        </td>
                         <td>{{ $report->started_at->format('H:i:s') }}</td>
                         <td>{{ $report->ended_at->format('H:i:s') }}</td>
                         <td>{{ $report->reported_at->format('d/m/Y') }}</td>
@@ -115,16 +153,19 @@
                             <div class="uk-button-group">
                                 <a href="{{ route('reports.edit', $report) }}"
                                     class="uk-button uk-button-secondary uk-margin-small-right">Edit</a>
-                                <button  onclick="confirm('Are you sure you want to delete this report?') || event.stopImmediatePropagation()" type="button" wire:click="delete({{ $report->id }})"
-                                    class="uk-button uk-button-danger uk-margin-small-right">
+                                <button
+                                    onclick="confirm('Are you sure you want to delete this report?') || event.stopImmediatePropagation()"
+                                    type="button" wire:click="delete({{ $report->id }})"
+                                    class="uk-button uk-button-danger">
                                     Delete
                                 </button>
                             </div>
                         </td>
                     </tr>
+
                 @empty
                     <tr>
-                        <td colspan="9" class="uk-background-default">
+                        <td colspan="10" class="uk-background-default">
                             <div class="uk-padding-small">
                                 <x-alert message="You dont have any reports at the moment" type="danger">
                                     <a href="{{ route('reports.create') }}" class="uk-link uk-link-heading">Create a
@@ -136,13 +177,15 @@
                 @endforelse
             </tbody>
             <tfoot>
-                <tr class="uk-background-muted">
+                <tr>
 
-                    <td style="font-weight: 800" colspan="3">Total Completed Tasks: {{ $totalCompletedTasks }}</td>
+                    <td style="font-weight: 800" colspan="3">Total Completed Tasks: {{ $totalCompletedTasks }}
+                    </td>
                     <td style="font-weight: 800" colspan="3">Total Duration: {{ $totalDuration }}
                     </td>
-                    <td style="font-weight: 800" colspan="3">Total Units/hr: {{ $report->reported_at->isFuture() ? "Pending" : $totalUnitshr }} </td>
-                 
+                    <td style="font-weight: 800" colspan="2">Total Units/hr: {{ $totalUnitshr }} </td>
+                    <td></td>
+
                     <td></td>
                 </tr>
                 <tr>
@@ -153,6 +196,5 @@
             </tfoot>
         </table>
     </div>
-
     <x-top-top />
 </div>
