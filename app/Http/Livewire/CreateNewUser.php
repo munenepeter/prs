@@ -11,8 +11,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules\Enum;
 use App\Http\Livewire\Concerns\HasUserInserts;
 
-class CreateNewUser extends Component
-{
+class CreateNewUser extends Component {
     use HasUserInserts;
 
     public string $firstname = '';
@@ -24,8 +23,7 @@ class CreateNewUser extends Component
     public string $phone_number = '';
 
 
-    public function create()
-    {
+    public function create() {
         $validated = $this->validate();
 
         $random_password = Str::random(8);
@@ -34,6 +32,7 @@ class CreateNewUser extends Component
             'firstname' => $validated['firstname'],
             'lastname' => $validated['lastname'],
             'email' => $validated['email'],
+            'gender' => $validated['gender'],
             'phone_number' => $validated['phone_number'],
             'password' => Hash::make($random_password),
         ]);
@@ -43,29 +42,28 @@ class CreateNewUser extends Component
         );
 
 
-        $user->sendNewUserCreatedNotification($random_password);
+        //$user->sendNewUserCreatedNotification($random_password);
 
         session()->flash('success', "$user->fullname has been created successfully.");
 
         return redirect()->route('users.index');
     }
 
-    public function render()
-    {
+    public function render() {
         return view('livewire.create-new-user');
     }
 
-    protected function rules(): array
-    {
+    protected function rules(): array {
         return [
             'firstname' => ['required', 'string', 'max:255'],
             'lastname' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'phone_number' => ['required', 'string', 'min:10'],
+            'gender' => 'required',
             'role' =>  [
-                    'required',
-                    new Enum(Roles::class),
-                ],
+                'required',
+                new Enum(Roles::class),
+            ],
         ];
     }
 }
