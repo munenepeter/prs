@@ -31,8 +31,9 @@
 
             <thead>
                 <tr>
-                    <th>Name</th>
-                    <th>Email</th>
+                    <th>User</th>
+                    <th>Contact Info</th>
+                    <th>Gender</th>
                     <th class="uk-table-shrink">Role</th>
                     <th class="uk-table-expand uk-text-center@m">Actions</th>
                 </tr>
@@ -40,10 +41,16 @@
             <tbody>
                 @forelse ($users as $user)
                     <tr>
-                        <td class="uk-text-capitalize">{{ $user->fullname }}</td>
+                        <td class="uk-text-capitalize">
+                            <p>{{ $user->fullname }}</p>
+                            <p class="uk-text-meta">{{ $user->nbo_id}}</p>
+                        </td>
                         <td>
                             <p>{{ $user->email }}</p>
                             <p class="uk-text-meta">{{ $user->phone_number }}</p>
+                        </td>
+                         <td>
+                            <p>{{ $user->gender }}</p>
                         </td>
                         <td class="uk-text-uppercase uk-table-shrink">
                             @php
