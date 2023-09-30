@@ -22,7 +22,7 @@ class ProjectFactory extends Factory
     {
         $status = Arr::random(ProjectStatuses::cases());
         return [
-            'name' => $this->faker->unique()->words(nb: random_int(1, 4), asText: true),
+            'name' => $this->faker->unique()->words(nb: random_int(1, 2), asText: true),
             'status' => $status,
             'description' => $this->faker->sentences(nb: random_int(3, 6), asText: true),
             'created_at' => $date = $this->faker->dateTimeThisMonth(),
