@@ -9,26 +9,22 @@ use Livewire\Component;
 use Illuminate\Validation\Rules\Enum;
 use App\Http\Livewire\Concerns\HasUserInserts;
 
-class EditUser extends Component
-{
+class EditUser extends Component {
     use HasUserInserts;
 
     public User $user;
 
-    public function mount()
-    {
+    public function mount() {
         $this->user->loadMissing('roles');
 
         $this->role = $this->user->roles->first()->name->value;
     }
 
-    public function getUserRoleProperty()
-    {
+    public function getUserRoleProperty() {
         return $this->user->first();
     }
 
-    public function edit()
-    {
+    public function edit() {
         if (
             $this->user->isClean() ||
             $this->userRole->name === Roles::tryFrom($this->role)
@@ -49,13 +45,11 @@ class EditUser extends Component
         return redirect()->route('users.index');
     }
 
-    public function render()
-    {
+    public function render() {
         return view('livewire.edit-user');
     }
 
-    protected function rules()
-    {
+    protected function rules() {
         return [
             'user.firstname' => [
                 'required',
@@ -71,6 +65,9 @@ class EditUser extends Component
                 'required',
                 'string',
                 'min:10'
+            ],
+            'user.gender' => [
+                'required'
             ],
             'role' => [
                 'required',
