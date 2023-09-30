@@ -61,13 +61,18 @@ class EditUser extends Component {
                 'string',
                 'min:3'
             ],
+            'user.email' => [
+                'required',
+                'string'
+            ],
             'user.phone_number' => [
                 'required',
                 'string',
                 'min:10'
             ],
             'user.gender' => [
-                'required'
+                'required',
+                $this->genders
             ],
             'role' => [
                 'required',
