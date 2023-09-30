@@ -29,6 +29,7 @@ class UserFactory extends Factory
             'firstname' => $firstName,
             'lastname' => $lastName,
             'email' => $email,
+            'gender' => fake()->randomElement(['Male', 'Female']),
             'phone_number' => '+254 7' . fake()->numerify('##') . ' ' . fake()->numerify('###') . ' ' . fake()->numerify('###'),
             'email_verified_at' => now(),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
