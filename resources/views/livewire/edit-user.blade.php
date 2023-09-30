@@ -20,7 +20,7 @@
             <x-form-error input="user.phone_number" />
         </div>
 
-		  <div class="uk-grid-margin uk-first-column">
+        <div class="uk-grid-margin uk-first-column">
             <x-label for="email" value="Email of the user" />
             <x-input id="email" type="text" wire:model.defer="user.email" required />
             <x-form-error input="user.email" />
@@ -28,8 +28,8 @@
 
         <div class="uk-grid-margin uk-first-column">
             <x-label for="gender" value="Gender for the user" />
-                <x-select id="gender" wire:model.lazy="user.gender" :collection="$this->genders" :hasErrors="$errors->has('gender')" />
-                <x-form-error input="gender" />
+            <x-select id="gender" wire:model.lazy="user.gender" :collection="$this->genders" :hasErrors="$errors->has('user.gender')" />
+            <x-form-error input="user.gender" />
         </div>
         <div class="uk-grid-margin uk-first-column">
             <x-label for="role" value="Special Role for the user" />
