@@ -90,6 +90,12 @@ class EditTaskModal extends Component
                     new Enum(TaskUnitTypes::class)
                 ],
             ),
+            'task.target' => Rule::when(
+                condition: $this->task->isDirty('name'),
+                rules: [
+                    'required','numeric'
+                ],
+            ),
         ];
     }
 }
