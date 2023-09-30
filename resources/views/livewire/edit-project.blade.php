@@ -178,6 +178,21 @@
 								placeholder="Name of task"
 							>
 						</div>
+						<x-label for="project_manager"
+							 value="Task Target"
+					/>
+						<div class="uk-width-expand">
+							<input
+								type="number"
+								wire:model.defer="target"
+								id="target"
+								@class([
+									   'uk-input',
+									   'uk-form-danger' => $errors->has('target')
+									])
+								placeholder="Target of the task"
+							>
+						</div>
 						<div class="uk-width-auto">
 							<button
 								type="button"
