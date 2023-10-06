@@ -131,7 +131,7 @@ class ViewDailyReports extends Component
         return $this->user->reports()
             ->with([
                 'project:id,name,slug',
-                'task:id,name,unit_type',
+                'task:id,name,unit_type,target',
             ])
             ->orderBy('reported_at', 'DESC');
     }

@@ -51,9 +51,7 @@ class DailyReport extends Model
     {
         return Attribute::make(
             get: function () {
-                return  CarbonInterval::minutes(
-                    $this->units_completed / $this->duration->totalMinutes
-                )->cascade()->multiply(60)->totalMinutes;
+                return  number_format(($this->units_completed / $this->duration->totalMinutes)*60, 2);
             }
         );
     }
