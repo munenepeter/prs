@@ -155,43 +155,110 @@
         </div>
     </div>
     <div class="uk-overflow-auto">
-        <table class="report-table">
+        <table>
             <thead>
                 <tr>
+                    <th>User</th>
                     <th>Project</th>
                     <th>Task</th>
-                    <th>Unit Type</th>
+                    <th>Unit type</th>
                     <th>Completed Tasks</th>
                     <th>Duration</th>
                     <th>Units/hr</th>
+                    <th>Perfomance</th>
                     <th>Start</th>
                     <th>End</th>
                     <th>Date</th>
+                    <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
                 @forelse ($reports as $report)
+                    @php
+                        $totalCompletedTasks += $report->units_completed;
+                        $totalUnitshr += $report->hourlyRate;
+                        $totalDuration = $totalDuration->add($report->duration); // Add the durations together
+                    @endphp
                     <tr>
-                        <td>{{ ucfirst($report->project->name) }}</td>
+                        <td>{{ ucfirst($report->user->fullname) }}</td>
+                        <td>
+                            <a href="{{ route('projects.tasks.show', $report->project->slug) }}">{{ ucfirst($report->project->name) }}</a>
+                        </td>
                         <td>{{ ucfirst($report->task->name) }}</td>
                         <td>
                             <span class="uk-label uk-label-{{ $report->task->unit_type->color() }}">
                                 {{ $report->task->unit_type->name }}
                             </span>
                         </td>
-                        <td>{{ $report->units_completed }}</td>
-                        <td>{{ $report->duration }}</td>
-                        <td>{{ $report->hourlyRate }}</td>
+                        <td>{{ $report->units_completed }} </td>
+                        <td>{{ $report->duration->forHumans(['short' => true]) }}</td>
+                        <td>
+                            {{ $report->hourlyRate }}
+                        <td>
+
+
+                            @php
+                                // Get the individual target for this associate
+                                $individualTarget = $report->task->target;
+                                
+                                // Initialize variables
+                                $percentageDifference = 0;
+                                $performanceStatus = '';
+                                $color = '';
+                                
+                                // Check if $individualTarget is not zero
+                                if ($individualTarget != 0) {
+                                    // Calculate the percentage difference from the target
+                                    $percentageDifference = number_format((($report->hourlyRate - $individualTarget) / $individualTarget) * 100, 1);
+                                
+                                    // Determine if performance is above or below the target
+                                    if ($percentageDifference > 0) {
+                                        $performanceStatus = 'Perfomance: ' . $percentageDifference;
+                                        $color = 'green';
+                                    } elseif ($percentageDifference < 0) {
+                                        $performanceStatus = 'Perfomance: ' . abs($percentageDifference);
+                                        $color = 'red';
+                                    } else {
+                                        $performanceStatus = 'On Target';
+                                        $color = 'blue';
+                                    }
+                                } else {
+                                    // Handle the case where $individualTarget is zero
+                                    $performanceStatus = 'Target is Zero';
+                                    $color = 'gray';
+                                }
+                            @endphp
+                            <span class="" style="color: {{ $color }}"> 
+                               {{ $performanceStatus }}
+                            </span><br>
+                            <span class="uk-text-small">Target: {{ $report->task->target }}</span>
+                        </td>
                         <td>{{ $report->started_at->format('H:i:s') }}</td>
                         <td>{{ $report->ended_at->format('H:i:s') }}</td>
                         <td>{{ $report->reported_at->format('d/m/Y') }}</td>
+                      
                     </tr>
+
                 @empty
                     <tr class="empty-row">
                         <td colspan="9">You don't have any reports at the moment</td>
                     </tr>
                 @endforelse
             </tbody>
+            <tfoot>
+                <tr>
+
+                    <td style="font-weight: 800" colspan="3">Total Completed Tasks: {{ $totalCompletedTasks }}
+                    </td>
+                    <td style="font-weight: 800" colspan="3">Total Duration: {{ $totalDuration }}
+                    </td>
+                    <td style="font-weight: 800" colspan="2">Total Units/hr: {{ $totalUnitshr }} </td>
+                    <td style="font-weight: 800" colspan="2">On Target: {{ X }}
+                    </td>
+                    <td style="font-weight: 800" colspan="2">Below Target: {{Y }}
+                    </td>
+                </tr>
+            </tfoot>
         </table>
     </div>
 </body>

@@ -133,10 +133,10 @@
                                 
                                     // Determine if performance is above or below the target
                                     if ($percentageDifference > 0) {
-                                        $performanceStatus = $percentageDifference . '% Above';
+                                        $performanceStatus = 'Perfomance: ' . $percentageDifference;
                                         $color = 'green';
                                     } elseif ($percentageDifference < 0) {
-                                        $performanceStatus = abs($percentageDifference) . '% Below';
+                                        $performanceStatus = 'Perfomance: ' . abs($percentageDifference);
                                         $color = 'red';
                                     } else {
                                         $performanceStatus = 'On Target';
@@ -149,7 +149,7 @@
                                 }
                             @endphp
                             <span class="" style="color: {{ $color }}"> 
-                                {{ $performanceStatus }}
+                               {{ $performanceStatus }}
                             </span><br>
                             <span class="uk-text-small">Target: {{ $report->task->target }}</span>
                         </td>
@@ -191,9 +191,10 @@
                     <td style="font-weight: 800" colspan="3">Total Duration: {{ $totalDuration }}
                     </td>
                     <td style="font-weight: 800" colspan="2">Total Units/hr: {{ $totalUnitshr }} </td>
-                    <td></td>
-
-                    <td></td>
+                    <td style="font-weight: 800" colspan="2">On Target: {{ X }}
+                    </td>
+                    <td style="font-weight: 800" colspan="2">Below Target: {{Y }}
+                    </td>
                 </tr>
                 <tr>
                     <td colspan="8">

@@ -117,35 +117,39 @@
                         <td>{{ $report->duration->forHumans(['short' => true]) }}</td>
                         <td>{{ $report->hourlyRate }}</td>
                         <td>
-
-
                             @php
-                                // Calculate performance score (units completed per hour)
-                                $durationInMinutes = $report->duration->totalMinutes;
-                                $performanceScore = $report->units_completed / ($durationInMinutes / 60); // units per hour
-                                
                                 // Get the individual target for this associate
                                 $individualTarget = $report->task->target;
                                 
-                                // Calculate the percentage difference from the target
-                                $percentageDifference = number_format((($performanceScore - $individualTarget) / $individualTarget) * 100, 1);
+                                // Initialize variables
+                                $percentageDifference = 0;
+                                $performanceStatus = '';
+                                $color = '';
                                 
-                                // Determine if performance is above or below the target
-                                if ($percentageDifference > 0) {
-                                    $performanceStatus = $percentageDifference . '% Above';
-                                    $color = 'green';
-                                } elseif ($percentageDifference < 0) {
-                                    $performanceStatus = abs($percentageDifference) . '% Below';
-                                    $color = 'red';
+                                // Check if $individualTarget is not zero
+                                if ($individualTarget != 0) {
+                                    // Calculate the percentage difference from the target
+                                    $percentageDifference = number_format((($report->hourlyRate - $individualTarget) / $individualTarget) * 100, 1);
+                                
+                                    // Determine if performance is above or below the target
+                                    if ($percentageDifference > 0) {
+                                        $performanceStatus = 'Perfomance: ' . $percentageDifference;
+                                        $color = 'green';
+                                    } elseif ($percentageDifference < 0) {
+                                        $performanceStatus = 'Perfomance: ' . abs($percentageDifference);
+                                        $color = 'red';
+                                    } else {
+                                        $performanceStatus = 'On Target';
+                                        $color = 'blue';
+                                    }
                                 } else {
-                                    $performanceStatus = 'On Target';
-                                    $color = 'blue';
+                                    // Handle the case where $individualTarget is zero
+                                    $performanceStatus = 'Target is Zero';
+                                    $color = 'gray';
                                 }
                             @endphp
-
-                            <span class="" style="color: {{ $color }}">
-                                Score: {{ number_format($performanceScore, 2) }}<br>
-                                {{ $performanceStatus }}
+                            <span class="" style="color: {{ $color }}"> 
+                               {{ $performanceStatus }}
                             </span><br>
                             <span class="uk-text-small">Target: {{ $report->task->target }}</span>
                         </td>
