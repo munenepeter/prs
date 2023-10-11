@@ -83,7 +83,7 @@
                         </td>
                         <td class="uk-table-expand">
                             <div class="uk-button-group">
-                                {{--								@can('manage-projects') --}}
+                             
 
                                 <a href="{{ route('users.edit', $user->id) }}"
                                     class="uk-button uk-button-secondary uk-margin-small-right">
@@ -98,7 +98,7 @@
                                 </button>
                                 @endif
 
-                                {{--								@endcan --}}
+                         
                             </div>
                         </td>
                     </tr>
