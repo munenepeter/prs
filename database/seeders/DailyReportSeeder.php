@@ -18,7 +18,7 @@ class DailyReportSeeder extends Seeder
     public function run()
     {
         DailyReport::factory()
-            ->count(600)
+            ->count(10)
             ->sequence(function (Sequence $sequence) {
                 $project = Project::query()->inRandomOrder()->with('tasks')->first();
                 return [

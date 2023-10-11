@@ -109,12 +109,12 @@ class User extends Authenticatable {
         static::creating(function ($user) {
             $latestUser = self::latest('id')->first();
             $latestId = $latestUser ? (int)substr($latestUser->id, 3) : 0;
-            $newId = 'NBO' . ($latestId + 1);
+            $newId = 'StaffNo: ' . ($latestId + 1);
 
-            // Check if the generated 'nbo_id' already exists and generate a new one if needed
-            while (self::where('nbo_id', $newId)->exists()) {
+            // Check if the generated 'staffno' already exists and generate a new one if needed
+            while (self::where('staffno', $newId)->exists()) {
                 $latestId++;
-                $newId = 'NBO' . ($latestId + 1);
+                $newId = 'StaffNo: '  . ($latestId + 1);
             }
 
             $user->nbo_id = $newId;

@@ -19,7 +19,7 @@ class ProjectSeeder extends Seeder
     public function run()
     {
         Project::factory()
-            ->count(60)
+            ->count(7)
             ->sequence(
                 fn (Sequence $sequence) => [
                     'user_id' => User::query()->projectManagers()->inRandomOrder()->first('id'),

@@ -21,7 +21,7 @@ class UserSeeder extends Seeder
         $this->admin();
         $this->projectManger();
 
-        User::factory()->count(200)
+        User::factory()->count(10)
             ->hasAttached(
                 Role::where('name', '=', Roles::USER)->get()
             )
@@ -34,11 +34,13 @@ class UserSeeder extends Seeder
             'firstname' => 'admin',
             'lastname' => '',
             'email' => 'admin@prs.com',
+            'gender' => 'Male',
             'email_verified_at' => now(),
             'password' => Hash::make('password'), // password
             'remember_token' => Str::random(10),
             'password_changed_at' => now(),
         ]);
+
 
         $admin->roles()->attach(Role::where('name', '=', Roles::ADMIN)->get());
     }
@@ -49,6 +51,7 @@ class UserSeeder extends Seeder
             'firstname' => 'project manager',
             'lastname' => '',
             'email' => 'projectmanager@prs.com',
+            'gender' => 'Male',
             'email_verified_at' => now(),
             'password' => Hash::make('password'), // password
             'remember_token' => Str::random(10),
