@@ -90,11 +90,13 @@
                                     Edit
                                 </a>
 
+                                @if(auth()->user()->id !== $user->id)
                                 <button type="button"
                                     onclick="confirm('Are you sure you want to delete this user?') || event.stopImmediatePropagation()"
                                     wire:click="deleteUser('{{ $user->email }}')" class="uk-button uk-button-danger">
                                     Delete
                                 </button>
+                                @endif
 
                                 {{--								@endcan --}}
                             </div>
