@@ -205,10 +205,12 @@
                     <td style="font-weight: 800" colspan="3">Total Duration: {{ $totalDuration }}
                     </td>
                     <td style="font-weight: 800" colspan="2">Total Units/hr: {{ $totalUnitshr }} </td>
-                    <td style="font-weight: 800" colspan="2">On Target: {{ 'X' }}
+                  @if(auth()->user()->isAdmin() || auth()->user()->isProjectManager() )
+                      <td style="font-weight: 800" colspan="2">On Target: {{ 'X' }}
                     </td>
                     <td style="font-weight: 800" colspan="2">Below Target: {{ 'Y' }}
                     </td>
+                  @endif
                 </tr>
                 <tr>
                     <td colspan="8">
