@@ -154,6 +154,11 @@
             <p class="page-number">Date: {{ date('d/m/Y') }}</p>
         </div>
     </div>
+      @php
+        $totalCompletedTasks = 0;
+        $totalDuration = \Carbon\CarbonInterval::create(0, 0, 0, 0); // Initialize the totalDuration as a CarbonInterval;
+        $totalUnitshr = 0;
+    @endphp
     <div class="uk-overflow-auto">
         <table>
             <thead>
