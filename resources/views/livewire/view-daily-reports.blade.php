@@ -191,9 +191,9 @@
                     <td style="font-weight: 800" colspan="3">Total Duration: {{ $totalDuration }}
                     </td>
                     <td style="font-weight: 800" colspan="2">Total Units/hr: {{ $totalUnitshr }} </td>
-                    <td style="font-weight: 800" colspan="2">On Target: {{ X }}
+                    <td style="font-weight: 800" colspan="2">On Target: {{ 'X' }}
                     </td>
-                    <td style="font-weight: 800" colspan="2">Below Target: {{Y }}
+                    <td style="font-weight: 800" colspan="2">Below Target: {{ 'Y' }}
                     </td>
                 </tr>
                 <tr>
