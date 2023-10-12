@@ -43,13 +43,13 @@
                     <tr>
                         <td class="uk-text-capitalize">
                             <p>{{ $user->fullname }}</p>
-                            <p class="uk-text-meta">{{ $user->staff_no}}</p>
+                            <p class="uk-text-meta">{{ $user->staff_no }}</p>
                         </td>
                         <td>
                             <p>{{ $user->email }}</p>
                             <p class="uk-text-meta">{{ $user->phone_number }}</p>
                         </td>
-                         <td>
+                        <td>
                             <p>{{ $user->gender }}</p>
                         </td>
                         <td class="uk-text-uppercase uk-table-shrink">
@@ -72,33 +72,33 @@
                                     case 'user':
                                         $usersCount++;
                                         break;
-                                
+
                                     default:
                                         $usersCount++;
                                         break;
                                 }
-                                
+
                             @endphp
                             {{ $user->roles->implode('name.value', ', ') ?? 'Users' }}
                         </td>
                         <td class="uk-table-expand">
                             <div class="uk-button-group">
-                             
+
 
                                 <a href="{{ route('users.edit', $user->id) }}"
                                     class="uk-button uk-button-secondary uk-margin-small-right">
                                     Edit
                                 </a>
 
-                                @if(auth()->user()->id !== $user->id)
                                 <button type="button"
-                                    onclick="confirm('Are you sure you want to delete this user?') || event.stopImmediatePropagation()"
-                                    wire:click="deleteUser('{{ $user->email }}')" class="uk-button uk-button-danger">
+                                    onclick="if (!confirm('Are you sure you want to delete this user?')) return false"
+                                    wire:click="deleteUser('{{ $user->email }}')" class="uk-button uk-button-danger"
+                                    @if (auth()->user()->id === $user->id) disabled @endif>
                                     Delete
                                 </button>
-                                @endif
 
-                         
+
+
                             </div>
                         </td>
                     </tr>
