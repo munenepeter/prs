@@ -113,16 +113,24 @@
                         <td>{{ $report->units_completed }} </td>
                         <td>{{ $report->duration->forHumans(['short' => true]) }}</td>
                         <td>
-                            {{ $report->hourlyRate }}
+                            @php
+                                $currentDate = new DateTime(); // Current date and time
+                                $reportDate = $report->reported_at;
+
+                            @endphp
+
+                            @if ($reportDate > $currentDate)
+                                <span class="uk-text-small">Pending: {{ $report->hourlyRate }} </span>
+                            @else
+                                {{ $report->hourlyRate }}
+                            @endif
+
                         <td>
 
 
                             @php
                                 // Get the individual target for this associate
                                 $individualTarget = $report->task->target;
-
-                                $currentDate = new DateTime(); // Current date and time
-                                $reportDate = $report->reported_at;
 
                                 // Initialize variables
                                 $percentageDifference = 0;
