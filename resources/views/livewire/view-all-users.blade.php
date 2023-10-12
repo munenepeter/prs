@@ -117,10 +117,10 @@
             </tbody>
             <tfoot>
                 <tr>
-                    <td style="font-weight: 800">Total: {{ $users->total() }}</td>
-                    <td style="font-weight: 800">Users: {{ $usersCount }} </td>
-                    <td style="font-weight: 800">Managers: {{ $managersCount }} </td>
-                    <td style="font-weight: 800">Admins: {{ $adminsCount }} </td>
+                    <td style="font-weight: 800" >Total: {{ $users->total() }}</td>
+                    <td style="font-weight: 800" >Users: {{ $usersCount }} </td>
+                    <td style="font-weight: 800" colspan="2" >Managers: {{ $managersCount }} </td>
+                    <td style="font-weight: 800" >Admins: {{ $adminsCount }} </td>
                 </tr>
                 <tr>
                     <td colspan="7">
