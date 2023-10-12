@@ -94,7 +94,7 @@
                     <th class="uk-table-expand">Actions</th>
                 </tr>
             </thead>
-            <tbody>
+              <tbody>
                 @forelse ($reports as $report)
                     @php
                         $totalCompletedTasks += $report->units_completed;
@@ -107,7 +107,7 @@
                             <a
                                 href="{{ route('projects.tasks.show', $report->project->slug) }}">{{ ucfirst($report->project->name) }}</a>
                         </td>
-                        <td >{{ ucfirst($report->task->name) }}</td>
+                        <td>{{ ucfirst($report->task->name) }}</td>
                         <td>
                             <span class="uk-label uk-label-{{ $report->task->unit_type->color() }}">
                                 {{ $report->task->unit_type->name }}
@@ -115,22 +115,36 @@
                         </td>
                         <td>{{ $report->units_completed }} </td>
                         <td>{{ $report->duration->forHumans(['short' => true]) }}</td>
-                        <td>{{ $report->hourlyRate }}</td>
                         <td>
+                            @php
+                                $currentDate = new DateTime(); // Current date and time
+                                $reportDate = $report->reported_at;
+
+                            @endphp
+
+                            @if ($reportDate > $currentDate)
+                                <span class="uk-text-small">Pending: {{ $report->hourlyRate }} </span>
+                            @else
+                                {{ $report->hourlyRate }}
+                            @endif
+
+                        <td>
+
+
                             @php
                                 // Get the individual target for this associate
                                 $individualTarget = $report->task->target;
-                                
+
                                 // Initialize variables
                                 $percentageDifference = 0;
                                 $performanceStatus = '';
                                 $color = '';
-                                
+
                                 // Check if $individualTarget is not zero
-                                if ($individualTarget != 0) {
+                                if ($individualTarget != 0 && $reportDate < $currentDate) {
                                     // Calculate the percentage difference from the target
                                     $percentageDifference = number_format((($report->hourlyRate - $individualTarget) / $individualTarget) * 100, 1);
-                                
+
                                     // Determine if performance is above or below the target
                                     if ($percentageDifference > 0) {
                                         $performanceStatus = 'Perfomance: ' . $percentageDifference;
@@ -142,14 +156,17 @@
                                         $performanceStatus = 'On Target';
                                         $color = 'blue';
                                     }
+                                } elseif ($reportDate > $currentDate) {
+                                    $performanceStatus = 'Pending';
+                                    $color = 'orange';
                                 } else {
                                     // Handle the case where $individualTarget is zero
                                     $performanceStatus = 'Target is Zero';
                                     $color = 'gray';
-                                }
-                            @endphp
-                            <span class="" style="color: {{ $color }}"> 
-                               {{ $performanceStatus }}
+                            } @endphp
+
+                            <span class="" style="color: {{ $color }}">
+                                {{ $performanceStatus }}
                             </span><br>
                             <span class="uk-text-small">Target: {{ $report->task->target }}</span>
                         </td>
@@ -184,16 +201,17 @@
                 @endforelse
             </tbody>
             <tfoot>
-                <tr>
+               <tr>
 
                     <td style="font-weight: 800" colspan="3">Total Completed Tasks: {{ $totalCompletedTasks }}
                     </td>
                     <td style="font-weight: 800" colspan="3">Total Duration: {{ $totalDuration }}
                     </td>
                     <td style="font-weight: 800" colspan="2">Total Units/hr: {{ $totalUnitshr }} </td>
-                    <td></td>
-
-                    <td></td>
+                    <td style="font-weight: 800" colspan="2">On Target: {{ 'X' }}
+                    </td>
+                    <td style="font-weight: 800" colspan="2">Below Target: {{ 'Y' }}
+                    </td>
                 </tr>
                 <tr>
                     <td colspan="8">
