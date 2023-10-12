@@ -43,7 +43,7 @@
                     <tr>
                         <td class="uk-text-capitalize">
                             <p>{{ $user->fullname }}</p>
-                            <p class="uk-text-meta">{{ $user->nbo_id}}</p>
+                            <p class="uk-text-meta">{{ $user->staff_no}}</p>
                         </td>
                         <td>
                             <p>{{ $user->email }}</p>

@@ -26,6 +26,8 @@ class User extends Authenticatable {
      */
     protected $fillable = [
         'email',
+        'staff_no',
+        'gender',
         'lastname',
         'password',
         'firstname',
@@ -112,12 +114,12 @@ class User extends Authenticatable {
             $newId = 'StaffNo: ' . ($latestId + 1);
 
             // Check if the generated 'staffno' already exists and generate a new one if needed
-            while (self::where('staffno', $newId)->exists()) {
+            while (self::where('staff_no', $newId)->exists()) {
                 $latestId++;
                 $newId = 'StaffNo: '  . ($latestId + 1);
             }
 
-            $user->nbo_id = $newId;
+            $user->staff_no = $newId;
         });
     }
 }
