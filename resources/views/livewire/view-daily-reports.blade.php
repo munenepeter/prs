@@ -120,17 +120,20 @@
                             @php
                                 // Get the individual target for this associate
                                 $individualTarget = $report->task->target;
-                                
+
+                                $currentDate = new DateTime(); // Current date and time
+                                $reportDate = $report->reported_at;
+
                                 // Initialize variables
                                 $percentageDifference = 0;
                                 $performanceStatus = '';
                                 $color = '';
-                                
+
                                 // Check if $individualTarget is not zero
-                                if ($individualTarget != 0) {
+                                if ($individualTarget != 0 && $reportDate < $currentDate) {
                                     // Calculate the percentage difference from the target
                                     $percentageDifference = number_format((($report->hourlyRate - $individualTarget) / $individualTarget) * 100, 1);
-                                
+
                                     // Determine if performance is above or below the target
                                     if ($percentageDifference > 0) {
                                         $performanceStatus = 'Perfomance: ' . $percentageDifference;
@@ -142,14 +145,17 @@
                                         $performanceStatus = 'On Target';
                                         $color = 'blue';
                                     }
+                                } elseif ($reportDate > $currentDate) {
+                                    $performanceStatus = 'Pending';
+                                    $color = 'orange';
                                 } else {
                                     // Handle the case where $individualTarget is zero
                                     $performanceStatus = 'Target is Zero';
                                     $color = 'gray';
-                                }
-                            @endphp
-                            <span class="" style="color: {{ $color }}"> 
-                               {{ $performanceStatus }}
+                            } @endphp
+
+                            <span class="" style="color: {{ $color }}">
+                                {{ $performanceStatus }}
                             </span><br>
                             <span class="uk-text-small">Target: {{ $report->task->target }}</span>
                         </td>
