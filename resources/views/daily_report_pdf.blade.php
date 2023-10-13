@@ -160,7 +160,7 @@
         $totalUnitshr = 0;
     @endphp
     <div>
-        <table style="border: 1px solid gray; border-collapse: collapse;">
+        <table class="report-table">
             <thead>
                 <tr>
                     
@@ -256,14 +256,14 @@
                     </td>
                     <td style="font-weight: 800" colspan="3">Total Duration: {{ $totalDuration }}
                     </td>
-                    <td style="font-weight: 800" colspan="2">Total Units/hr: {{ $totalUnitshr }} </td>
-                   @if (auth()->user()->isAdmin() ||
+                    <td style="font-weight: 800" colspan="3">Total Units/hr: {{ $totalUnitshr }} </td>
+                   {{-- @if (auth()->user()->isAdmin() ||
                             auth()->user()->isProjectManager())
                         <td style="font-weight: 800" colspan="2">On Target: {{ 'X' }}
                         </td>
                         <td style="font-weight: 800" colspan="2">Below Target: {{ 'Y' }}
                         </td>
-                    @endif
+                    @endif --}}
                 </tr>
             </tfoot>
         </table>
