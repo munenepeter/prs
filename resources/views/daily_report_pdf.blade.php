@@ -22,6 +22,7 @@
             border: 1px solid #ddd;
             word-wrap: break-word;
             max-width: 150px;
+            font-size: 14px;
            /* overflow: hidden; */
         }
 

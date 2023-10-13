@@ -61,30 +61,5 @@ Route::get('/dashboard', DashboardController::class)->middleware(['auth', 'new_u
 
 
 
-Route::get('/test-pdf', function () {
-    try {
-        // Replace this with your actual data retrieval logic
-        $reports = [
-            // Sample data
-            ['name' => 'Report 1', 'value' => 10],
-            ['name' => 'Report 2', 'value' => 20],
-        ];
-
-        // Load the view content
-        $pdfContent = view('daily_report_pdf', compact('reports'))->render();
-
-        // Generate PDF
-        $pdf = PDF::loadHtml($pdfContent);
-
-        // Set paper size and orientation if needed
-        $pdf->setPaper('A4', 'portrait');
-
-        // Download the PDF
-        return $pdf->download('test-pdf.pdf');
-    } catch (\Exception $e) {
-        return response()->json(['error' => 'PDF export failed'], 500);
-    }
-});
-
 
 require __DIR__.'/auth.php';
