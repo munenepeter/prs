@@ -17,12 +17,12 @@
 
         .report-table th,
         .report-table td {
-            padding: 8px;
+            padding: 4px;
             text-align: left;
             border: 1px solid #ddd;
             word-wrap: break-word;
-            max-width: 200px;
-            overflow: hidden;
+            max-width: 150px;
+           /* overflow: hidden; */
         }
 
         .report-table th {
@@ -37,7 +37,7 @@
 
         .report-table th,
         .report-table td {
-            padding: 8px;
+            padding: 4px;
             text-align: left;
             border: 1px solid #ddd;
         }
@@ -48,7 +48,7 @@
         }
 
         .uk-label {
-            padding: 5px 8px;
+            padding: 4px 6px;
             border-radius: 4px;
             color: #fefefe;
         }
