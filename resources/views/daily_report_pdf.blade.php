@@ -160,10 +160,10 @@
         $totalUnitshr = 0;
     @endphp
     <div>
-        <table>
+        <table style="border: 1px solid gray; border-collapse: collapse;">
             <thead>
                 <tr>
-                    <th style="width: 10%">User</th>
+                    
                     <th style="width: 10%">Project</th>
                     <th style="width: 10%">Task</th>
                     <th style="width: 10%">Unit type</th>
@@ -184,7 +184,7 @@
                         $totalDuration = $totalDuration->add($report->duration); // Add the durations together
                     @endphp
                     <tr>
-                        <td>{{ ucfirst($report->user->fullname) }}</td>
+                       
                         <td>
                             <a href="{{ route('projects.tasks.show', $report->project->slug) }}">{{ ucfirst($report->project->name) }}</a>
                         </td>
