@@ -159,22 +159,21 @@
         $totalDuration = \Carbon\CarbonInterval::create(0, 0, 0, 0); // Initialize the totalDuration as a CarbonInterval;
         $totalUnitshr = 0;
     @endphp
-    <div class="uk-overflow-auto">
+    <div>
         <table>
             <thead>
                 <tr>
-                    <th>User</th>
-                    <th>Project</th>
-                    <th>Task</th>
-                    <th>Unit type</th>
-                    <th>Completed Tasks</th>
-                    <th>Duration</th>
-                    <th>Units/hr</th>
-                    <th>Perfomance</th>
-                    <th>Start</th>
-                    <th>End</th>
-                    <th>Date</th>
-                    <th>Actions</th>
+                    <th style="width: 10%">User</th>
+                    <th style="width: 10%">Project</th>
+                    <th style="width: 10%">Task</th>
+                    <th style="width: 10%">Unit type</th>
+                    <th style="width: 10%">Completed Tasks</th>
+                    <th style="width: 10%">Duration</th>
+                    <th style="width: 10%">Units/hr</th>
+                    <th style="width: 10%">Perfomance</th>
+                    <th style="width: 10%">Start</th>
+                    <th style="width: 10%">End</th>
+                    <th style="width: 10%">Date</th>
                 </tr>
             </thead>
             <tbody>
@@ -258,10 +257,13 @@
                     <td style="font-weight: 800" colspan="3">Total Duration: {{ $totalDuration }}
                     </td>
                     <td style="font-weight: 800" colspan="2">Total Units/hr: {{ $totalUnitshr }} </td>
-                    <td style="font-weight: 800" colspan="2">On Target: {{ 'X' }}
-                    </td>
-                    <td style="font-weight: 800" colspan="2">Below Target: {{ 'Y' }}
-                    </td>
+                   @if (auth()->user()->isAdmin() ||
+                            auth()->user()->isProjectManager())
+                        <td style="font-weight: 800" colspan="2">On Target: {{ 'X' }}
+                        </td>
+                        <td style="font-weight: 800" colspan="2">Below Target: {{ 'Y' }}
+                        </td>
+                    @endif
                 </tr>
             </tfoot>
         </table>
