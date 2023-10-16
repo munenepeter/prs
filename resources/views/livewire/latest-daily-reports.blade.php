@@ -71,10 +71,12 @@
             </div>
         </form>
     </div>
-    @php
+  @php
         $totalCompletedTasks = 0;
         $totalDuration = \Carbon\CarbonInterval::create(0, 0, 0, 0); // Initialize the totalDuration as a CarbonInterval;
         $totalUnitshr = 0;
+        $onTarget = 0;
+        $belowTarget = 0;
     @endphp
     <div class="uk-overflow-auto">
         <table class="uk-table uk-table-small uk-table-divider uk-table-middle uk-table-striped uk-table-responsive">
@@ -94,7 +96,7 @@
                     <th class="uk-table-expand">Actions</th>
                 </tr>
             </thead>
-              <tbody>
+            <tbody>
                 @forelse ($reports as $report)
                     @php
                         $totalCompletedTasks += $report->units_completed;
@@ -128,13 +130,11 @@
                                 {{ $report->hourlyRate }}
                             @endif
 
-                         <td>
+                        <td>
 
 
                             @php
 
-                            $onTarget = 0;
-                            $belowTarget = 0;
                                 // Get the individual target for this associate
                                 $individualTarget = $report->task->target;
 
@@ -205,12 +205,14 @@
                     </tr>
                 @endforelse
             </tbody>
+
+
             <tfoot>
                 <tr>
 
                     <td style="font-weight: 800" colspan="3">Total Completed Tasks: {{ $totalCompletedTasks }}
                     </td>
-                    <td style="font-weight: 800" colspan="3">Total Duration: {{ $totalDuration }}
+                    <td style="font-weight: 800" colspan="3">Total Duration: {{ $totalDuration->forHumans(['short' => true])  }}
                     </td>
                     <td style="font-weight: 800" colspan="2">Total Units/hr: {{ $totalUnitshr }} </td>
                     @if (auth()->user()->isAdmin() ||
@@ -227,6 +229,8 @@
                     </td>
                 </tr>
             </tfoot>
+
+
         </table>
     </div>
     <x-top-top />
