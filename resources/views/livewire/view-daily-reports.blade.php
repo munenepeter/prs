@@ -202,7 +202,9 @@
                     </tr>
                 @endforelse
             </tbody>
-            <tfoot>
+           
+            @if(!empty($reports))
+               <tfoot>
                 <tr>
 
                     <td style="font-weight: 800" colspan="3">Total Completed Tasks: {{ $totalCompletedTasks }}
@@ -212,9 +214,9 @@
                     <td style="font-weight: 800" colspan="2">Total Units/hr: {{ $totalUnitshr }} </td>
                     @if (auth()->user()->isAdmin() ||
                             auth()->user()->isProjectManager())
-                        <td style="font-weight: 800" colspan="2">On Target: {{ isset($onTarget) ? $onTarget : 0 }}
+                        <td style="font-weight: 800" colspan="2">On Target: {{ $onTarget}}
                         </td>
-                        <td style="font-weight: 800" colspan="2">Below Target: {{ isset($belowTarget) ? $belowTarget : 0 }}
+                        <td style="font-weight: 800" colspan="2">Below Target: {{ $belowTarget }}
                         </td>
                     @endif
                 </tr>
@@ -223,7 +225,9 @@
                         {{ $reports->links() }}
                     </td>
                 </tr>
-            </tfoot>
+            </tfoot>  
+            @endempty
+               
         </table>
     </div>
     <x-top-top />
