@@ -226,7 +226,7 @@
                     </td>
                 </tr>
             </tfoot>  
-            @endempty
+            @endif
                
         </table>
     </div>
