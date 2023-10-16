@@ -94,6 +94,8 @@
             <tbody>
                 @forelse ($reports as $report)
                     @php
+                        $onTarget = 0;
+                        $belowTarget = 0;
                         $totalCompletedTasks += $report->units_completed;
                         $totalUnitshr += $report->hourlyRate;
                         $totalDuration = $totalDuration->add($report->duration); // Add the durations together
@@ -130,8 +132,6 @@
 
                             @php
 
-                                $onTarget = 0;
-                                $belowTarget = 0;
                                 // Get the individual target for this associate
                                 $individualTarget = $report->task->target;
 
