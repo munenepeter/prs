@@ -22,13 +22,13 @@
             border: 1px solid #ddd;
             word-wrap: break-word;
             max-width: 150px;
-            font-size: 14px;
-           /* overflow: hidden; */
+            font-size: 12px !important;
         }
 
         .report-table th {
             background-color: #f2f2f2;
             font-weight: bold;
+            font-size: 12px !important;
         }
 
         .report-table {
@@ -36,17 +36,6 @@
             border-collapse: collapse;
         }
 
-        .report-table th,
-        .report-table td {
-            padding: 4px;
-            text-align: left;
-            border: 1px solid #ddd;
-        }
-
-        .report-table th {
-            background-color: #f2f2f2;
-            font-weight: bold;
-        }
 
         .uk-label {
             padding: 4px 6px;
