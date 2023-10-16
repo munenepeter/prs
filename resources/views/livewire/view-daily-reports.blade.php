@@ -130,8 +130,8 @@
 
                             @php
 
-                            $onTarget = 0;
-                            $belowTarget = 0;
+                                $onTarget = 0;
+                                $belowTarget = 0;
                                 // Get the individual target for this associate
                                 $individualTarget = $report->task->target;
 
