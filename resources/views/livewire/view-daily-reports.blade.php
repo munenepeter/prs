@@ -209,7 +209,7 @@
 
                     <td style="font-weight: 800" colspan="3">Total Completed Tasks: {{ $totalCompletedTasks }}
                     </td>
-                    <td style="font-weight: 800" colspan="3">Total Duration: {{ $totalDuration }}
+                    <td style="font-weight: 800" colspan="3">Total Duration: {{ ($totalDuration === '1 second') ? 0 : $totalDuration  }}
                     </td>
                     <td style="font-weight: 800" colspan="2">Total Units/hr: {{ $totalUnitshr }} </td>
                     @if (auth()->user()->isAdmin() ||
