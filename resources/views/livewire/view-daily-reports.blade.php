@@ -72,6 +72,8 @@
         $totalCompletedTasks = 0;
         $totalDuration = \Carbon\CarbonInterval::create(0, 0, 0, 0); // Initialize the totalDuration as a CarbonInterval;
         $totalUnitshr = 0;
+        $onTarget = 0;
+        $belowTarget = 0;
     @endphp
     <div class="uk-overflow-auto">
         <table class="uk-table uk-table-small uk-table-divider uk-table-middle uk-table-striped uk-table-responsive">
@@ -94,8 +96,6 @@
             <tbody>
                 @forelse ($reports as $report)
                     @php
-                        $onTarget = 0;
-                        $belowTarget = 0;
                         $totalCompletedTasks += $report->units_completed;
                         $totalUnitshr += $report->hourlyRate;
                         $totalDuration = $totalDuration->add($report->duration); // Add the durations together
@@ -202,9 +202,9 @@
                     </tr>
                 @endforelse
             </tbody>
-           
-            @if(!empty($reports))
-               <tfoot>
+
+
+            <tfoot>
                 <tr>
 
                     <td style="font-weight: 800" colspan="3">Total Completed Tasks: {{ $totalCompletedTasks }}
@@ -214,7 +214,7 @@
                     <td style="font-weight: 800" colspan="2">Total Units/hr: {{ $totalUnitshr }} </td>
                     @if (auth()->user()->isAdmin() ||
                             auth()->user()->isProjectManager())
-                        <td style="font-weight: 800" colspan="2">On Target: {{ $onTarget}}
+                        <td style="font-weight: 800" colspan="2">On Target: {{ $onTarget }}
                         </td>
                         <td style="font-weight: 800" colspan="2">Below Target: {{ $belowTarget }}
                         </td>
@@ -225,9 +225,9 @@
                         {{ $reports->links() }}
                     </td>
                 </tr>
-            </tfoot>  
-            @endif
-               
+            </tfoot>
+
+
         </table>
     </div>
     <x-top-top />
