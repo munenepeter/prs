@@ -128,10 +128,13 @@
                                 {{ $report->hourlyRate }}
                             @endif
 
-                        <td>
+                         <td>
 
 
                             @php
+
+                            $onTarget = 0;
+                            $belowTarget = 0;
                                 // Get the individual target for this associate
                                 $individualTarget = $report->task->target;
 
@@ -147,9 +150,11 @@
 
                                     // Determine if performance is above or below the target
                                     if ($percentageDifference > 0) {
+                                        $onTarget++;
                                         $performanceStatus = 'Perfomance: ' . $percentageDifference;
                                         $color = 'green';
                                     } elseif ($percentageDifference < 0) {
+                                        $belowTarget++;
                                         $performanceStatus = 'Perfomance: ' . abs($percentageDifference);
                                         $color = 'red';
                                     } else {
@@ -201,17 +206,20 @@
                 @endforelse
             </tbody>
             <tfoot>
-               <tr>
+                <tr>
 
                     <td style="font-weight: 800" colspan="3">Total Completed Tasks: {{ $totalCompletedTasks }}
                     </td>
                     <td style="font-weight: 800" colspan="3">Total Duration: {{ $totalDuration }}
                     </td>
                     <td style="font-weight: 800" colspan="2">Total Units/hr: {{ $totalUnitshr }} </td>
-                    <td style="font-weight: 800" colspan="2">On Target: {{ 'X' }}
-                    </td>
-                    <td style="font-weight: 800" colspan="2">Below Target: {{ 'Y' }}
-                    </td>
+                    @if (auth()->user()->isAdmin() ||
+                            auth()->user()->isProjectManager())
+                        <td style="font-weight: 800" colspan="2">On Target: {{ $onTarget }}
+                        </td>
+                        <td style="font-weight: 800" colspan="2">Below Target: {{ $belowTarget }}
+                        </td>
+                    @endif
                 </tr>
                 <tr>
                     <td colspan="8">
