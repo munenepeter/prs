@@ -4,12 +4,17 @@ namespace App\Http\Livewire\Concerns;
 
 use App\Models\User;
 use App\Models\Client;
+use App\Enums\TaskUnitTypes;
 use App\Enums\ProjectStatuses;
 use Illuminate\Support\Collection;
 
 trait HasInserts {
+
     public string $task = '';
+
     public int $target = 0;
+
+    public string $unit_type;
 
     public ?string $new_client = null;
 
@@ -33,6 +38,10 @@ trait HasInserts {
         return User::query()->projectManagers()
             ->get()
             ->pluck('fullname', 'id');
+    }
+    public function getTaskUnitTypesProperty(): array {
+
+        return TaskUnitTypes::pluck('name', 'value');
     }
 
     public function taskExistsBrowserEvent(): void {
