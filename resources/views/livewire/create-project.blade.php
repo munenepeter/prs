@@ -89,7 +89,12 @@
                 </div>
                 <br>
                 <div>
-                    <x-label for="target" value="Target" />
+                    @if ($unit_type === 'HOUR')
+                        <x-label for="target" value="Target (in minutes)" />
+                    @else
+                        <x-label for="target" value="Target (in {{strlower($unit_type)}}'s in per hour)" />
+                    @endif
+
                     <x-input id="target" wire:model.defer="target" :hasError="$errors->has('target')" />
                     <x-form-error input="target" />
                 </div>
