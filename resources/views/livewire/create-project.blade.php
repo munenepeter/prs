@@ -122,6 +122,7 @@
                                         class="remove-task uk-icon uk-close uk-svg uk-margin-small-left"
                                         uk-close="ratio: 0.8"></button>
                                 </div>
+
                             </div>
                         @endforeach
                     </div>
