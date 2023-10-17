@@ -81,7 +81,7 @@
                             <input type="text" wire:model.defer="task" id="task" @class(['uk-input', 'uk-form-danger' => $errors->has('task')])
                                 placeholder="Name of task">
                         </div>
-                        {{$tasks}}
+                        {{$target}}
                             <x-label for="project_manager" value="Target" />
                        
                         
