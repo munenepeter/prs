@@ -261,7 +261,7 @@
             <tfoot>
                   <tr>
 
-                    <td style="font-weight: 800" colspan="3">Total Completed Tasks: {{ $totalCompletedTasks }}
+                    <td style="font-weight: 800" colspan="2">Completed Tasks: {{ $totalCompletedTasks }}
                     </td>
                     <td style="font-weight: 800" colspan="2">Total Duration: {{ $totalDuration->forHumans(['short' => true])  }}
                     </td>
