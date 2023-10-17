@@ -81,17 +81,19 @@
                     <x-input id="task_name" wire:model.defer="task" :hasError="$errors->has('task')" />
                     <x-form-error input="task" />
                 </div>
+                <br>
                 <div>
                     <x-label for="unit_type" value="Unit Type" />
                     <x-select id="unit_type" :collection="$this->taskUnitTypes" wire:model.defer="unit_type" :hasError="$errors->has('unit_type')" />
                     <x-form-error input="unit_type" />
                 </div>
+                <br>
                 <div>
                     <x-label for="target" value="Target" />
                     <x-input id="target" wire:model.defer="target" :hasError="$errors->has('target')" />
                     <x-form-error input="target" />
                 </div>
-
+                <br>
                 <div>
                     <button type="button" wire:click="addTask" class="uk-button uk-button-primary">Add Task
                     </button>
