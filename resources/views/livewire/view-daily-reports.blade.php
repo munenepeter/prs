@@ -72,7 +72,7 @@
         $totalCompletedTasks = 0;
         $totalDuration = \Carbon\CarbonInterval::create(0, 0, 0, 0); // Initialize the totalDuration as a CarbonInterval;
         $totalUnitshr = 0;
-        $onTarget = 0;
+        $aboveTarget = 0;
         $belowTarget = 0;
     @endphp
     <div class="uk-overflow-auto">
@@ -147,7 +147,7 @@
 
                                     // Determine if performance is above or below the target
                                     if ($percentageDifference > 0) {
-                                        $onTarget++;
+                                        $aboveTarget++;
                                         $performanceStatus = 'Perfomance: ' . $percentageDifference;
                                         $color = 'green';
                                     } elseif ($percentageDifference < 0) {
@@ -214,7 +214,7 @@
                     <td style="font-weight: 800" colspan="2">Total Units/hr: {{ $totalUnitshr }} </td>
                     @if (auth()->user()->isAdmin() ||
                             auth()->user()->isProjectManager())
-                        <td style="font-weight: 800" colspan="2">On Target: {{ $onTarget }}
+                        <td style="font-weight: 800" colspan="2">On Target: {{ $aboveTarget }}
                         </td>
                         <td style="font-weight: 800" colspan="2">Below Target: {{ $belowTarget }}
                         </td>

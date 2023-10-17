@@ -148,6 +148,8 @@
         $totalCompletedTasks = 0;
         $totalDuration = \Carbon\CarbonInterval::create(0, 0, 0, 0); // Initialize the totalDuration as a CarbonInterval;
         $totalUnitshr = 0;
+        $aboveTarget = 0;
+        $belowTarget = 0;
     @endphp
     <div>
         <table class="report-table">
@@ -186,44 +188,61 @@
                         </td>
                         <td>{{ $report->units_completed }} </td>
                         <td>{{ $report->duration->forHumans(['short' => true]) }}</td>
-                        <td>
-                            {{ $report->hourlyRate }}
+                         <td>
+                            @php
+                                $currentDate = new DateTime(); // Current date and time
+                                $reportDate = $report->reported_at;
+
+                            @endphp
+
+                            @if ($reportDate > $currentDate)
+                                <span class="uk-text-small">Pending: {{ $report->hourlyRate }} </span>
+                            @else
+                                {{ $report->hourlyRate }}
+                            @endif
+
                         <td>
 
 
                             @php
+
                                 // Get the individual target for this associate
                                 $individualTarget = $report->task->target;
-                                
+
                                 // Initialize variables
                                 $percentageDifference = 0;
                                 $performanceStatus = '';
                                 $color = '';
-                                
+
                                 // Check if $individualTarget is not zero
-                                if ($individualTarget != 0) {
+                                if ($individualTarget != 0 && $reportDate < $currentDate) {
                                     // Calculate the percentage difference from the target
                                     $percentageDifference = number_format((($report->hourlyRate - $individualTarget) / $individualTarget) * 100, 1);
-                                
+
                                     // Determine if performance is above or below the target
                                     if ($percentageDifference > 0) {
+                                        $aboveTarget++;
                                         $performanceStatus = 'Perfomance: ' . $percentageDifference;
                                         $color = 'green';
                                     } elseif ($percentageDifference < 0) {
+                                        $belowTarget++;
                                         $performanceStatus = 'Perfomance: ' . abs($percentageDifference);
                                         $color = 'red';
                                     } else {
                                         $performanceStatus = 'On Target';
                                         $color = 'blue';
                                     }
+                                } elseif ($reportDate > $currentDate) {
+                                    $performanceStatus = 'Pending';
+                                    $color = 'orange';
                                 } else {
                                     // Handle the case where $individualTarget is zero
                                     $performanceStatus = 'Target is Zero';
                                     $color = 'gray';
-                                }
-                            @endphp
-                            <span class="" style="color: {{ $color }}"> 
-                               {{ $performanceStatus }}
+                            } @endphp
+
+                            <span class="" style="color: {{ $color }}">
+                                {{ $performanceStatus }}
                             </span><br>
                             <span class="uk-text-small">Target: {{ $report->task->target }}</span>
                         </td>
@@ -240,13 +259,20 @@
                 @endforelse
             </tbody>
             <tfoot>
-                <tr>
+                  <tr>
 
-                    <td style="font-weight: 800" colspan="4">Total Completed Tasks: {{ $totalCompletedTasks }}
+                    <td style="font-weight: 800" colspan="3">Total Completed Tasks: {{ $totalCompletedTasks }}
                     </td>
-                    <td style="font-weight: 800" colspan="3">Total Duration: {{ $totalDuration->forHumans(['short' => true]) }}
+                    <td style="font-weight: 800" colspan="3">Total Duration: {{ $totalDuration->forHumans(['short' => true])  }}
                     </td>
-                    <td style="font-weight: 800" colspan="4">Total Units/hr: {{ $totalUnitshr }} </td>
+                    <td style="font-weight: 800" colspan="2">Total Units/hr: {{ $totalUnitshr }} </td>
+                    @if (auth()->user()->isAdmin() ||
+                            auth()->user()->isProjectManager())
+                        <td style="font-weight: 800" colspan="2">Above Target: {{ $aboveTarget }}
+                        </td>
+                        <td style="font-weight: 800" colspan="2">Below Target: {{ $belowTarget }}
+                        </td>
+                    @endif
                 </tr>
             </tfoot>
         </table>
