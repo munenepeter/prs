@@ -26,8 +26,14 @@
                         <td>{{ $task->name }}</td>
                         <td>
                             {{ $task->target }}
-                            {{ ['HOUR' => 'units', 'CHARACTERS' => 'characters', 'PAGES' => 'pages'][$task->unit_type->name] }}
-                            per hour
+                            @if ($task->unit_type->name === 'HOUR')
+                                mins per day
+                            @else
+                                {{ strtolower($task->unit_type->name) }} per
+                                hr
+                            @endif
+
+
 
                         </td>
                         <td>{{ $task->unit_type->name }}</td>
