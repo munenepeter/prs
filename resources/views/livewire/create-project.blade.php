@@ -89,6 +89,7 @@
                 </div>
                 <br>
                 <div>
+                {{$unit_type}}
                     @if ($unit_type === 'HOUR')
                         <x-label for="target" value="Target (in minutes)" />
                     @else
