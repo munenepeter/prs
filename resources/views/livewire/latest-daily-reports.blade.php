@@ -217,7 +217,7 @@
                     <td style="font-weight: 800" colspan="2">Total Units/hr: {{ $totalUnitshr }} </td>
                     @if (auth()->user()->isAdmin() ||
                             auth()->user()->isProjectManager())
-                        <td style="font-weight: 800" colspan="2">On Target: {{ $aboveTarget }}
+                        <td style="font-weight: 800" colspan="2">Above Target: {{ $aboveTarget }}
                         </td>
                         <td style="font-weight: 800" colspan="2">Below Target: {{ $belowTarget }}
                         </td>
