@@ -263,7 +263,7 @@
 
                     <td style="font-weight: 800" colspan="3">Total Completed Tasks: {{ $totalCompletedTasks }}
                     </td>
-                    <td style="font-weight: 800" colspan="3">Total Duration: {{ $totalDuration->forHumans(['short' => true])  }}
+                    <td style="font-weight: 800" colspan="2">Total Duration: {{ $totalDuration->forHumans(['short' => true])  }}
                     </td>
                     <td style="font-weight: 800" colspan="2">Total Units/hr: {{ $totalUnitshr }} </td>
                     @if (auth()->user()->isAdmin() ||
