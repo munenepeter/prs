@@ -128,8 +128,6 @@
                             @endif
 
                         <td>
-
-
                             @php
 
                                 // Get the individual target for this associate
@@ -143,7 +141,11 @@
                                 // Check if $individualTarget is not zero
                                 if ($individualTarget != 0 && $reportDate < $currentDate) {
                                     // Calculate the percentage difference from the target
-                                    $percentageDifference = number_format((($report->hourlyRate - $individualTarget) / $individualTarget) * 100, 1);
+                                    if ($report->task->unit_type->name === 'HOUR') {
+                                        $percentageDifference = number_format((($report->duration->totalMinutes - $individualTarget) / $individualTarget) * 100, 1);
+                                    } else {
+                                        $percentageDifference = number_format((($report->hourlyRate - $individualTarget) / $individualTarget) * 100, 1);
+                                    }
 
                                     // Determine if performance is above or below the target
                                     if ($percentageDifference > 0) {
@@ -209,7 +211,8 @@
 
                     <td style="font-weight: 800" colspan="3">Total Completed Tasks: {{ $totalCompletedTasks }}
                     </td>
-                    <td style="font-weight: 800" colspan="3">Total Duration: {{ $totalDuration->forHumans(['short' => true])  }}
+                    <td style="font-weight: 800" colspan="3">Total Duration:
+                        {{ $totalDuration->forHumans(['short' => true]) }}
                     </td>
                     <td style="font-weight: 800" colspan="2">Total Units/hr: {{ $totalUnitshr }} </td>
                     @if (auth()->user()->isAdmin() ||
