@@ -92,7 +92,7 @@
                     @if ($unit_type === 'HOUR')
                         <x-label for="target" value="Target (in minutes)" />
                     @else
-                        <x-label for="target" value="Target (in {{strlower($unit_type)}}'s in per hour)" />
+                        <x-label for="target" value="Target (in {{strtolower($unit_type)}}'s in per hour)" />
                     @endif
 
                     <x-input id="target" wire:model.defer="target" :hasError="$errors->has('target')" />
