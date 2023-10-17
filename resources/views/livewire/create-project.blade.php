@@ -75,7 +75,7 @@
         @if ($create_tasks)
             <div class="uk-grid-margin">
                 <p class="uk-text-lead">Add a new task to {{ $name }} project</p>
-                    <div class="uk-form-controls uk-grid uk-flex-middle uk-grid-small" uk-grid>
+                    <div class="uk-form-controls uk-grid" uk-grid>
                         <x-label for="project_manager" value="Task Name" />
                         <div class="uk-width-expand">
                             <input type="text" wire:model.defer="task" id="task" @class(['uk-input', 'uk-form-danger' => $errors->has('task')])
