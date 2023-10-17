@@ -14,7 +14,7 @@ trait HasInserts {
 
     public int $target = 0;
 
-    public string $unit_type;
+    public string $unit_type = '';
 
     public ?string $new_client = null;
 

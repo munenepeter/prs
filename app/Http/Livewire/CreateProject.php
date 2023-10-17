@@ -51,6 +51,7 @@ class CreateProject extends Component {
         if (!$value) {
             $this->reset('tasks');
             $this->reset('target');
+            $this->reset('unit_types');
             return;
         }
 
@@ -67,11 +68,13 @@ class CreateProject extends Component {
 
         $this->tasks?->add([
             'name' => $this->task,
+            'unit_type' => $this->unit_type,
             'target' => $this->target
         ]);
 
         $this->reset('task');
         $this->reset('target');
+        $this->reset('unit_types');
     }
 
     public function removeTask(int $task): void {
