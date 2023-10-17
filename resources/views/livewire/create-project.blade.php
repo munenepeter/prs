@@ -88,8 +88,9 @@
                     <x-form-error input="unit_type" />
                 </div>
                 <br>
-                <div>
                 {{$unit_type}}
+                <div>
+                
                     @if ($unit_type === 'HOUR')
                         <x-label for="target" value="Target (in minutes)" />
                     @else
