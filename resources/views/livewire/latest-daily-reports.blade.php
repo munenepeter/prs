@@ -130,9 +130,7 @@
                                 {{ $report->hourlyRate }}
                             @endif
 
-                        <td>
-
-
+                        <td tyle="font-size:12px;">
                             @php
 
                                 // Get the individual target for this associate
@@ -146,7 +144,11 @@
                                 // Check if $individualTarget is not zero
                                 if ($individualTarget != 0 && $reportDate < $currentDate) {
                                     // Calculate the percentage difference from the target
-                                    $percentageDifference = number_format((($report->hourlyRate - $individualTarget) / $individualTarget) * 100, 1);
+                                    if ($report->task->unit_type->name === 'HOUR') {
+                                        $percentageDifference = number_format((($report->duration->totalMinutes - $individualTarget) / $individualTarget) * 100, 1);
+                                    } else {
+                                        $percentageDifference = number_format((($report->hourlyRate - $individualTarget) / $individualTarget) * 100, 1);
+                                    }
 
                                     // Determine if performance is above or below the target
                                     if ($percentageDifference > 0) {
@@ -173,7 +175,14 @@
                             <span class="" style="color: {{ $color }}">
                                 {{ $performanceStatus }}
                             </span><br>
-                            <span class="uk-text-small">Target: {{ $report->task->target }}</span>
+                            <span class="uk-text-small">Target: {{ $report->task->target }} <span>
+                                    @if ($report->task->unit_type->name === 'HOUR')
+                                        mins/day
+                                    @else
+                                        {{ ['CHARACTERS' => 'chars', 'PAGES' => 'pgs'][$report->task->unit_type->name] }}/hr
+                                    @endif
+
+                                </span></span>
                         </td>
                         <td>{{ $report->started_at->format('H:i:s') }}</td>
                         <td>{{ $report->ended_at->format('H:i:s') }}</td>

@@ -127,7 +127,7 @@
                                 {{ $report->hourlyRate }}
                             @endif
 
-                        <td>
+                        <td tyle="font-size:12px;">
                             @php
 
                                 // Get the individual target for this associate
@@ -172,7 +172,14 @@
                             <span class="" style="color: {{ $color }}">
                                 {{ $performanceStatus }}
                             </span><br>
-                            <span class="uk-text-small">Target: {{ $report->task->target }}</span>
+                            <span class="uk-text-small">Target: {{ $report->task->target }} <span>
+                                    @if ($report->task->unit_type->name === 'HOUR')
+                                        mins/day
+                                    @else
+                                        {{ ['CHARACTERS' => 'chars', 'PAGES' => 'pgs'][$report->task->unit_type->name] }}/hr
+                                    @endif
+
+                                </span></span>
                         </td>
                         <td>{{ $report->started_at->format('H:i:s') }}</td>
                         <td>{{ $report->ended_at->format('H:i:s') }}</td>
