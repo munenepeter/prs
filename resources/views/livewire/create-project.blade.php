@@ -89,11 +89,13 @@
                 </div>
                 <br>
                 <div>
-                
-                    @if ($unit_type == 1)
+
+                    @if ((int) $unit_type === 1)
                         <x-label for="target" value="Target (in minutes)" />
+                    @elseif((int) $unit_type >= 1)
+                        <x-label for="target" value="Target (in {{ ((int)$unit_type  == 2) : 'pages' ? 'characters' }}'s in per hour)" />
                     @else
-                        <x-label for="target" value="Target (in {{strtolower($unit_type)}}'s in per hour)" />
+                        <x-label for="target" value="Target" />
                     @endif
 
                     <x-input id="target" wire:model.defer="target" :hasError="$errors->has('target')" />
