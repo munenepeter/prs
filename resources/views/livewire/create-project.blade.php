@@ -75,68 +75,27 @@
         @if ($create_tasks)
             <div class="uk-grid-margin">
                 <p class="uk-text-lead">Add a new task to {{ $name }} project</p>
-                    <div class="uk-form-controls">
-                        <x-label for="project_manager" value="Name" />
-                        <div class="uk-width-expand">
-                            <input type="text" wire:model.defer="task" id="task" @class(['uk-input', 'uk-form-danger' => $errors->has('task')])
-                                placeholder="Name of task">
-                        </div>
-                      
-                            <x-label for="project_manager" value="Target" />
-                       
-                        
-                        <div class="uk-width-expand">
-                            <input type="number" wire:model.defer="target" id="target" @class(['uk-input', 'uk-form-danger' => $errors->has('target')])
-                                placeholder="Target of the task">
-                        </div>
-                        <div class="uk-width-auto">
-                            <button type="button" wire:click="addTask" class="uk-button uk-button-primary">Add Task
-                            </button>
-                        </div>
-                        <div class="uk-width-1-1">
-                            <x-form-error input="task" />
-                        </div>
-                    </div>
 
+                <div>
+                    <x-label for="task_name" value="Name of task" />
+                    <x-input id="task_name" wire:model.defer="task" :hasError="$errors->has('task')" />
+                    <x-form-error input="task" />
+                </div>
+                <div>
+                    <x-label for="unit_type" value="Unit Type" />
+                    <x-select id="unit_type" :collection="$this->taskUnitTypes" wire:model.defer="unit_type" :hasError="$errors->has('unit_type')" />
+                    <x-form-error input="unit_type" />
+                </div>
+                <div>
+                    <x-label for="target" value="Target" />
+                    <x-input id="target" wire:model.defer="target" :hasError="$errors->has('target')" />
+                    <x-form-error input="target" />
+                </div>
 
-
-
-                    <div>
-					<x-label for="task_name"
-							 value="Name of task"
-					/>
-					<x-input id="task_name"
-							 wire:model.defer="task"
-							 :hasError="$errors->has('task')"
-					/>
-					<x-form-error input="task" />
-				</div>
-				<div>
-					<x-label for="unit_type"
-							 value="Unit Type"
-					/>
-					<x-select id="unit_type"
-							  :collection="$this->taskUnitTypes"
-							  wire:model.defer="unit_type"
-							  :hasError="$errors->has('unit_type')"
-					/>
-					<x-form-error input="unit_type" />
-				</div>
-				<div>
-					<x-label for="target"
-							 value="Target"
-					/>
-					<x-input id="target"
-							  wire:model.defer="target"
-							  :hasError="$errors->has('target')"
-					/>
-					<x-form-error input="target" />
-				</div>
-
-				<div>
-					  <button type="button" wire:click="addTask" class="uk-button uk-button-primary">Add Task
-                            </button>
-				</div>
+                <div>
+                    <button type="button" wire:click="addTask" class="uk-button uk-button-primary">Add Task
+                    </button>
+                </div>
 
             </div>
 
