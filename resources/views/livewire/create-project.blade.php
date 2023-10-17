@@ -76,12 +76,12 @@
             <div class="uk-grid-margin">
                 <p class="uk-text-lead">Add a new task to {{ $name }} project</p>
                     <div class="uk-form-controls uk-grid" uk-grid>
-                        <x-label for="project_manager" value="Task Name" />
+                        <x-label for="project_manager" value="Name" />
                         <div class="uk-width-expand">
                             <input type="text" wire:model.defer="task" id="task" @class(['uk-input', 'uk-form-danger' => $errors->has('task')])
                                 placeholder="Name of task">
                         </div>
-                        <x-label for="project_manager" value="Task Target" />
+                        <x-label for="project_manager" value="Target" />
                         <div class="uk-width-expand">
                             <input type="number" wire:model.defer="target" id="target" @class(['uk-input', 'uk-form-danger' => $errors->has('target')])
                                 placeholder="Target of the task">
