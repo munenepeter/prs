@@ -84,7 +84,7 @@
                 <br>
                 <div>
                     <x-label for="unit_type" value="Unit Type" />
-                    <x-select id="unit_type" :collection="$this->taskUnitTypes" wire:model.defer="unit_type" :hasError="$errors->has('unit_type')" />
+                    <x-select id="unit_type" :collection="$this->taskUnitTypes" wire:model="unit_type" :hasError="$errors->has('unit_type')" />
                     <x-form-error input="unit_type" />
                 </div>
                 <br>
