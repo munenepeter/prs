@@ -90,7 +90,7 @@
                 <br>
                 <div>
                 
-                    @if ($unit_type === 1)
+                    @if ($unit_type == 1)
                         <x-label for="target" value="Target (in minutes)" />
                     @else
                         <x-label for="target" value="Target (in {{strtolower($unit_type)}}'s in per hour)" />
