@@ -228,7 +228,7 @@
                             @endif
 
 
-                        <td></td>
+                        <td>
                             @php
 
                                 // Get the individual target for this associate
