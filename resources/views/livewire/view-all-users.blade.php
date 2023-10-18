@@ -27,7 +27,7 @@
             $adminsCount = 0;
         @endphp
 
-        <table class="uk-table uk-table-small uk-table-divider uk-table-middle uk-table-striped uk-table-responsive">
+        <table style="font-size:14px;" class="uk-table uk-table-small uk-table-divider uk-table-middle uk-table-striped uk-table-responsive">
 
             <thead>
                 <tr>
