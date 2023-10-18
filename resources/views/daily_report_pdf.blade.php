@@ -188,12 +188,27 @@
                         </td>
                         <td>{{ ucfirst($report->task->name) }}</td>
                         <td>
-                            <span class="uk-label uk-label-{{ $report->task->unit_type->color() }}">
+                            <span style="font-size:12px;"
+                                class="uk-label uk-label-{{ $report->task->unit_type->color() }}">
                                 {{ $report->task->unit_type->name }}
                             </span>
                         </td>
-                        <td>{{ $report->units_completed }} </td>
-                        <td>{{ $report->duration->forHumans(['short' => true]) }}</td>
+                        <td>
+                            @if ($report->task->unit_type->name === 'HOUR')
+                                N/A
+                            @else
+                                {{ $report->units_completed }}
+                            @endif
+
+                        </td>
+                        <td>
+                            @if ($report->task->unit_type->name === 'HOUR')
+                                <span style="font-size:12px;">{{ $report->duration->totalMinutes }} mins</span>
+                            @else
+                                {{ $report->duration->forHumans(['short' => true]) }}
+                            @endif
+
+                        </td>
                         <td>
                             @php
                                 $currentDate = new DateTime(); // Current date and time
@@ -201,13 +216,19 @@
 
                             @endphp
 
-                            @if ($reportDate > $currentDate)
-                                <span class="uk-text-small">Pending: {{ $report->hourlyRate }} </span>
+
+                            @if ($report->task->unit_type->name === 'HOUR')
+                                N/A
                             @else
-                                {{ $report->hourlyRate }}
+                                @if ($reportDate > $currentDate)
+                                    <span class="uk-text-small">Pending: {{ $report->hourlyRate }} </span>
+                                @else
+                                    {{ $report->hourlyRate }}
+                                @endif
                             @endif
 
-                        <td tyle="font-size:12px;">
+
+                        <td></td>
                             @php
 
                                 // Get the individual target for this associate
@@ -287,6 +308,11 @@
                         <td style="font-weight: 800" colspan="2">Above Target: {{ $aboveTarget }}
                         </td>
                         <td style="font-weight: 800" colspan="2">Below Target: {{ $belowTarget }}
+                        </td>
+                    @else
+                        <td style="font-weight: 800" colspan="2">
+                        </td>
+                        <td style="font-weight: 800" colspan="2">
                         </td>
                     @endif
                 </tr>

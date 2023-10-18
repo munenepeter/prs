@@ -7,8 +7,7 @@ use App\Enums\TaskUnitTypes;
 use Illuminate\Support\Collection;
 use Lean\LivewireAccess\BlockFrontendAccess;
 
-trait AddOrEditReport
-{
+trait AddOrEditReport {
     use WithProjectsAndItsTasks;
 
     public int $project = -1;
@@ -16,7 +15,7 @@ trait AddOrEditReport
     public int $task = -1;
 
     #[BlockFrontendAccess]
-    public TaskUnitTypes $unit_type ;
+    public TaskUnitTypes $unit_type;
 
     public int $units_completed = 0;
 
@@ -26,15 +25,13 @@ trait AddOrEditReport
 
     public string $reported_at = '';
 
-    public function initializeData(bool $edit_mode = false, string $report = 'report')
-    {
+    public function initializeData(bool $edit_mode = false, string $report = 'report') {
         if (!$edit_mode) {
             $this->reported_at = today()->toDateString();
         }
     }
 
-    public function initializeTasks(?int $project_id = null)
-    {
+    public function initializeTasks(?int $project_id = null) {
         if (blank($project_id) && $this->project === -1) {
             $this->tasks = new Collection();
         } else {
@@ -44,8 +41,7 @@ trait AddOrEditReport
         }
     }
 
-    public function updatedTask(int $task_id)
-    {
+    public function updatedTask(int $task_id) {
         if ($task_id < 0) {
             return;
         }
@@ -55,9 +51,17 @@ trait AddOrEditReport
 
     abstract public function save();
 
-    protected function getUnitType(int $task_id)
-    {
+    protected function getUnitType(int $task_id) {
         $this->unit_type = Task::query()->where('id', '=', $task_id)
             ->value('unit_type');
+
+        // Set the default value to 420 when unit_type is HOUR
+        if ($this->unit_type === TaskUnitTypes::HOUR) {
+            $this->units_completed = 420;
+        }else{
+            $this->units_completed = 0;
+        }
+        
     }
+
 }

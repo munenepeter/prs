@@ -79,7 +79,8 @@
         $belowTarget = 0;
     @endphp
     <div class="uk-overflow-auto">
-        <table class="uk-table uk-table-small uk-table-divider uk-table-middle uk-table-striped uk-table-responsive">
+       <table style="font-size:14px;"
+            class="uk-table uk-table-small uk-table-divider uk-table-middle uk-table-striped uk-table-responsive">
             <thead>
                 <tr>
                     <th class="uk-width-small">User</th>
@@ -111,12 +112,27 @@
                         </td>
                         <td>{{ ucfirst($report->task->name) }}</td>
                         <td>
-                            <span class="uk-label uk-label-{{ $report->task->unit_type->color() }}">
+                            <span style="font-size:12px;"
+                                class="uk-label uk-label-{{ $report->task->unit_type->color() }}">
                                 {{ $report->task->unit_type->name }}
                             </span>
                         </td>
-                        <td>{{ $report->units_completed }} </td>
-                        <td>{{ $report->duration->forHumans(['short' => true]) }}</td>
+                        <td>
+                            @if ($report->task->unit_type->name === 'HOUR')
+                                N/A
+                            @else
+                                {{ $report->units_completed }}
+                            @endif
+
+                        </td>
+                        <td>
+                            @if ($report->task->unit_type->name === 'HOUR')
+                                <span style="font-size:12px;">{{ $report->duration->totalMinutes }} mins</span>
+                            @else
+                                {{ $report->duration->forHumans(['short' => true]) }}
+                            @endif
+
+                        </td>
                         <td>
                             @php
                                 $currentDate = new DateTime(); // Current date and time
@@ -124,13 +140,19 @@
 
                             @endphp
 
-                            @if ($reportDate > $currentDate)
-                                <span class="uk-text-small">Pending: {{ $report->hourlyRate }} </span>
+
+                            @if ($report->task->unit_type->name === 'HOUR')
+                                N/A
                             @else
-                                {{ $report->hourlyRate }}
+                                @if ($reportDate > $currentDate)
+                                    <span class="uk-text-small">Pending: {{ $report->hourlyRate }} </span>
+                                @else
+                                    {{ $report->hourlyRate }}
+                                @endif
                             @endif
 
-                        <td tyle="font-size:12px;">
+
+                        <td>
                             @php
 
                                 // Get the individual target for this associate
@@ -157,7 +179,7 @@
                                         $color = 'green';
                                     } elseif ($percentageDifference < 0) {
                                         $belowTarget++;
-                                        $performanceStatus = 'Perfomance: ' . abs($percentageDifference);
+                                        $performanceStatus = 'Perfomance: ' . abs((float) $percentageDifference);
                                         $color = 'red';
                                     } else {
                                         $performanceStatus = 'On Target';
@@ -221,7 +243,8 @@
 
                     <td style="font-weight: 800" colspan="3">Total Completed Tasks: {{ $totalCompletedTasks }}
                     </td>
-                    <td style="font-weight: 800" colspan="2">Total Duration: {{ $totalDuration->forHumans(['short' => true])  }}
+                    <td style="font-weight: 800" colspan="3">Total Duration:
+                        {{ $totalDuration->forHumans(['short' => true]) }}
                     </td>
                     <td style="font-weight: 800" colspan="2">Total Units/hr: {{ $totalUnitshr }} </td>
                     @if (auth()->user()->isAdmin() ||
@@ -229,6 +252,11 @@
                         <td style="font-weight: 800" colspan="2">Above Target: {{ $aboveTarget }}
                         </td>
                         <td style="font-weight: 800" colspan="2">Below Target: {{ $belowTarget }}
+                        </td>
+                    @else
+                        <td style="font-weight: 800" colspan="2">
+                        </td>
+                        <td style="font-weight: 800" colspan="2">
                         </td>
                     @endif
                 </tr>
