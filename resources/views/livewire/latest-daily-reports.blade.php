@@ -127,7 +127,7 @@
                         </td>
                         <td>
                             @if ($report->task->unit_type->name === 'HOUR')
-                                <span style="font-size:12px;">{{ $report->duration->totalMinutes }} mins</span>
+                                <span style="font-size:12px;">{{ number_format($report->duration->totalMinutes,2)}} mins</span>
                             @else
                                 {{ $report->duration->forHumans(['short' => true]) }}
                             @endif
