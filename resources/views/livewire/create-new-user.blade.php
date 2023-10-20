@@ -21,8 +21,8 @@
             </div>
             <div class="uk-width-1-2@s">
                 <x-label for="phone_number" value="Phone Number of the user" />
-                <input class="uk-input" id="phone_number" type="phone_number" wire:model.defer="phone_number"
-                    required />
+                <input class="uk-input" id="phone_number" type="text" wire:model.defer="phone_number"
+                  required />
                 <x-form-error input="phone_number" />
             </div>
             <div class="uk-width-1-2@s">

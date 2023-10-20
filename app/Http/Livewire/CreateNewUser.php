@@ -20,25 +20,25 @@ class CreateNewUser extends Component {
 
     public string $email = '';
 
-    public string $phone_number = '';
+    public $phone_number;
 
 
     public function create() {
-        $validated = $this->validate();
+        $this->validate();
 
         $random_password = Str::random(8);
 
         $user = User::query()->create([
-            'firstname' => $validated['firstname'],
-            'lastname' => $validated['lastname'],
-            'email' => $validated['email'],
-            'gender' => $validated['gender'],
-            'phone_number' => $validated['phone_number'],
+            'firstname' => $this->firstname,
+            'lastname' => $this->lastname,
+            'email' => $this->email,
+            'gender' => $this->gender,
+            'phone_number' => $this->phone_number,
             'password' => Hash::make($random_password),
         ]);
 
         $user->roles()->attach(
-            Role::query()->where('name', '=', $validated['role'])->first('id')
+            Role::query()->where('name', '=', $this->role)->first('id')
         );
 
 
@@ -58,7 +58,15 @@ class CreateNewUser extends Component {
             'firstname' => ['required', 'string', 'max:255'],
             'lastname' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'phone_number' => ['required', 'string', 'min:10'],
+            'phone_number' => [
+                'required',
+                'string',
+                'digits:10',
+                function ($attribute, $value, $fail) {
+                    if (substr($value, 0, 1) !== '0') {
+                        $fail("The $attribute must start with '0'.");
+                    }
+                },],
             'gender' => 'required',
             'role' =>  [
                 'required',

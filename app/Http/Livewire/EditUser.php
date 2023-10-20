@@ -65,10 +65,16 @@ class EditUser extends Component {
                 'required',
                 'string'
             ],
-            'user.phone_number' => [
+            'user.phone_number' =>
+            [
                 'required',
                 'string',
-                'min:10'
+                'digits:10',
+                function ($attribute, $value, $fail) {
+                    if (substr($value, 0, 1) !== '0') {
+                        $fail("The $attribute must start with '0'.");
+                    }
+                }
             ],
             'user.gender' => [
                 'required',
