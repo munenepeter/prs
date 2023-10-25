@@ -53,56 +53,60 @@ class DailyReport extends Model {
                     return 0;
                 } else {
                     if ($this->reported_at > new \DateTime()) {
-                        return number_format(($this->units_completed / $this->duration->totalMinutes) * 60, 2);
+                        return round(($this->units_completed / $this->duration->totalMinutes) * 60, 2);
                     }
                 }
-                return  number_format(($this->units_completed / $this->duration->totalMinutes) * 60, 2);
+                return  round(($this->units_completed / $this->duration->totalMinutes) * 60, 2);
             }
         );
+    }
+    protected function calculatePerformance(): array {
+        $performance = [
+            'status' => 'On Target',
+            'color' => 'blue'
+        ];
+
+        if ($this->reported_at > new \DateTime()) {
+            $performance = [
+                'status' => 'Pending',
+                'color' => 'orange'
+            ];
+        } elseif ($this->task->target != 0 && $this->reported_at < new \DateTime()) {
+            $percentageDifference = 0;
+
+            if ($this->task->unit_type->name === 'HOUR') {
+                $percentageDifference = number_format((($this->duration->totalMinutes - $this->task->target) / $this->task->target) * 100, 1);
+            } else {
+                $percentageDifference = number_format((((int)$this->hourlyRate - $this->task->target) / $this->task->target) * 100, 1);
+            }
+
+            if ($percentageDifference > 0) {
+                $performance = [
+                    'status' => 'Performance: ' . $percentageDifference,
+                    'color' => 'green'
+                ];
+                $this->aboveTarget++;
+              
+            } elseif ($percentageDifference < 0) {
+                $performance = [
+                    'status' => 'Performance: ' . abs((float) $percentageDifference),
+                    'color' => 'red'
+                ];
+                $this->belowTarget++;
+            }
+        } else {
+            $performance = [
+                'status' => 'Target is Zero',
+                'color' => 'gray'
+            ];
+        }
+
+        return $performance;
     }
     protected function perfomance(): Attribute {
         return Attribute::make(
             get: function () {
-                $performance = [
-                    'status' => 'On Target',
-                    'color' => 'blue'
-                ];
-
-                if ($this->reported_at > new \DateTime()) {
-                    $performance = [
-                        'status' => 'Pending',
-                        'color' => 'orange'
-                    ];
-                } elseif ($this->task->target != 0 && $this->reported_at < new \DateTime()) {
-                    $percentageDifference = 0;
-
-                    if ($this->task->unit_type->name === 'HOUR') {
-                        $percentageDifference = number_format((($this->duration->totalMinutes - $this->task->target) / $this->task->target) * 100, 1);
-                    } else {
-                        $percentageDifference = number_format((((int)$this->hourlyRate - $this->task->target) / $this->task->target) * 100, 1);
-                    }
-
-                    if ($percentageDifference > 0) {
-                        $performance = [
-                            'status' => 'Performance: ' . $percentageDifference,
-                            'color' => 'green'
-                        ];
-                        $this->aboveTarget++;
-                    } elseif ($percentageDifference < 0) {
-                        $performance = [
-                            'status' => 'Performance: ' . abs((float) $percentageDifference),
-                            'color' => 'red'
-                        ];
-                        $this->belowTarget++;
-                    }
-                } else {
-                    $performance = [
-                        'status' => 'Target is Zero',
-                        'color' => 'gray'
-                    ];
-                }
-
-                return $performance;
+                return $this->calculatePerformance();
             }
         );
     }

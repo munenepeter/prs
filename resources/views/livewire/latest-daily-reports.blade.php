@@ -75,7 +75,6 @@
         $totalUnits = 0;
         $totalDuration = \Carbon\CarbonInterval::create(0, 0, 0, 0); // Initialize the totalDuration as a CarbonInterval;
         $totalUnitshr = 0;
-      
 
         $totalProjects = 0;
         $totalTasks = 0;
@@ -102,8 +101,8 @@
             <tbody>
                 @forelse ($reports as $report)
                     @php
-                        $totalUnits += $report->task->unit_type->name === 'HOUR' ? 0 : (int)$report->units_completed;
-                        $totalUnitshr += (int)$report->hourlyRate;
+                        $totalUnits += $report->task->unit_type->name === 'HOUR' ? 0 : (int) $report->units_completed;
+                        $totalUnitshr += $report->hourlyRate;
                         $totalDuration = $totalDuration->add($report->duration); // Add the durations together
 
                         $totalProjects++;
@@ -141,9 +140,9 @@
                         </td>
                         <td>
                             @if ($report->reported_at > new \DateTime())
-                               Pending {{ $report->hourlyRate }}  
+                                Pending {{ $report->hourlyRate }}
                             @else
-                              {{ ($report->hourlyRate == 0) ? 'N/A' : $report->hourlyRate }}  
+                                {{ $report->hourlyRate == 0 ? 'N/A' : $report->hourlyRate }}
                             @endif
                         <td>
 
@@ -186,28 +185,20 @@
 
 
             <tfoot style="font-size:12px;">
-                <tr>
+                <tr style="font-weight: 800">
                     <td></td>
-                    <td style="font-weight: 800">Total:{{ $totalProjects <= 0 ? 'N/A' : $totalProjects }} </td>
-                    <td style="font-weight: 800">Total:{{ $totalTasks <= 0 ? 'N/A' : $totalTasks }} </td>
+                    <td>Total:{{ $totalProjects <= 0 ? 'N/A' : $totalProjects }} </td>
+                    <td>Total:{{ $totalTasks <= 0 ? 'N/A' : $totalTasks }}</td>
                     <td></td>
-                    <td style="font-weight: 800">Total:{{ $totalUnits <= 0 ? 'N/A' : $totalUnits }} </td>
-                    <td style="font-weight: 800">
-                        Total:{{ $totalDuration->forHumans(['short' => true]) }}
-                    </td>
-                    <td style="font-weight: 800">Total:
-                        {{ $totalUnitshr <= 0 ? 'N/A' : $totalUnitshr }} </td>
-                    @if (auth()->user()->isAdmin() ||
-                            auth()->user()->isProjectManager())
-                        <td style="font-weight: 800" colspan="2">Above Target: {{ $report->aboveTarget }}
-                        </td>
-                        <td style="font-weight: 800" colspan="2">Below Target: {{ $report->belowTarget }}
-                        </td>
+                    <td>Total:{{ $totalUnits <= 0 ? 'N/A' : $totalUnits }}</td>
+                    <td>Total:{{ $totalDuration->forHumans(['short' => true]) }}</td>
+                    <td>Total:{{ $totalUnitshr <= 0 ? 'N/A' : $totalUnitshr }} </td>
+                    @if (auth()->user()->isAdmin() || auth()->user()->isProjectManager())
+                        <td colspan="2">Above Target: {{ $report->aboveTarget ?? 'N/A'  }}</td>
+                        <td colspan="2">Below Target: {{ $report->belowTarget ?? 'N/A'}}</td>
                     @else
-                        <td style="font-weight: 800" colspan="2">
-                        </td>
-                        <td style="font-weight: 800" colspan="2">
-                        </td>
+                        <td colspan="2"></td>
+                        <td colspan="2"></td>
                     @endif
                     <td></td>
                 </tr>
