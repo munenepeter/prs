@@ -18,22 +18,23 @@
         .report-table th,
         .report-table td {
             padding: 4px;
+            border: 1px solid #130101;
             text-align: left;
             word-wrap: break-word;
             max-width: 150px;
             font-size: 12px !important;
         }
 
-        .report-table th {
-            background-color: #f2f2f2;
+        .report-table th, tfoot {
+            background: #d3d2d2;
             font-weight: bold;
             font-size: 12px !important;
         }
 
         .report-table {
-            border: 1px solid #ddd;
             width: 100%;
             border-collapse: collapse;
+           
         }
 
 
@@ -97,6 +98,7 @@
         .left-content {
             width: 33%;
             text-align: left;
+            margin-top: 10px;
         }
 
         .center-content {
@@ -107,6 +109,7 @@
         .right-content {
             width: 33%;
             text-align: right;
+            margin-top: 10px;
         }
 
         .logo {
@@ -141,7 +144,6 @@
             </p>
         </div>
         <div class="center-content">
-            <p class="company-description">Productivity Reporting System</p>
             <h1 class="report-title">Daily Report</h1>
         </div>
         <div class="right-content">
@@ -159,7 +161,7 @@
         $totalTasks = 0;
     @endphp
     <div>
-        <table class="report-table" border="1">
+        <table class="report-table">
             <thead>
                 <tr>
 
@@ -322,7 +324,7 @@
                         <td style="font-weight: 800" colspan="2">
                         </td>
                     @endif
-                    <td></td>
+                   
                 </tr>
         </table>
     </div>

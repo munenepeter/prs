@@ -10,7 +10,7 @@
         <ul class="uk-navbar-nav uk-visible@m">
             <li class="{{ request()->is('/') ? 'uk-active' : '' }}">
                 <a href="/">
-                    Digita Divide Data Productivity Reporting System
+                    Digita Divide Data {{config('app.name', 'Project Management  System')}}
                 </a>
             </li>
             @auth
