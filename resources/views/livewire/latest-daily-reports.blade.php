@@ -78,6 +78,9 @@
 
         $totalProjects = 0;
         $totalTasks = 0;
+
+        $aboveTarget = 0;
+        $belowTarget = 0;
     @endphp
     <div class="uk-overflow-auto">
         <table style="font-size:14px;"
@@ -107,6 +110,15 @@
 
                         $totalProjects++;
                         $totalTasks++;
+
+                        // calculate above & below targets
+
+                        if ($report->perfomance['color'] === 'green') {
+                            $aboveTarget++;
+                        } elseif ($report->perfomance['color'] === 'red') {
+                            $belowTarget++;
+                        }
+
                     @endphp
                     <tr>
                         <td>{{ ucfirst($report->user->fullname) }}</td>
@@ -152,6 +164,8 @@
                             <span class="uk-text-small">Target: {{ $report->task->target }}
                                 <span> {{ $report->formattedTarget }} </span></span>
                         </td>
+
+
                         <td>{{ $report->started_at->format('H:i:s') }}</td>
                         <td>{{ $report->ended_at->format('H:i:s') }}</td>
                         <td>{{ $report->reported_at->format('d/m/Y') }}</td>
@@ -193,9 +207,10 @@
                     <td>Total:{{ $totalUnits <= 0 ? 'N/A' : $totalUnits }}</td>
                     <td>Total:{{ $totalDuration->forHumans(['short' => true]) }}</td>
                     <td>Total:{{ $totalUnitshr <= 0 ? 'N/A' : $totalUnitshr }} </td>
-                    @if (auth()->user()->isAdmin() || auth()->user()->isProjectManager())
-                        <td colspan="2">Above Target: {{ $report->aboveTarget ?? 'N/A'  }}</td>
-                        <td colspan="2">Below Target: {{ $report->belowTarget ?? 'N/A'}}</td>
+                    @if (auth()->user()->isAdmin() ||
+                            auth()->user()->isProjectManager())
+                        <td colspan="2">Above Target: {{ $aboveTarget ?? 'N/A' }}</td>
+                        <td colspan="2">Below Target: {{ $belowTarget ?? 'N/A' }}</td>
                     @else
                         <td colspan="2"></td>
                         <td colspan="2"></td>
