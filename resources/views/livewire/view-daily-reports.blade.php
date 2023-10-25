@@ -74,6 +74,9 @@
         $totalUnitshr = 0;
         $aboveTarget = 0;
         $belowTarget = 0;
+
+        $totalProjects = 0;
+        $totalTasks = 0;
     @endphp
     <div class="uk-overflow-auto">
         <table style="font-size:14px;"
@@ -237,11 +240,11 @@
             </tbody>
 
 
-            <tfoot>
+            <tfoot style="font-size:12px;">
                 <tr>
                     <td></td>
-                    <td style="font-weight: 800">Total:{{ $totalUnits <= 0 ? 'N/A' : $totalUnits }} </td>
-                    <td style="font-weight: 800">Total:{{ $totalUnits <= 0 ? 'N/A' : $totalUnits }} </td>
+                    <td style="font-weight: 800">Total:{{ $totalProjects <= 0 ? 'N/A' : $totalProjects}} </td>
+                    <td style="font-weight: 800">Total:{{ $totalTasks <= 0 ? 'N/A' : $totalTasks }} </td>
                     <td></td>
                     <td style="font-weight: 800">Total:{{ $totalUnits <= 0 ? 'N/A' : $totalUnits }} </td>
                     <td style="font-weight: 800">
@@ -261,6 +264,7 @@
                         <td style="font-weight: 800" colspan="2">
                         </td>
                     @endif
+                     <td></td>
                 </tr>
                 <tr>
                     <td colspan="8">

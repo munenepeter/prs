@@ -90,12 +90,12 @@
                                     Edit
                                 </a>
 
-                                <button type="button"
+                                {{-- <button type="button"
                                    onclick="confirm('Are you sure you want to delete this user?') || event.stopImmediatePropagation()"
                                     wire:click="deleteUser('{{ $user->email }}')" class="uk-button uk-button-danger"
                                     @if (auth()->user()->id === $user->id) disabled @endif>
                                     Delete
-                                </button>
+                                </button> --}}
 
 
 
