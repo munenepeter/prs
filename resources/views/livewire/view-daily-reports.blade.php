@@ -75,6 +75,9 @@
 
         $totalProjects = 0;
         $totalTasks = 0;
+
+         $aboveTarget = 0;
+        $belowTarget = 0;
     @endphp
     <div class="uk-overflow-auto">
         <table style="font-size:14px;"

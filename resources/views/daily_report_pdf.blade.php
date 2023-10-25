@@ -135,7 +135,8 @@
             font-size: 14px;
             color: #666;
         }
-        a{
+
+        a {
             color: #52c74e;
         }
     </style>
@@ -163,6 +164,9 @@
 
         $totalProjects = 0;
         $totalTasks = 0;
+
+        $aboveTarget = 0;
+        $belowTarget = 0;
     @endphp
     <div>
         <table class="report-table">
@@ -183,7 +187,7 @@
             </thead>
             <tbody>
                 @forelse ($reports as $report)
-                   @php
+                    @php
                         $totalUnits += $report->task->unit_type->name === 'HOUR' ? 0 : (int) $report->units_completed;
                         $totalUnitshr += $report->hourlyRate;
                         $totalDuration = $totalDuration->add($report->duration); // Add the durations together
@@ -261,7 +265,7 @@
             </tbody>
             <tfoot style="font-size:12px;">
                 <tr style="font-weight: 800">
-                  
+
                     <td>Total:{{ $totalProjects <= 0 ? 'N/A' : $totalProjects }} </td>
                     <td>Total:{{ $totalTasks <= 0 ? 'N/A' : $totalTasks }}</td>
                     <td></td>
@@ -276,7 +280,7 @@
                         <td colspan="2"></td>
                         <td colspan="2"></td>
                     @endif
-                  
+
                 </tr>
         </table>
     </div>
