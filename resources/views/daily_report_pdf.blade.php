@@ -164,7 +164,7 @@
                     <th style="width: 10%">Project</th>
                     <th style="width: 10%">Task</th>
                     <th style="width: 10%">Unit type</th>
-                    <th style="width: 10%">Completed Tasks</th>
+                    <th style="width: 10%">Units</th>
                     <th style="width: 10%">Duration</th>
                     <th style="width: 10%">Units/hr</th>
                     <th style="width: 10%">Perfomance</th>

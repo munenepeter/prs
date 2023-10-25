@@ -87,7 +87,7 @@
                     <th class="uk-width-small">Project</th>
                     <th class="uk-width-small">Task</th>
                     <th class="uk-table-shrink">Unit type</th>
-                    <th class="uk-table-shrink">Completed Tasks</th>
+                    <th class="uk-table-shrink">Units</th>
                     <th class="uk-width-small">Duration</th>
                     <th class="uk-width-small">Units/hr</th>
                     <th class="uk-table-expand">Perfomance</th>

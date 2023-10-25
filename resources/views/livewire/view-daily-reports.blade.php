@@ -69,7 +69,7 @@
     </div>
 
     @php
-        $totalCompletedTasks = 0;
+        $totalUnits = 0;
         $totalDuration = \Carbon\CarbonInterval::create(0, 0, 0, 0); // Initialize the totalDuration as a CarbonInterval;
         $totalUnitshr = 0;
         $aboveTarget = 0;
@@ -84,7 +84,7 @@
                     <th class="uk-width-small">Project</th>
                     <th class="uk-width-small">Task</th>
                     <th class="uk-table-shrink">Unit type</th>
-                    <th class="uk-table-shrink">Completed Tasks</th>
+                    <th class="uk-table-shrink">Units</th>
                     <th class="uk-width-small">Duration</th>
                     <th class="uk-width-small">Units/hr</th>
                     <th class="uk-table-expand">Perfomance</th>
@@ -97,10 +97,10 @@
             <tbody>
                 @forelse ($reports as $report)
                     @php
-                        $totalCompletedTasks += ($report->task->unit_type->name === 'HOUR') ? 0 : $report->units_completed;
-                        $totalUnitshr += ($report->task->unit_type->name === 'HOUR') ? 0 : $report->hourlyRate;
+                        $totalUnits += $report->task->unit_type->name === 'HOUR' ? 0 : $report->units_completed;
+                        $totalUnitshr += $report->task->unit_type->name === 'HOUR' ? 0 : $report->hourlyRate;
                         $totalDuration = $totalDuration->add($report->duration); // Add the durations together
-                    
+
                     @endphp
                     <tr>
                         <td>{{ ucfirst($report->user->fullname) }}</td>
@@ -118,7 +118,6 @@
                         <td>
                             @if ($report->task->unit_type->name === 'HOUR')
                                 N/A
-                             
                             @else
                                 {{ $report->units_completed }}
                             @endif
@@ -126,7 +125,8 @@
                         </td>
                         <td>
                             @if ($report->task->unit_type->name === 'HOUR')
-                                <span style="font-size:12px;">{{ number_format($report->duration->totalMinutes,2) }} mins</span>
+                                <span style="font-size:12px;">{{ number_format($report->duration->totalMinutes, 2) }}
+                                    mins</span>
                             @else
                                 {{ $report->duration->forHumans(['short' => true]) }}
                             @endif
@@ -239,13 +239,16 @@
 
             <tfoot>
                 <tr>
-
-                    <td style="font-weight: 800" colspan="3">Total Completed Tasks: {{ ($totalCompletedTasks <= 0) ? 'N/A' : $totalCompletedTasks}}
+                    <td></td>
+                    <td style="font-weight: 800">Total:{{ $totalUnits <= 0 ? 'N/A' : $totalUnits }} </td>
+                    <td style="font-weight: 800">Total:{{ $totalUnits <= 0 ? 'N/A' : $totalUnits }} </td>
+                    <td></td>
+                    <td style="font-weight: 800">Total:{{ $totalUnits <= 0 ? 'N/A' : $totalUnits }} </td>
+                    <td style="font-weight: 800">
+                        Total:{{ $totalDuration->forHumans(['short' => true]) }}
                     </td>
-                    <td style="font-weight: 800" colspan="3">Total Duration:
-                        {{ $totalDuration->forHumans(['short' => true]) }}
-                    </td>
-                    <td style="font-weight: 800" colspan="2">Total Units/hr: {{ ($totalUnitshr <= 0) ? 'N/A' : $totalUnitshr}} </td>
+                    <td style="font-weight: 800">Total:
+                        {{ $totalUnitshr <= 0 ? 'N/A' : $totalUnitshr }} </td>
                     @if (auth()->user()->isAdmin() ||
                             auth()->user()->isProjectManager())
                         <td style="font-weight: 800" colspan="2">Above Target: {{ $aboveTarget }}
