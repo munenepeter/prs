@@ -99,10 +99,11 @@
             </thead>
             <tbody>
                 @forelse ($reports as $report)
-                    @php
-                        $totalCompletedTasks += $report->units_completed;
-                        $totalUnitshr += $report->hourlyRate;
+                     @php
+                        $totalCompletedTasks += ($report->task->unit_type->name === 'HOUR') ? 0 : $report->units_completed;
+                        $totalUnitshr += ($report->task->unit_type->name === 'HOUR') ? 0 : $report->hourlyRate;
                         $totalDuration = $totalDuration->add($report->duration); // Add the durations together
+                    
                     @endphp
                     <tr>
                         <td>{{ ucfirst($report->user->fullname) }}</td>
@@ -238,15 +239,15 @@
             </tbody>
 
 
-            <tfoot>
+           <tfoot>
                 <tr>
 
-                    <td style="font-weight: 800" colspan="3">Total Completed Tasks: {{ $totalCompletedTasks }}
+                    <td style="font-weight: 800" colspan="3">Total Completed Tasks: {{ ($totalCompletedTasks <= 0) ? 'N/A' : $totalCompletedTasks}}
                     </td>
                     <td style="font-weight: 800" colspan="3">Total Duration:
                         {{ $totalDuration->forHumans(['short' => true]) }}
                     </td>
-                    <td style="font-weight: 800" colspan="2">Total Units/hr: {{ $totalUnitshr }} </td>
+                    <td style="font-weight: 800" colspan="2">Total Units/hr: {{ ($totalUnitshr <= 0) ? 'N/A' : $totalUnitshr}} </td>
                     @if (auth()->user()->isAdmin() ||
                             auth()->user()->isProjectManager())
                         <td style="font-weight: 800" colspan="2">Above Target: {{ $aboveTarget }}
