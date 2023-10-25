@@ -102,8 +102,8 @@
             <tbody>
                 @forelse ($reports as $report)
                     @php
-                        $totalUnits += $report->task->unit_type->name === 'HOUR' ? 0 : (int) $report->units_completed;
-                        $totalUnitshr += $report->task->unit_type->name === 'HOUR' ? 0 : (int) $report->hourlyRate;
+                        $totalUnits += $report->task->unit_type->name === 'HOUR' ? 0 : (int)$report->units_completed;
+                        $totalUnitshr += (int)$report->hourlyRate;
                         $totalDuration = $totalDuration->add($report->duration); // Add the durations together
 
                         $totalProjects++;

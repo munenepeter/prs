@@ -63,52 +63,47 @@ class DailyReport extends Model {
     protected function perfomance(): Attribute {
         return Attribute::make(
             get: function () {
-                // Get the individual target for this associate
-                $individualTarget = $this->task->target;
+                $performance = [
+                    'status' => 'On Target',
+                    'color' => 'blue'
+                ];
 
-                // Initialize variables
-                $percentageDifference = 0;
-                $performance = [];
+                if ($this->reported_at > new \DateTime()) {
+                    $performance = [
+                        'status' => 'Pending',
+                        'color' => 'orange'
+                    ];
+                } elseif ($this->task->target != 0 && $this->reported_at < new \DateTime()) {
+                    $percentageDifference = 0;
 
-
-                // Check if $individualTarget is not zero
-                if ($individualTarget != 0 && $this->reported_at < new \DateTime()) {
-                    // Calculate the percentage difference from the target
                     if ($this->task->unit_type->name === 'HOUR') {
-                        $percentageDifference = number_format((($this->duration->totalMinutes - $individualTarget) / $individualTarget) * 100, 1);
+                        $percentageDifference = number_format((($this->duration->totalMinutes - $this->task->target) / $this->task->target) * 100, 1);
                     } else {
-                        $percentageDifference = number_format((((int)$this->hourlyRate - $individualTarget) / $individualTarget) * 100, 1);
+                        $percentageDifference = number_format((((int)$this->hourlyRate - $this->task->target) / $this->task->target) * 100, 1);
                     }
 
-                    // Determine if performance is above or below the target
                     if ($percentageDifference > 0) {
-                        $performance['status'] = 'Perfomance: ' . $percentageDifference;
-                        $performance['color'] = 'green';
+                        $performance = [
+                            'status' => 'Performance: ' . $percentageDifference,
+                            'color' => 'green'
+                        ];
                         $this->aboveTarget++;
                     } elseif ($percentageDifference < 0) {
-                        $performance['status'] = 'Perfomance: ' . abs((float) $percentageDifference);
-                        $performance['color'] = 'red';
+                        $performance = [
+                            'status' => 'Performance: ' . abs((float) $percentageDifference),
+                            'color' => 'red'
+                        ];
                         $this->belowTarget++;
-                    } else {
-                        $performance['status'] = 'On Target';
-                        $performance['color'] = 'blue';
-                        $this->belowTarget = 0;
-                        $this->aboveTarget = 0;
                     }
-                } elseif ($this->reported_at > new \DateTime()) {
-                    $performance['status'] = 'Pending';
-                    $performance['color'] = 'orange';
-                    $this->belowTarget = 0;
-                    $this->aboveTarget = 0;
                 } else {
-
-                    $performance['status'] = 'Target is Zero';
-                    $performance['color'] = 'gray';
+                    $performance = [
+                        'status' => 'Target is Zero',
+                        'color' => 'gray'
+                    ];
                 }
+
                 return $performance;
             }
-
-
         );
     }
 
