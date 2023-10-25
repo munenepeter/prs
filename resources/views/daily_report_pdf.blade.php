@@ -19,7 +19,6 @@
         .report-table td {
             padding: 4px;
             text-align: left;
-            border: 1px solid #ddd;
             word-wrap: break-word;
             max-width: 150px;
             font-size: 12px !important;
@@ -32,6 +31,7 @@
         }
 
         .report-table {
+            border: 1px solid #ddd;
             width: 100%;
             border-collapse: collapse;
         }
@@ -175,11 +175,10 @@
             </thead>
             <tbody>
                 @forelse ($reports as $report)
-                @php
+                    @php
                         $totalCompletedTasks += ($report->task->unit_type->name === 'HOUR') ? 0 : $report->units_completed;
                         $totalUnitshr += ($report->task->unit_type->name === 'HOUR') ? 0 : $report->hourlyRate;
-                        $totalDuration = $totalDuration->add($report->duration); // Add the durations together
-                    
+                        $totalDuration = $totalDuration->add($report->duration); 
                     @endphp
                     <tr>
 
@@ -295,12 +294,12 @@
                     </tr>
                 @endforelse
             </tbody>
-         <tfoot>
+            <tfoot>
                 <tr>
 
-                    <td style="font-weight: 800" colspan="3">Total Completed Tasks: {{ ($totalCompletedTasks <= 0) ? 'N/A' : $totalCompletedTasks}}
+                    <td style="font-weight: 800" colspan="2">Completed Tasks: {{ ($totalCompletedTasks <= 0) ? 'N/A' : $totalCompletedTasks}}
                     </td>
-                    <td style="font-weight: 800" colspan="3">Total Duration:
+                    <td style="font-weight: 800" colspan="2">Total Duration:
                         {{ $totalDuration->forHumans(['short' => true]) }}
                     </td>
                     <td style="font-weight: 800" colspan="2">Total Units/hr: {{ ($totalUnitshr <= 0) ? 'N/A' : $totalUnitshr}} </td>
