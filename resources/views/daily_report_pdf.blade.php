@@ -183,13 +183,22 @@
             </thead>
             <tbody>
                 @forelse ($reports as $report)
-                    @php
+                   @php
                         $totalUnits += $report->task->unit_type->name === 'HOUR' ? 0 : (int) $report->units_completed;
                         $totalUnitshr += $report->hourlyRate;
                         $totalDuration = $totalDuration->add($report->duration); // Add the durations together
 
                         $totalProjects++;
                         $totalTasks++;
+
+                        // calculate above & below targets
+
+                        if ($report->perfomance['color'] === 'green') {
+                            $aboveTarget++;
+                        } elseif ($report->perfomance['color'] === 'red') {
+                            $belowTarget++;
+                        }
+
                     @endphp
                     <tr>
 
@@ -261,8 +270,8 @@
                     <td>Total:{{ $totalUnitshr <= 0 ? 'N/A' : $totalUnitshr }} </td>
                     @if (auth()->user()->isAdmin() ||
                             auth()->user()->isProjectManager())
-                        <td colspan="2">Above Target: {{ $report->aboveTarget ?? 'N/A' }}</td>
-                        <td colspan="2">Below Target: {{ $report->belowTarget ?? 'N/A' }}</td>
+                        <td colspan="2">Above Target: {{ $aboveTarget ?? 'N/A' }}</td>
+                        <td colspan="2">Below Target: {{ $belowTarget ?? 'N/A' }}</td>
                     @else
                         <td colspan="2"></td>
                         <td colspan="2"></td>
