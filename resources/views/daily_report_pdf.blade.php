@@ -159,7 +159,7 @@
         $totalTasks = 0;
     @endphp
     <div>
-        <table class="report-table">
+        <table class="report-table" border="1">
             <thead>
                 <tr>
 
