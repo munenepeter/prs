@@ -72,7 +72,7 @@
         </form>
     </div>
     @php
-        $totalCompletedTasks = 0;
+        $totalUnits = 0;
         $totalDuration = \Carbon\CarbonInterval::create(0, 0, 0, 0); // Initialize the totalDuration as a CarbonInterval;
         $totalUnitshr = 0;
         $aboveTarget = 0;
@@ -103,7 +103,7 @@
             <tbody>
                 @forelse ($reports as $report)
                     @php
-                        $totalCompletedTasks += $report->task->unit_type->name === 'HOUR' ? 0 : $report->units_completed;
+                        $totalUnits += $report->task->unit_type->name === 'HOUR' ? 0 : $report->units_completed;
                         $totalUnitshr += $report->task->unit_type->name === 'HOUR' ? 0 : $report->hourlyRate;
                         $totalDuration = $totalDuration->add($report->duration); // Add the durations together
 
