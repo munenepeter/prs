@@ -44,11 +44,11 @@
                                 </button>
                                 <livewire:edit-task-modal key="{{ $task->id . ' ' . $task->name }}" :task_id="$task->id" />
 
-                                <button type="button"
+                                {{-- <button type="button"
                                     onclick="confirm('Are you sure you want to delete this project task?') || event.stopImmediatePropagation()"
                                     wire:click="deleteTask({{ $task->id }})" class="uk-button uk-button-danger">
                                     Delete
-                                </button>
+                                </button> --}}
                             </div>
 
                         </td>
