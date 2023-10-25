@@ -25,12 +25,15 @@ class EditUser extends Component {
     }
 
     public function edit() {
-        if (
-            $this->user->isClean() ||
-            $this->userRole->name === Roles::tryFrom($this->role)
-        ) {
-            return redirect()->route('users.index');
-        }
+
+        //Some witchcraft which makes the user uneditable
+
+        // if (
+        //     $this->user->isClean() ||
+        //     $this->userRole->name === Roles::tryFrom($this->role)
+        // ) {
+        //     return redirect()->route('users.index');
+        // }
 
         $validated = $this->validate();
 
