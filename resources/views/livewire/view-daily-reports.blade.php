@@ -141,6 +141,7 @@
                             @else
                                 {{ $report->hourlyRate == 0 ? 'N/A' : $report->hourlyRate }}
                             @endif
+                        </td>
                         <td>
 
                             <span class="" style="color: {{ $report->perfomance['color'] }}">
@@ -192,8 +193,8 @@
                     <td>Total:{{ $totalUnitshr <= 0 ? 'N/A' : $totalUnitshr }} </td>
                     @if (auth()->user()->isAdmin() ||
                             auth()->user()->isProjectManager())
-                        <td colspan="2">Above Target: {{ $report->aboveTarget ?? 'N/A'  }}</td>
-                        <td colspan="2">Below Target: {{ $report->belowTarget ?? 'N/A'}}</td>
+                        <td colspan="2">Above Target: {{ $report->aboveTarget ?? 'N/A' }}</td>
+                        <td colspan="2">Below Target: {{ $report->belowTarget ?? 'N/A' }}</td>
                     @else
                         <td colspan="2"></td>
                         <td colspan="2"></td>
