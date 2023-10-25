@@ -88,6 +88,7 @@ trait HasDailyReportFilters
             ]
         );
     }
+  
 
     protected function resolveReports()
     {

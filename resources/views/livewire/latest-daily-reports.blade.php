@@ -75,8 +75,7 @@
         $totalUnits = 0;
         $totalDuration = \Carbon\CarbonInterval::create(0, 0, 0, 0); // Initialize the totalDuration as a CarbonInterval;
         $totalUnitshr = 0;
-        $aboveTarget = 0;
-        $belowTarget = 0;
+      
 
         $totalProjects = 0;
         $totalTasks = 0;
@@ -89,7 +88,7 @@
                     <th class="uk-width-small">User</th>
                     <th class="uk-width-small">Project</th>
                     <th class="uk-width-small">Task</th>
-                    <th class="uk-table-shrink">Unit type</th>
+                    <th class="uk-table-shrink">Type</th>
                     <th class="uk-table-shrink">Units</th>
                     <th class="uk-width-small">Duration</th>
                     <th class="uk-width-small">Units/hr</th>
@@ -103,8 +102,8 @@
             <tbody>
                 @forelse ($reports as $report)
                     @php
-                        $totalUnits += $report->task->unit_type->name === 'HOUR' ? 0 : $report->units_completed;
-                        $totalUnitshr += $report->task->unit_type->name === 'HOUR' ? 0 : $report->hourlyRate;
+                        $totalUnits += $report->task->unit_type->name === 'HOUR' ? 0 : (int) $report->units_completed;
+                        $totalUnitshr += $report->task->unit_type->name === 'HOUR' ? 0 : (int) $report->hourlyRate;
                         $totalDuration = $totalDuration->add($report->duration); // Add the durations together
 
                         $totalProjects++;
@@ -141,77 +140,18 @@
 
                         </td>
                         <td>
-                            @php
-                                $currentDate = new DateTime(); // Current date and time
-                                $reportDate = $report->reported_at;
-
-                            @endphp
-
-
-                            @if ($report->task->unit_type->name === 'HOUR')
-                                N/A
+                            @if ($report->reported_at > new \DateTime())
+                               Pending {{ $report->hourlyRate }}  
                             @else
-                                @if ($reportDate > $currentDate)
-                                    <span class="uk-text-small">Pending: {{ $report->hourlyRate }} </span>
-                                @else
-                                    {{ $report->hourlyRate }}
-                                @endif
+                              {{ ($report->hourlyRate == 0) ? 'N/A' : $report->hourlyRate }}  
                             @endif
-
-
                         <td>
-                            @php
 
-                                // Get the individual target for this associate
-                                $individualTarget = $report->task->target;
-
-                                // Initialize variables
-                                $percentageDifference = 0;
-                                $performanceStatus = '';
-                                $color = '';
-
-                                // Check if $individualTarget is not zero
-                                if ($individualTarget != 0 && $reportDate < $currentDate) {
-                                    // Calculate the percentage difference from the target
-                                    if ($report->task->unit_type->name === 'HOUR') {
-                                        $percentageDifference = number_format((($report->duration->totalMinutes - $individualTarget) / $individualTarget) * 100, 1);
-                                    } else {
-                                        $percentageDifference = number_format((($report->hourlyRate - $individualTarget) / $individualTarget) * 100, 1);
-                                    }
-
-                                    // Determine if performance is above or below the target
-                                    if ($percentageDifference > 0) {
-                                        $aboveTarget++;
-                                        $performanceStatus = 'Perfomance: ' . $percentageDifference;
-                                        $color = 'green';
-                                    } elseif ($percentageDifference < 0) {
-                                        $belowTarget++;
-                                        $performanceStatus = 'Perfomance: ' . abs((float) $percentageDifference);
-                                        $color = 'red';
-                                    } else {
-                                        $performanceStatus = 'On Target';
-                                        $color = 'blue';
-                                    }
-                                } elseif ($reportDate > $currentDate) {
-                                    $performanceStatus = 'Pending';
-                                    $color = 'orange';
-                                } else {
-                                    // Handle the case where $individualTarget is zero
-                                    $performanceStatus = 'Target is Zero';
-                                    $color = 'gray';
-                            } @endphp
-
-                            <span class="" style="color: {{ $color }}">
-                                {{ $performanceStatus }}
+                            <span class="" style="color: {{ $report->perfomance['color'] }}">
+                                {{ $report->perfomance['status'] }}
                             </span><br>
-                            <span class="uk-text-small">Target: {{ $report->task->target }} <span>
-                                    @if ($report->task->unit_type->name === 'HOUR')
-                                        mins/day
-                                    @else
-                                        {{ ['CHARACTERS' => 'chars', 'PAGES' => 'pgs'][$report->task->unit_type->name] }}/hr
-                                    @endif
-
-                                </span></span>
+                            <span class="uk-text-small">Target: {{ $report->task->target }}
+                                <span> {{ $report->formattedTarget }} </span></span>
                         </td>
                         <td>{{ $report->started_at->format('H:i:s') }}</td>
                         <td>{{ $report->ended_at->format('H:i:s') }}</td>
@@ -259,9 +199,9 @@
                         {{ $totalUnitshr <= 0 ? 'N/A' : $totalUnitshr }} </td>
                     @if (auth()->user()->isAdmin() ||
                             auth()->user()->isProjectManager())
-                        <td style="font-weight: 800" colspan="2">Above Target: {{ $aboveTarget }}
+                        <td style="font-weight: 800" colspan="2">Above Target: {{ $report->aboveTarget }}
                         </td>
-                        <td style="font-weight: 800" colspan="2">Below Target: {{ $belowTarget }}
+                        <td style="font-weight: 800" colspan="2">Below Target: {{ $report->belowTarget }}
                         </td>
                     @else
                         <td style="font-weight: 800" colspan="2">
