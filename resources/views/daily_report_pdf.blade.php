@@ -18,7 +18,7 @@
         .report-table th,
         .report-table td {
             padding: 4px;
-            border: 1px solid #130101;
+            border: 1px solid #666;
             text-align: left;
             word-wrap: break-word;
             max-width: 150px;
@@ -27,7 +27,7 @@
 
         .report-table th,
         tfoot {
-            background: #d3d2d2;
+            background: #777;
             font-weight: bold;
             font-size: 12px !important;
         }
@@ -134,6 +134,9 @@
         .page-number {
             font-size: 14px;
             color: #666;
+        }
+        a{
+            color: #52c74e;
         }
     </style>
 </head>
@@ -264,7 +267,7 @@
                         <td colspan="2"></td>
                         <td colspan="2"></td>
                     @endif
-                    <td></td>
+                  
                 </tr>
         </table>
     </div>
