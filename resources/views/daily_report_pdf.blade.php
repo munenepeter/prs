@@ -27,7 +27,7 @@
 
         .report-table th,
         tfoot {
-            background: #777;
+            background: lightgray;
             font-weight: bold;
             font-size: 12px !important;
         }
