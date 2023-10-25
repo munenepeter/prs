@@ -51,11 +51,7 @@ class DailyReport extends Model {
 
                 if ($this->task->unit_type->name === 'HOUR') {
                     return 0;
-                } else {
-                    if ($this->reported_at > new \DateTime()) {
-                        return round(($this->units_completed / $this->duration->totalMinutes) * 60, 2);
-                    }
-                }
+                } 
                 return  round(($this->units_completed / $this->duration->totalMinutes) * 60, 2);
             }
         );
