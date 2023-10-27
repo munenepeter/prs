@@ -105,7 +105,15 @@
             </div>
         </div>
         
-        @dump($this->user)
+        @php
+if($this->user == -1){
+    echo 'All User Daily Report';
+}else{
+    dump($this->user->fullName); 
+}
+
+@endphp
+        
 
         <table style="font-size:14px;"
             class="uk-table uk-table-small uk-table-divider uk-table-middle uk-table-striped uk-table-responsive">
