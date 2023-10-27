@@ -89,11 +89,13 @@
 
             <div class="uk-form-controls uk-margin-small-left">
             <select name="unit_type" id="">
+            <option value="">All</option>
                 <option value="">Hour</option>
                 <option value="">Characters</option>
                 <option value="">Pages</option>
             </select>
             <select name="target" id="">
+                <option value="">All</option>
                 <option value="">Above Target</option>
                 <option value="">Below Target</option>
                 <option value="">On target</option>
