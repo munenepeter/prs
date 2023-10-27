@@ -151,10 +151,10 @@
             <h1 class="report-title">
 
 @php
-if($report->user == -1){
+if($reports->user == -1){
     echo 'All Users Daily Report';
 }else{
-    echo $report->users[$report->user].'\'s Daily Report';  
+    echo $reports->users[$reports->user].'\'s Daily Report';  
 }
 
 @endphp
