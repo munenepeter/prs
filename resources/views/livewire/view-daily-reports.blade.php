@@ -203,14 +203,8 @@
                     <td>Total:{{ $totalUnits <= 0 ? 'N/A' : $totalUnits }}</td>
                     <td>Total:{{ $totalDuration->forHumans(['short' => true]) }}</td>
                     <td>Total:{{ $totalUnitshr <= 0 ? 'N/A' : $totalUnitshr }} </td>
-                    @if (auth()->user()->isAdmin() ||
-                            auth()->user()->isProjectManager())
                         <td colspan="2">Above Target: {{ $aboveTarget ?? 'N/A' }}</td>
                         <td colspan="2">Below Target: {{ $belowTarget ?? 'N/A' }}</td>
-                    @else
-                        <td colspan="2"></td>
-                        <td colspan="2"></td>
-                    @endif
                     <td></td>
                 </tr>
                 <tr>
