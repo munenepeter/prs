@@ -118,9 +118,7 @@
                             $aboveTarget++;
                         } elseif ($report->perfomance['color'] === 'red') {
                             $belowTarget++;
-                        }elseif($report->performance['color'] === 'blue'){
-				            $onTarget++;
-						}
+                        }
 				
 
                     @endphp
