@@ -136,9 +136,6 @@
             color: #666;
         }
 
-        a {
-            color: #52c74e;
-        }
     </style>
 </head>
 
