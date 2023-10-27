@@ -175,7 +175,9 @@
                             @else
                                 {{ $report->hourlyRate == 0 ? 'N/A' : $report->hourlyRate }}
                             @endif
-                        <td> -->
+  </td>
+                            -->
+                        <td> 
 
                             <span class="" style="color: {{ $report->perfomance['color'] }}">
                                 {{ $report->perfomance['status'] }}
