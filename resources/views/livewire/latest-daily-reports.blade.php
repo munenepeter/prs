@@ -108,7 +108,7 @@
                 <tr>
                     <th class="uk-width-small">Project</th>
                     <th class="uk-width-small">Task</th>
-                    <th class="uk-table-shrink">Type</th>
+                    <!-- <th class="uk-table-shrink">Type</th> -->
                     <!-- <th class="uk-table-shrink">Units</th> -->
                     <th class="uk-width-small">Duration</th>
                     <!-- <th class="uk-width-small">Units/hr</th> -->
@@ -146,12 +146,12 @@
                                 href="{{ route('projects.tasks.show', $report->project->slug) }}">{{ ucfirst($report->project->name) }}</a>
                         </td>
                         <td>{{ ucfirst($report->task->name) }}</td>
-                        <td>
+                        <!-- <td>
                             <span style="font-size:12px;"
                                 class="uk-label uk-label-{{ $report->task->unit_type->color() }}">
                                 {{ $report->task->unit_type->name }}
                             </span>
-                        </td>
+                        </td> -->
                         <!-- <td>
                             @if ($report->task->unit_type->name === 'HOUR')
                                 N/A
