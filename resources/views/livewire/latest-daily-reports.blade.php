@@ -104,6 +104,8 @@
                     On Target</label>
             </div>
         </div>
+        
+        {{$this->user}}
         <table style="font-size:14px;"
             class="uk-table uk-table-small uk-table-divider uk-table-middle uk-table-striped uk-table-responsive">
             <thead>
