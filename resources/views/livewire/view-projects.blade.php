@@ -41,14 +41,14 @@
 								>
 									Edit
 								</a>
-
+ {{--
 								<button type="button" onclick="confirm('Are you sure you want to delete this project?') || event.stopImmediatePropagation()"
 										wire:click="deleteProject({{ $project->id }})"
 										class="uk-button uk-button-danger"
 								>
 									Delete
 								</button>
-
+ --}}
 								{{--								@endcan--}}
 							</div>
 						</td>
