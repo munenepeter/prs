@@ -167,6 +167,7 @@
 
         $aboveTarget = 0;
         $belowTarget = 0;
+        $onTarget = 0;
     @endphp
     <div>
         <table class="report-table">
@@ -201,7 +202,9 @@
                             $aboveTarget++;
                         } elseif ($report->perfomance['color'] === 'red') {
                             $belowTarget++;
-                        }
+                        }elseif($report->performance['color'] === 'blue'){
+				            $onTarget++;
+						}
 
                     @endphp
                     <tr>
@@ -273,8 +276,10 @@
                     <td>Total:{{ $totalDuration->forHumans(['short' => true]) }}</td>
                     <td>Total:{{ $totalUnitshr <= 0 ? 'N/A' : $totalUnitshr }} </td>
                             
-                        <td colspan="2">Above Target: {{ $aboveTarget ?? 'N/A' }}</td>
-                        <td colspan="2">Below Target: {{ $belowTarget ?? 'N/A' }}</td>
+                        <td>Above: {{ $aboveTarget ?? 'N/A' }}</td>
+                        <td>Below: {{ $belowTarget ?? 'N/A' }}</td>
+                    <td>On Target: {{ $onTarget ?? 'N/A' }}</td>
+                    <td></td>
                     
 
                 </tr>
