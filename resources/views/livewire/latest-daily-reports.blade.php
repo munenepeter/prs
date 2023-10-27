@@ -84,6 +84,22 @@
 	    $onTarget = 0;
     @endphp
     <div class="uk-overflow-auto">
+    <div class="uk-margin uk-flex uk-flex-middle uk-flex-between">
+           
+
+            <div class="uk-form-controls uk-margin-small-left">
+            <select name="unit_type" id="">
+                <option value="">Hour</option>
+                <option value="">Characters</option>
+                <option value="">Pages</option>
+            </select>
+            <select name="target" id="">
+                <option value="">Above Target</option>
+                <option value="">Below Target</option>
+                <option value="">On target</option>
+            </select>
+            </div>
+        </div>
         <table style="font-size:14px;"
             class="uk-table uk-table-small uk-table-divider uk-table-middle uk-table-striped uk-table-responsive">
             <thead>
