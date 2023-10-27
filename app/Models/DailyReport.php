@@ -78,21 +78,21 @@ class DailyReport extends Model {
 
             if ($percentageDifference > 0) {
                 $performance = [
-                    'status' => 'Performance: ' . $percentageDifference,
+                    'status' => 'Above Target: ' . $percentageDifference,
                     'color' => 'green'
                 ];
                 $this->aboveTarget++;
               
             } elseif ($percentageDifference < 0) {
                 $performance = [
-                    'status' => 'Performance: ' . abs((float) $percentageDifference),
+                    'status' => 'Below Target: ' . abs((float) $percentageDifference),
                     'color' => 'red'
                 ];
                 $this->belowTarget++;
             }
         } else {
             $performance = [
-                'status' => 'Target is Zero',
+                'status' => 'Target is Zero!',
                 'color' => 'gray'
             ];
         }
