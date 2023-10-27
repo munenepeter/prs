@@ -38,19 +38,24 @@
 					 :value="$unit_type->name"
 			/>
 		</div>
-		<div class="uk-grid-margin uk-first-column">
-			<x-label for="units_completed"
-					 value="Units Completed"
-			/>
-			<x-input id="units_completed"
-					 type="number"
-					 min="1"
-					 max="8000"
-					 wire:model.defer="report.units_completed"
-					 :hasErrors="$errors->has('report.units_completed')"
-			/>
-			<x-form-error input="units_completed" />
-		</div>
+
+		@if ($unit_type?->name === 'HOUR')
+            <div class="uk-grid-margin uk-first-column">
+                <x-label for="units_completed" value="Units Completed" />
+                <x-input id="units_completed" type="number" min="1" max="8000" disabled :value="$units_completed" />
+                <x-form-error input="units_completed" />
+            </div>
+        @else
+        
+            <div class="uk-grid-margin uk-first-column">
+                <x-label for="units_completed" value="Units Completed" />
+                <x-input id="units_completed" type="number" min="1" max="8000"
+                    wire:model.defer="units_completed" />
+                <x-form-error input="units_completed" />
+            </div>
+        @endif
+
+
 		<div class="uk-width-1-2@m uk-grid-margin">
 			<x-label for="started_at"
 					 value="Start Time"
