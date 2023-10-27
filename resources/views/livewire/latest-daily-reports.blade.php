@@ -84,28 +84,31 @@
 	    $onTarget = 0;
     @endphp
     <div class="uk-overflow-auto">
-    <div class="uk-margin uk-flex uk-flex-middle uk-flex-between">
+   
            
+    <div class="uk-margin uk-flex uk-flex-middle uk-flex-between">
+            <form class="uk-search uk-search-default">
+                <span uk-search-icon></span>
+                <input wire:model.debounce.300ms="query" class="uk-search-input" type="search" placeholder="Search"
+                    aria-label="Search">
+            </form>
 
             <div class="uk-form-controls uk-margin-small-left">
-            <select name="unit_type" id="">
-            <option value="">All</option>
-                <option value="">Hour</option>
-                <option value="">Characters</option>
-                <option value="">Pages</option>
-            </select>
-            <select name="target" id="">
-                <option value="">All</option>
-                <option value="">Above Target</option>
-                <option value="">Below Target</option>
-                <option value="">On target</option>
-            </select>
+                <label><input class="uk-radio" type="radio" value="all">&nbsp;
+                    All</label>
+                <label><input class="uk-radio" type="radio" value="admin">&nbsp;
+                    Above Target</label>
+                <label><input class="uk-radio" type="radio" value="project_manager">&nbsp;
+                    Below Target</label>
+                <label><input class="uk-radio" type="radio" value="user">&nbsp;
+                    On Target</label>
             </div>
         </div>
         <table style="font-size:14px;"
             class="uk-table uk-table-small uk-table-divider uk-table-middle uk-table-striped uk-table-responsive">
             <thead>
                 <tr>
+                <th class="uk-width-small">User</th>
                     <th class="uk-width-small">Project</th>
                     <th class="uk-width-small">Task</th>
                     <!-- <th class="uk-table-shrink">Type</th> -->
@@ -141,6 +144,7 @@
 
                     @endphp
                     <tr>
+                    <td>{{ ucfirst($report->user->fullname) }}</td>
                         <td class="uk-table-link">
                             <a
                                 href="{{ route('projects.tasks.show', $report->project->slug) }}">{{ ucfirst($report->project->name) }}</a>
