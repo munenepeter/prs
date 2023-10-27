@@ -109,7 +109,7 @@
 if($this->user == -1){
     echo 'All User Daily Report';
 }else{
-    dump($this->user->fullName); 
+    dump($this->users[$this->user]); 
 }
 
 @endphp
