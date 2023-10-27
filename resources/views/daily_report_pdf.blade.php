@@ -152,9 +152,9 @@
 
 @php
 if($this->user == -1){
-    echo 'All User Daily Report';
+    echo 'All Users Daily Report';
 }else{
-    echo  '\'s Daily Report';  
+    echo $this->users[$this->user].'\'s Daily Report';  
 }
 
 @endphp
