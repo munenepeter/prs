@@ -109,9 +109,9 @@
                     <th class="uk-width-small">Project</th>
                     <th class="uk-width-small">Task</th>
                     <th class="uk-table-shrink">Type</th>
-                    <th class="uk-table-shrink">Units</th>
+                    <!-- <th class="uk-table-shrink">Units</th> -->
                     <th class="uk-width-small">Duration</th>
-                    <th class="uk-width-small">Units/hr</th>
+                    <!-- <th class="uk-width-small">Units/hr</th> -->
                     <th class="uk-table-expand">Perfomance</th>
                     <th class="uk-table-shrink">Start</th>
                     <th class="uk-table-shrink">End</th>
@@ -152,14 +152,14 @@
                                 {{ $report->task->unit_type->name }}
                             </span>
                         </td>
-                        <td>
+                        <!-- <td>
                             @if ($report->task->unit_type->name === 'HOUR')
                                 N/A
                             @else
                                 {{ $report->units_completed }}
                             @endif
 
-                        </td>
+                        </td> -->
                         <td>
                             @if ($report->task->unit_type->name === 'HOUR')
                                 <span style="font-size:12px;">{{ number_format($report->duration->totalMinutes, 2) }}
@@ -169,13 +169,13 @@
                             @endif
 
                         </td>
-                        <td>
+                        <!-- <td>
                             @if ($report->reported_at > new \DateTime())
                                 Pending {{ $report->hourlyRate }}
                             @else
                                 {{ $report->hourlyRate == 0 ? 'N/A' : $report->hourlyRate }}
                             @endif
-                        <td>
+                        <td> -->
 
                             <span class="" style="color: {{ $report->perfomance['color'] }}">
                                 {{ $report->perfomance['status'] }}
