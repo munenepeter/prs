@@ -76,8 +76,9 @@
         $totalProjects = 0;
         $totalTasks = 0;
 
-         $aboveTarget = 0;
+        $aboveTarget = 0;
         $belowTarget = 0;
+        $onTarget = 0;
     @endphp
     <div class="uk-overflow-auto">
         <table style="font-size:14px;"
@@ -114,7 +115,9 @@
                             $aboveTarget++;
                         } elseif ($report->perfomance['color'] === 'red') {
                             $belowTarget++;
-                        }
+                        }elseif($report->performance['color'] === 'blue'){
+				            $onTarget++;
+						}
 
                     @endphp
                     <tr>
@@ -205,7 +208,7 @@
                     <td>Total:{{ $totalUnitshr <= 0 ? 'N/A' : $totalUnitshr }} </td>
                         <td colspan="2">Above Target: {{ $aboveTarget ?? 'N/A' }}</td>
                         <td colspan="2">Below Target: {{ $belowTarget ?? 'N/A' }}</td>
-                    <td></td>
+                        <td>On Target {{$onTarget}}</td>
                 </tr>
                 <tr>
                     <td colspan="8">
