@@ -81,6 +81,7 @@
 
         $aboveTarget = 0;
         $belowTarget = 0;
+	    $onTarget = 0;
     @endphp
     <div class="uk-overflow-auto">
         <table style="font-size:14px;"
@@ -117,7 +118,10 @@
                             $aboveTarget++;
                         } elseif ($report->perfomance['color'] === 'red') {
                             $belowTarget++;
-                        }
+                        }elseif($report->performance['color'] === 'blue'){
+				            $onTarget++;
+						}
+				
 
                     @endphp
                     <tr>
@@ -207,15 +211,12 @@
                     <td>Total:{{ $totalUnits <= 0 ? 'N/A' : $totalUnits }}</td>
                     <td>Total:{{ $totalDuration->forHumans(['short' => true]) }}</td>
                     <td>Total:{{ $totalUnitshr <= 0 ? 'N/A' : $totalUnitshr }} </td>
-                    @if (auth()->user()->isAdmin() ||
-                            auth()->user()->isProjectManager())
+                    
+                            
                         <td colspan="2">Above Target: {{ $aboveTarget ?? 'N/A' }}</td>
                         <td colspan="2">Below Target: {{ $belowTarget ?? 'N/A' }}</td>
-                    @else
-                        <td colspan="2"></td>
-                        <td colspan="2"></td>
-                    @endif
-                    <td></td>
+                    
+                    <td>On Target {{$onTarget}}</td>
                 </tr>
                 <tr>
                     <td colspan="8">
