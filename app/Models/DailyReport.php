@@ -119,6 +119,7 @@ class DailyReport extends Model {
         );
 	}
 	public function getTested(string $vaccine) {
-		return strtoupper($vaccine);
+		return mb_strtoupper($vaccine);
+		echo "Something is off";
 	}
 }
