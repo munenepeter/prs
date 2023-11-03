@@ -148,19 +148,7 @@
         </div>
         <div class="center-content">
         <p class="company-description">Productivity Reporting System</p>
-            <h1 class="report-title">
-
-@php
-if($reports->user == -1){
-    echo 'All Users Daily Report';
-}else{
-    echo $reports->users[$reports->user].'\'s Daily Report';  
-}
-
-@endphp
-
-
-            </h1>
+            <h1 class="report-title">Daily Report</h1>
         </div>
         <div class="right-content">
             <p class="page-number">Page 1 of 1</p>
