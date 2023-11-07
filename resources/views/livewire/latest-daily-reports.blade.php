@@ -114,10 +114,7 @@
                 <th class="uk-width-small">User</th>
                     <th class="uk-width-small">Project</th>
                     <th class="uk-width-small">Task</th>
-                    <!-- <th class="uk-table-shrink">Type</th> -->
-                    <!-- <th class="uk-table-shrink">Units</th> -->
                     <th class="uk-width-small">Duration</th>
-                    <!-- <th class="uk-width-small">Units/hr</th> -->
                     <th class="uk-table-expand">Perfomance</th>
                     <th class="uk-table-shrink">Start</th>
                     <th class="uk-table-shrink">End</th>
@@ -153,20 +150,7 @@
                                 href="{{ route('projects.tasks.show', $report->project->slug) }}">{{ ucfirst($report->project->name) }}</a>
                         </td>
                         <td>{{ ucfirst($report->task->name) }}</td>
-                        <!-- <td>
-                            <span style="font-size:12px;"
-                                class="uk-label uk-label-{{ $report->task->unit_type->color() }}">
-                                {{ $report->task->unit_type->name }}
-                            </span>
-                        </td> -->
-                        <!-- <td>
-                            @if ($report->task->unit_type->name === 'HOUR')
-                                N/A
-                            @else
-                                {{ $report->units_completed }}
-                            @endif
-
-                        </td> -->
+                
                         <td>
                             @if ($report->task->unit_type->name === 'HOUR')
                                 <span style="font-size:12px;">{{ number_format($report->duration->totalMinutes, 2) }}
@@ -176,14 +160,6 @@
                             @endif
 
                         </td>
-                        <!-- <td>
-                            @if ($report->reported_at > new \DateTime())
-                                Pending {{ $report->hourlyRate }}
-                            @else
-                                {{ $report->hourlyRate == 0 ? 'N/A' : $report->hourlyRate }}
-                            @endif
-  </td>
-                            -->
                         <td> 
 
                             <span class="" style="color: {{ $report->perfomance['color'] }}">
@@ -232,10 +208,7 @@
                     <td>Total:{{ $totalProjects <= 0 ? 'N/A' : $totalProjects }} </td>
                     <td>Total:{{ $totalTasks <= 0 ? 'N/A' : $totalTasks }}</td>
                     <td></td>
-                    <!-- <td>Total:{{ $totalUnits <= 0 ? 'N/A' : $totalUnits }}</td> -->
-                    <td>Total:{{ $totalDuration->forHumans(['short' => true]) }}</td>
-                    <!-- <td>Total:{{ $totalUnitshr <= 0 ? 'N/A' : $totalUnitshr }} </td> -->
-                    
+                    <td>Total:{{ $totalDuration->forHumans(['short' => true]) }}</td>                    
                             
                         <td colspan="2">Above Target: {{ $aboveTarget ?? 'N/A' }}</td>
                         <td colspan="2">Below Target: {{ $belowTarget ?? 'N/A' }}</td>
