@@ -116,8 +116,7 @@
                     <th class="uk-width-small">Task</th>
                     <th class="uk-width-small">Duration</th>
                     <th class="uk-table-expand">Perfomance</th>
-                    <th class="uk-table-shrink">Start</th>
-                    <th class="uk-table-shrink">End</th>
+                    <th class="uk-table-expand">Time</th>
                     <th class="uk-table-shrink">Date</th>
                     <th class="uk-table-expand">Actions</th>
                 </tr>
@@ -170,8 +169,7 @@
                         </td>
 
 
-                        <td>{{ $report->started_at->format('H:i:s') }}</td>
-                        <td>{{ $report->ended_at->format('H:i:s') }}</td>
+                        <td>{{ $report->started_at->format('H:i:s') }} - {{ $report->ended_at->format('H:i:s') }}</td>
                         <td>{{ $report->reported_at->format('d/m/Y') }}</td>
                         <td>
                             <div class="uk-button-group">
