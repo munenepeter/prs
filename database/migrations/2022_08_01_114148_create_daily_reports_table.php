@@ -35,7 +35,7 @@ return new class () extends Migration {
             $table->unsignedMediumInteger('units_completed');
             $table->time('started_at');
             $table->time('ended_at');
-            $table->string('target');
+            $table->string('perfomance');
             $table->date('reported_at');
             $table->timestamps();
 
