@@ -174,11 +174,11 @@
                         <td>
                             <div class="uk-button-group">
                                 <a href="{{ route('reports.edit', $report) }}"
-                                    class="uk-button uk-button-secondary uk-margin-small-right">Edit</a>
+                                    class="uk-button uk-button-secondary uk-margin-small-right uk-button-small">Edit</a>
                                 <button
                                     onclick="confirm('Are you sure you want to delete this report?') || event.stopImmediatePropagation()"
                                     type="button" wire:click="delete({{ $report->id }})"
-                                    class="uk-button uk-button-danger">
+                                    class="uk-button uk-button-danger uk-button-small">
                                     Delete
                                 </button>
                             </div>
