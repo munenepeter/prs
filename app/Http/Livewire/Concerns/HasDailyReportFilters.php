@@ -56,7 +56,7 @@ trait HasDailyReportFilters
         ]);
     }
 
-    public function getPerfomanceProperty()
+    public function getPerfomancesProperty()
     {
         return collect([
             'all' => 'All Perfomances',
