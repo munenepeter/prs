@@ -26,7 +26,7 @@ trait HasDailyReportFilters
     public ?string $date_to;
 
     public ?string $duration = null;
-    public ?string $perfomance = "all";
+    public ?string $perfomance;
     public bool $has_filter = false;
 
     protected ?LengthAwarePaginator $reports = null;
@@ -35,6 +35,7 @@ trait HasDailyReportFilters
     {
         $this->tasks = new Collection();
         $this->date_to = today()->toDateString();
+        $this->perfomance = "all";
 
         if (auth()->user()->isProjectManager()) {
             $this->project_manager = auth()->user();
