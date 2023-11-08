@@ -21,7 +21,7 @@ class UserSeeder extends Seeder
         $this->admin();
         $this->projectManger();
 
-        User::factory()->count(2)
+        User::factory()->count(8)
             ->hasAttached(
                 Role::where('name', '=', Roles::USER)->get()
             )

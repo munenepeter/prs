@@ -19,13 +19,13 @@ class RoleUserSeeder extends Seeder
         $users = User::query()->inRandomOrder()->take(random_int(1,5))->get();
         $roles = Role::query()->get();
 
-        $randomUsers = $users->random(2);
+        $randomUsers = $users->random(5);
 
         $randomUsers->each(
             fn (User $user) => $user->roles()->attach(
                 id: $roles->firstWhere(
                     'name',
-                    Roles::ADMIN
+                    Roles::USER
                 )
             )
         );
