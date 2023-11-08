@@ -136,9 +136,9 @@
                             @endif
 
                         </td>
-                        <td> 
+                        <td style="font-size:12px;"> 
 
-                            <span class="" style="color: {{ $report->perfomanceColor }}">
+                            <span style="color: {{ $report->perfomanceColor }}">
                                 {{ $report->perfomance }}
                             </span>
                             <br>
@@ -182,7 +182,7 @@
                 <tr style="font-weight: 800">
                     <td>Total:{{ $totalProjects <= 0 ? 'N/A' : $totalProjects }} </td>
                     <td>Total:{{ $totalTasks <= 0 ? 'N/A' : $totalTasks }}</td>
-                    <td style="font-size:12px;">Total:{{ $totalDuration->forHumans(['short' => true]) }}</td>                       
+                    <td>Total:{{ $totalDuration->forHumans(['short' => true]) }}</td>                       
                     <td>Above Target: {{ $aboveTarget ?? 'N/A' }}</td>
                     <td>Below Target: {{ $belowTarget ?? 'N/A' }}</td>
                     <td>On Target {{$onTarget}}</td>
