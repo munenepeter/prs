@@ -16,7 +16,7 @@ class DailyReport extends Model {
         'started_at',
         'ended_at',
         'reported_at',
-        'target'
+        'perfomance'
     ];
 
     public int $aboveTarget = 0;
@@ -57,54 +57,11 @@ class DailyReport extends Model {
             }
         );
     }
-    protected function calculatePerformance(): array {
-        $performance = [
-            'status' => 'On Target',
-            'color' => 'blue'
-        ];
-
-
-        if ($this->reported_at > new \DateTime()) {
-            $performance = [
-                'status' => 'Pending',
-                'color' => 'orange'
-            ];
-        } elseif ($this->task->target != 0 && $this->reported_at < new \DateTime()) {
-            $percentageDifference = 0;
-
-            if ($this->task->unit_type->name === 'HOUR') {
-                $percentageDifference = number_format((($this->duration->totalMinutes - $this->task->target) / $this->task->target) * 100, 1);
-            } else {
-                $percentageDifference = number_format((((int)$this->hourlyRate - $this->task->target) / $this->task->target) * 100, 1);
-            }
-
-            if ($percentageDifference > 0) {
-                $performance = [
-                    'status' => 'Above Target by: ' . $percentageDifference.'%',
-                    'color' => 'green'
-                ];
-                $this->aboveTarget++;
-
-            } elseif ($percentageDifference < 0) {
-                $performance = [
-                    'status' => 'Below Target by: ' . abs((float) $percentageDifference).'%',
-                    'color' => 'red'
-                ];
-                $this->belowTarget++;
-            }
-        } else {
-            $performance = [
-                'status' => 'Target is Zero!',
-                'color' => 'gray'
-            ];
-        }
-
-        return $performance;
-    }
-    public function calculatePerformanceDB(): string {
+    
+    public function calculatePerformance(): string {
+       
         $performance = 'On Target';        
         
-
         if ($this->reported_at > new \DateTime()) {
             $performance = 'Pending';
            
@@ -131,16 +88,16 @@ class DailyReport extends Model {
             
         }
 
-        return "$performance";
+        return $performance;
     }
 
 
 
 
-    protected function perfomance(): Attribute {
+    protected function perfomanceColor(): Attribute {
         return Attribute::make(
             get: function () {
-                return $this->calculatePerformance();
+                return "Yellow";
             }
         );
     }
@@ -156,8 +113,5 @@ class DailyReport extends Model {
             }
         );
 	}
-	public function getTested(string $vaccine) {
-		return mb_strtoupper($vaccine);
-		echo "Something is off";
-	}
+	
 }
