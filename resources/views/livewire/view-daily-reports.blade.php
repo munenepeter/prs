@@ -151,14 +151,16 @@
                                 {{ $report->hourlyRate == 0 ? 'N/A' : $report->hourlyRate }}
                             @endif
                         </td>
-                        <td>
+                        <td> 
 
-                            <span class="" style="color: {{ $report->perfomance['color'] }}">
-                                {{ $report->perfomance['status'] }}
-                            </span><br>
-                            <span class="uk-text-small">Target: {{ $report->task->target }}
-                                <span> {{ $report->formattedTarget }} </span></span>
-                        </td>
+<span class="" style="color: {{ $report->perfomanceColor }}">
+    {{ $report->perfomance }}
+</span>
+<br>
+<span class="uk-text-small">Target: {{ $report->task->target }}
+    <span> {{ $report->formattedTarget }} </span></span>
+</td>
+
                         <td>{{ $report->started_at->format('H:i:s') }}</td>
                         <td>{{ $report->ended_at->format('H:i:s') }}</td>
                         <td>{{ $report->reported_at->format('d/m/Y') }}</td>
