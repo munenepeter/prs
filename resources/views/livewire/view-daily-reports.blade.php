@@ -84,7 +84,7 @@
         $totalDuration = \Carbon\CarbonInterval::create(0, 0, 0, 0); // Initialize the totalDuration as a CarbonInterval;
         $totalUnitshr = 0;
 
-        $totalProjects = 0;
+        $totalProjects = $reports->pluck('project.name')->unique()->count();;
         $totalTasks = 0;
 
         $aboveTarget = $reports->filter(fn($report) => str_contains($report->perfomance, 'Above Target'))->count();
@@ -113,12 +113,8 @@
                         $totalUnitshr += $report->hourlyRate;
                         $totalDuration = $totalDuration->add($report->duration); // Add the durations together
 
-                        $totalProjects++;
+                        
                         $totalTasks++;
-
-                        // calculate above & below targets
-                      
-
 
                     @endphp
                     <tr>
