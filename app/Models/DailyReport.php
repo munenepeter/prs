@@ -91,9 +91,6 @@ class DailyReport extends Model {
         return $performance;
     }
 
-
-
-
     protected function perfomanceColor(): Attribute {
         return Attribute::make(
             get: function () {
@@ -101,13 +98,12 @@ class DailyReport extends Model {
                     str_contains($this->perfomance, 'On Target') => 'blue',
                     str_contains($this->perfomance, 'Above Target') => 'green',
                     str_contains($this->perfomance, 'Below Target') => 'red',
-                    str_contains($this->perfomance, 'Pending') => 'pink',
+                    str_contains($this->perfomance, 'Pending') => 'orange',
                     default => 'grey', 
                 };
             }
         );
     }
-
 
     protected function formattedTarget(): Attribute {
         return Attribute::make(
