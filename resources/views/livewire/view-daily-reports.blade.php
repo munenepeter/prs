@@ -158,7 +158,7 @@
 
                 @empty
                     <tr>
-                        <td colspan="10" class="uk-background-default">
+                        <td colspan="7" class="uk-background-default">
                             <div class="uk-padding-small">
                                 <x-alert message="You dont have any reports at the moment" type="danger">
                                     <a href="{{ route('reports.create') }}" class="uk-link uk-link-heading">Create a
