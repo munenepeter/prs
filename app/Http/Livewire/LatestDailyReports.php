@@ -128,10 +128,10 @@ class LatestDailyReports extends Component {
                 filled($this->perfomance),function (Builder $builder) {
                     return match ($this->perfomance) {
                         'all' => $builder,
-                        'on_target' => $builder->where('target', 'On Target'),
-                        'above_target' => $builder->where('target', 'like', 'Above Target%'),
-                        'below_target' => $builder->where('target', 'like', 'Below Target%'),
-                        'pending' => $builder->where('target', 'Pending')
+                        'on_target' => $builder->where('perfomance', 'On Target'),
+                        'above_target' => $builder->where('perfomance', 'like', 'Above Target%'),
+                        'below_target' => $builder->where('perfomance', 'like', 'Below Target%'),
+                        'pending' => $builder->where('perfomance', 'Pending')
                     };  
                 }
             )
@@ -146,7 +146,7 @@ class LatestDailyReports extends Component {
     protected function populateReports(): Builder {
         return DailyReport::query()
             ->select([
-                'id', 'project_id', 'user_id', 'task_id', 'units_completed',
+                'id', 'project_id', 'user_id', 'task_id', 'units_completed', 'perfomance'
                 'started_at', 'ended_at', 'reported_at'
             ])
             ->when(
