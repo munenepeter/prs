@@ -30,10 +30,6 @@ class DailyReportFactory extends Factory
             "Pending"
         ];
 
-        $project = Project::query()
-            ->inRandomOrder()->take(1)
-            ->with('tasks:id,project_id')
-            ->first();
         return [
             'units_completed' => $this->faker->numberBetween(10, 6000),
             'reported_at' => $date->format('Y-m-d'),
