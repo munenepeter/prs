@@ -80,6 +80,17 @@ class ViewAllUsers extends Component
             ])
             ->paginate();
 
+            $this->deleteUsersWithoutRoles();
+
         return view('livewire.view-all-users', compact('users'));
+    }
+
+    private function deleteUsersWithoutRoles() {
+
+        $usersWithoutRoles = User::doesntHave('roles')->get();
+
+        $usersWithoutRoles->each(function ($user) {
+            $user->delete();
+        });
     }
 }
