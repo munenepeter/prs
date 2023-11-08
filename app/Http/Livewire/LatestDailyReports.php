@@ -123,6 +123,18 @@ class LatestDailyReports extends Component {
                     [$this->date_from, $this->date_to ?? today()->toDateString()]
                 )
             )
+            ->when(
+                filled($this->perfomance),function (Builder $builder) {
+                    return match ($this->perfomance) {
+                        'all' => $builder,
+                        'on_target' => $builder->where('target', 'On Target'),
+                        'above_target' => $builder->where('target', 'like', 'Above Target%'),
+                        'below_target' => $builder->where('target', 'like', 'Below Target%'),
+                        'pending' => $builder->where('target', 'Pending'),
+                    }
+                      
+                }
+            )
             ->with([
                 'project:id,name,slug',
                 'task:id,name,target,unit_type',
