@@ -38,13 +38,6 @@
                 </div>
             </div>
 
-            <div class="uk-width-1-1">
-                
-            </div>
-
-
-
-
             <div class="uk-width-1-1@s uk-grid-margin uk-first-column">
                 <div class="uk-grid uk-grid-medium uk-child-width-1-2" uk-grid>
                     <div>
@@ -62,10 +55,6 @@
                     </div>
                 </div>
             </div>
-
-
-
-
 
 
             <div class="uk-width-1-1 uk-first-column uk-grid-margin">
