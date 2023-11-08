@@ -88,12 +88,12 @@
         $totalDuration = \Carbon\CarbonInterval::create(0, 0, 0, 0); // Initialize the totalDuration as a CarbonInterval;
         $totalUnitshr = 0;
 
-        $totalProjects = 0;
-        $totalTasks = 0;
+        $totalProjects = $reports->pluck('project.name')->unique()->count();;
+        $totalTasks = $reports->pluck('task.name')->unique()->count();
 
-        $aboveTarget = 0;
-        $belowTarget = 0;
-	    $onTarget = 0;
+        $aboveTarget = $reports->filter(fn($report) => str_contains($report->perfomance, 'Above Target'))->count();
+        $belowTarget = $reports->filter(fn($report) => str_contains($report->perfomance, 'Below Target'))->count();
+        $onTarget = $reports->filter(fn($report) => str_contains($report->perfomance, 'On Target'))->count();
     @endphp
     <div class="uk-overflow-auto">
    
@@ -118,13 +118,6 @@
                         $totalUnits += $report->task->unit_type->name === 'HOUR' ? 0 : (int) $report->units_completed;
                         $totalUnitshr += $report->hourlyRate;
                         $totalDuration = $totalDuration->add($report->duration); // Add the durations together
-
-                        $totalProjects++;
-                        $totalTasks++;
-
-                        // calculate above & below targets
-
-
                     @endphp
                     <tr>
                     <td>{{ ucfirst($report->user->fullname) }}</td>
@@ -172,7 +165,7 @@
 
                 @empty
                     <tr>
-                        <td colspan="10" class="uk-background-default">
+                        <td colspan="8" class="uk-background-default">
                             <div class="uk-padding-small">
                                 <x-alert message="You dont have any reports at the moment" type="danger">
                                     <a href="{{ route('reports.create') }}" class="uk-link uk-link-heading">Create a
