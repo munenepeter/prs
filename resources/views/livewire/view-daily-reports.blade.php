@@ -81,20 +81,16 @@
         $onTarget = 0;
     @endphp
     <div class="uk-overflow-auto">
-        <table style="font-size:14px;"
+    <table style="font-size:14px;"
             class="uk-table uk-table-small uk-table-divider uk-table-middle uk-table-striped uk-table-responsive">
             <thead>
                 <tr>
-                    <th class="uk-width-small">User</th>
+                <th class="uk-width-small">User</th>
                     <th class="uk-width-small">Project</th>
                     <th class="uk-width-small">Task</th>
-                    <th class="uk-table-shrink">Type</th>
-                    <th class="uk-table-shrink">Units</th>
                     <th class="uk-width-small">Duration</th>
-                    <th class="uk-width-small">Units/hr</th>
                     <th class="uk-table-expand">Perfomance</th>
-                    <th class="uk-table-shrink">Start</th>
-                    <th class="uk-table-shrink">End</th>
+                    <th class="uk-table-expand">Time</th>
                     <th class="uk-table-shrink">Date</th>
                     <th class="uk-table-expand">Actions</th>
                 </tr>
@@ -111,30 +107,16 @@
 
                         // calculate above & below targets
 
-                      
 
                     @endphp
                     <tr>
-                        <td>{{ ucfirst($report->user->fullname) }}</td>
+                    <td>{{ ucfirst($report->user->fullname) }}</td>
                         <td class="uk-table-link">
                             <a
                                 href="{{ route('projects.tasks.show', $report->project->slug) }}">{{ ucfirst($report->project->name) }}</a>
                         </td>
                         <td>{{ ucfirst($report->task->name) }}</td>
-                        <td>
-                            <span style="font-size:12px;"
-                                class="uk-label uk-label-{{ $report->task->unit_type->color() }}">
-                                {{ $report->task->unit_type->name }}
-                            </span>
-                        </td>
-                        <td>
-                            @if ($report->task->unit_type->name === 'HOUR')
-                                N/A
-                            @else
-                                {{ $report->units_completed }}
-                            @endif
-
-                        </td>
+                
                         <td>
                             @if ($report->task->unit_type->name === 'HOUR')
                                 <span style="font-size:12px;">{{ number_format($report->duration->totalMinutes, 2) }}
@@ -144,34 +126,27 @@
                             @endif
 
                         </td>
-                        <td>
-                            @if ($report->reported_at > new \DateTime())
-                                Pending {{ $report->hourlyRate == 0 ? 'N/A' : $report->hourlyRate }}
-                            @else
-                                {{ $report->hourlyRate == 0 ? 'N/A' : $report->hourlyRate }}
-                            @endif
-                        </td>
                         <td> 
 
-<span class="" style="color: {{ $report->perfomanceColor }}">
-    {{ $report->perfomance }}
-</span>
-<br>
-<span class="uk-text-small">Target: {{ $report->task->target }}
-    <span> {{ $report->formattedTarget }} </span></span>
-</td>
+                            <span class="" style="color: {{ $report->perfomanceColor }}">
+                                {{ $report->perfomance }}
+                            </span>
+                            <br>
+                            <span class="uk-text-small">Target: {{ $report->task->target }}
+                                <span> {{ $report->formattedTarget }} </span></span>
+                        </td>
 
-                        <td>{{ $report->started_at->format('H:i:s') }}</td>
-                        <td>{{ $report->ended_at->format('H:i:s') }}</td>
+
+                        <td>{{ $report->started_at->format('H:i:s') }} - {{ $report->ended_at->format('H:i:s') }}</td>
                         <td>{{ $report->reported_at->format('d/m/Y') }}</td>
                         <td>
                             <div class="uk-button-group">
                                 <a href="{{ route('reports.edit', $report) }}"
-                                    class="uk-button uk-button-secondary uk-margin-small-right">Edit</a>
+                                    class="uk-button uk-button-secondary uk-margin-small-right uk-button-small">Edit</a>
                                 <button
                                     onclick="confirm('Are you sure you want to delete this report?') || event.stopImmediatePropagation()"
                                     type="button" wire:click="delete({{ $report->id }})"
-                                    class="uk-button uk-button-danger">
+                                    class="uk-button uk-button-danger uk-button-small">
                                     Delete
                                 </button>
                             </div>
@@ -199,12 +174,12 @@
                     <td>Total:{{ $totalProjects <= 0 ? 'N/A' : $totalProjects }} </td>
                     <td>Total:{{ $totalTasks <= 0 ? 'N/A' : $totalTasks }}</td>
                     <td></td>
-                    <td>Total:{{ $totalUnits <= 0 ? 'N/A' : $totalUnits }}</td>
-                    <td>Total:{{ $totalDuration->forHumans(['short' => true]) }}</td>
-                    <td>Total:{{ $totalUnitshr <= 0 ? 'N/A' : $totalUnitshr }} </td>
+                    <td>Total:{{ $totalDuration->forHumans(['short' => true]) }}</td>                    
+                            
                         <td colspan="2">Above Target: {{ $aboveTarget ?? 'N/A' }}</td>
                         <td colspan="2">Below Target: {{ $belowTarget ?? 'N/A' }}</td>
-                        <td>On Target {{$onTarget}}</td>
+                    
+                    <td>On Target {{$onTarget}}</td>
                 </tr>
                 <tr>
                     <td colspan="8">
