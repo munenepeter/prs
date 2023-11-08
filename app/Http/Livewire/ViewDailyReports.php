@@ -123,6 +123,17 @@ class ViewDailyReports extends Component
                     };
                 }
             )
+            ->when(
+                filled($this->perfomance),function (Builder $builder) {
+                    return match ($this->perfomance) {
+                        'all' => $builder,
+                        'on_target' => $builder->where('perfomance', 'On Target'),
+                        'above_target' => $builder->where('perfomance', 'like', 'Above Target%'),
+                        'below_target' => $builder->where('perfomance', 'like', 'Below Target%'),
+                        'pending' => $builder->where('perfomance', 'Pending')
+                    };  
+                }
+            )
             ->orderBy('reported_at', 'DESC');
     }
 
