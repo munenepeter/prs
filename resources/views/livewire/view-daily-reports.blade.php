@@ -99,7 +99,7 @@
              
                     <th class="uk-width-small">Project</th>
                     <th class="uk-width-small">Task</th>
-                    <th class="uk-width-small">Duration</th>
+                    <th class="uk-width-expand">Duration</th>
                     <th class="uk-table-expand">Perfomance</th>
                     <th class="uk-table-expand">Time</th>
                     <th class="uk-table-shrink">Date</th>
@@ -129,8 +129,7 @@
                 
                         <td>
                             @if ($report->task->unit_type->name === 'HOUR')
-                                <span style="font-size:12px;">{{ number_format($report->duration->totalMinutes, 2) }}
-                                    mins</span>
+                               {{ number_format($report->duration->totalMinutes, 2) }} mins
                             @else
                                 {{ $report->duration->forHumans(['short' => true]) }}
                             @endif
