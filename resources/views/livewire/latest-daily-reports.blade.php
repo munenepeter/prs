@@ -48,10 +48,10 @@
 
                     </div>
                     <div>
-                    <x-label for="duration" value="Filter by perfomance e.g Above target" />
+                    <x-label for="perfomance" value="Filter by perfomance e.g Above target" />
                     <x-select wire:model.defer="duration" id="duration" choose_text="Choose the perfomance"
-                    :hasError="$errors->has('duration')" :collection="$this->perfomances" :hasError="$errors->has('duration')" :disabled="$has_filter" />
-                    <x-form-error input="task" />
+                    :hasError="$errors->has('perfomance')" :collection="$this->perfomances" :hasError="$errors->has('perfomance')" :disabled="$has_filter" />
+                    <x-form-error input="perfomance" />
                     </div>
                 </div>
             </div>
