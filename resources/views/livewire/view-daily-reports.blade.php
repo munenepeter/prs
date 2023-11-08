@@ -85,7 +85,7 @@
         $totalUnitshr = 0;
 
         $totalProjects = $reports->pluck('project.name')->unique()->count();;
-        $totalTasks = 0;
+        $totalTasks = $reports->pluck('task.name')->unique()->count();
 
         $aboveTarget = $reports->filter(fn($report) => str_contains($report->perfomance, 'Above Target'))->count();
         $belowTarget = $reports->filter(fn($report) => str_contains($report->perfomance, 'Below Target'))->count();
@@ -112,10 +112,6 @@
                         $totalUnits += $report->task->unit_type->name === 'HOUR' ? 0 : (int) $report->units_completed;
                         $totalUnitshr += $report->hourlyRate;
                         $totalDuration = $totalDuration->add($report->duration); // Add the durations together
-
-                        
-                        $totalTasks++;
-
                     @endphp
                     <tr>
                         <td class="uk-table-link">
