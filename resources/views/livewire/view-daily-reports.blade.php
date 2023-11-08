@@ -111,11 +111,7 @@
 
                         // calculate above & below targets
 
-                        if ($report->perfomance['color'] === 'green') {
-                            $aboveTarget++;
-                        } elseif ($report->perfomance['color'] === 'red') {
-                            $belowTarget++;
-                        }
+                      
 
                     @endphp
                     <tr>
