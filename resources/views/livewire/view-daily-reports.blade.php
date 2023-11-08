@@ -88,8 +88,8 @@
         $totalTasks = 0;
 
         $aboveTarget = $reports->filter(fn($report) => str_contains($report->perfomance, 'Above Target'))->count();
-        $belowTarget = 0;
-        $onTarget = 0;
+        $belowTarget = $reports->filter(fn($report) => str_contains($report->perfomance, 'Below Target'))->count();
+        $onTarget = $reports->filter(fn($report) => str_contains($report->perfomance, 'On Target'))->count();
     @endphp
     <div class="uk-overflow-auto">
     <table style="font-size:14px;"
