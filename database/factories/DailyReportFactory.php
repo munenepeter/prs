@@ -24,8 +24,8 @@ class DailyReportFactory extends Factory
         $date->second(0);
 
         $targets = [
-            "Above Target by ". $this->faker->numberBetween(10, 6000) . "%",
-            "Below Target by ". $this->faker->numberBetween(10, 6000) . "%",
+            "Above Target by ". $this->faker->numberBetween(0, 900) . "%",
+            "Below Target by ". $this->faker->numberBetween(0, 700) . "%",
             "On Target",
             "Pending"
         ];
@@ -35,7 +35,7 @@ class DailyReportFactory extends Factory
             'reported_at' => $date->format('Y-m-d'),
             'started_at' => $date->format('H:i:s'),
             'ended_at' => $date->addMinutes($this->faker->numberBetween(10, 480))->format('H:i:s'),
-            'target' => Arr::random($targets),
+            'perfomance' => Arr::random($targets),
         ];
     }
 }
