@@ -147,6 +147,8 @@
 
                             <span class="" style="color: {{ $report->perfomanceColor }}">
                                 {{ $report->perfomance }}
+                                <br>
+                                {{ $report->perfomanceColor }}
                             </span>
                             <span class="uk-text-small">Target: {{ $report->task->target }}
                                 <span> {{ $report->formattedTarget }} </span></span>
