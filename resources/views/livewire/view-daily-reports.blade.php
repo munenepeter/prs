@@ -96,7 +96,7 @@
             class="uk-table uk-table-small uk-table-divider uk-table-middle uk-table-striped uk-table-responsive">
             <thead>
                 <tr>
-                <th class="uk-width-small">User</th>
+             
                     <th class="uk-width-small">Project</th>
                     <th class="uk-width-small">Task</th>
                     <th class="uk-width-small">Duration</th>
@@ -121,7 +121,6 @@
 
                     @endphp
                     <tr>
-                    <td>{{ ucfirst($report->user->fullname) }}</td>
                         <td class="uk-table-link">
                             <a
                                 href="{{ route('projects.tasks.show', $report->project->slug) }}">{{ ucfirst($report->project->name) }}</a>
