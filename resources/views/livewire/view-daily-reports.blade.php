@@ -127,11 +127,12 @@
                         </td>
                         <td>{{ ucfirst($report->task->name) }}</td>
                 
-                        <td>
+                        <td style="font-size:12px;">
                             @if ($report->task->unit_type->name === 'HOUR')
-                               {{ number_format($report->duration->totalMinutes, 2) }} mins
+                                <span>{{ number_format($report->duration->totalMinutes, 2) }}
+                                    mins</span>
                             @else
-                                {{ $report->duration->forHumans(['short' => true]) }}
+                               <span> {{ $report->duration->forHumans(['short' => true]) }}</span>
                             @endif
 
                         </td>
