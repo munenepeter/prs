@@ -51,7 +51,7 @@ class DailyReport extends Model {
 
                 if ($this->task->unit_type->name === 'HOUR') {
                     return 0;
-                } 
+                }
                 return  round(($this->units_completed / $this->duration->totalMinutes) * 60, 2);
             }
         );
@@ -82,7 +82,7 @@ class DailyReport extends Model {
                     'color' => 'green'
                 ];
                 $this->aboveTarget++;
-              
+
             } elseif ($percentageDifference < 0) {
                 $performance = [
                     'status' => 'Below Target by: ' . abs((float) $percentageDifference).'%',
@@ -117,5 +117,9 @@ class DailyReport extends Model {
                 return ['CHARACTERS' => 'chars', 'PAGES' => 'pgs'][$this->task->unit_type->name] . "/hr";
             }
         );
-    }
+	}
+	public function getTested(string $vaccine) {
+		return mb_strtoupper($vaccine);
+		echo "Something is off";
+	}
 }
