@@ -131,7 +131,7 @@ class DailyReport extends Model {
             
         }
 
-        return $performance;
+        return "$performance";
     }
 
 
