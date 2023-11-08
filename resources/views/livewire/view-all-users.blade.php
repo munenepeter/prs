@@ -86,13 +86,13 @@
 
 
                                 <a href="{{ route('users.edit', $user->id) }}"
-                                    class="uk-button uk-button-secondary uk-margin-small-right">
+                                    class="uk-button uk-button-secondary uk-margin-small-right uk-button-small">
                                     Edit
                                 </a>
 
                                 {{-- <button type="button"
                                    onclick="confirm('Are you sure you want to delete this user?') || event.stopImmediatePropagation()"
-                                    wire:click="deleteUser('{{ $user->email }}')" class="uk-button uk-button-danger"
+                                    wire:click="deleteUser('{{ $user->email }}')" class="uk-button uk-button-danger uk-button-small"
                                     @if (auth()->user()->id === $user->id) disabled @endif>
                                     Delete
                                 </button> --}}
