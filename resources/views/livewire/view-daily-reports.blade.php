@@ -87,7 +87,7 @@
         $totalProjects = 0;
         $totalTasks = 0;
 
-        $aboveTarget = 0;
+        $aboveTarget = $reports->filter(fn($report) => str_contains($report->perfomance, 'Above Target'))->count();
         $belowTarget = 0;
         $onTarget = 0;
     @endphp
@@ -117,6 +117,7 @@
                         $totalTasks++;
 
                         // calculate above & below targets
+                      
 
 
                     @endphp
