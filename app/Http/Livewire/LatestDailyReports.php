@@ -146,7 +146,7 @@ class LatestDailyReports extends Component {
     protected function populateReports(): Builder {
         return DailyReport::query()
             ->select([
-                'id', 'project_id', 'user_id', 'task_id', 'units_completed', 'perfomance'
+                'id', 'project_id', 'user_id', 'task_id', 'units_completed', 'perfomance',
                 'started_at', 'ended_at', 'reported_at'
             ])
             ->when(
