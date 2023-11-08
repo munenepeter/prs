@@ -28,12 +28,12 @@ class EditUser extends Component {
 
         //Some witchcraft which makes the user uneditable
 ///te
-        if (
-            $this->user->isClean() ||
-            $this->userRole->name === Roles::tryFrom($this->role)
-        ) {
-            return redirect()->route('users.index');
-        }
+        // if (
+        //     $this->user->isClean() ||
+        //     $this->userRole->name === Roles::tryFrom($this->role)
+        // ) {
+        //     return redirect()->route('users.index');
+        // }
 
         $validated = $this->validate();
 
