@@ -181,13 +181,11 @@
                     <td>On Target {{$onTarget}}</td>
                 </tr>
                 <tr>
-                    <td colspan="8">
+                    <td colspan="7">
                         {{ $reports->links() }}
                     </td>
                 </tr>
             </tfoot>
-
-
         </table>
     </div>
     <x-top-top />
