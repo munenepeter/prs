@@ -130,9 +130,8 @@ class LatestDailyReports extends Component {
                         'on_target' => $builder->where('target', 'On Target'),
                         'above_target' => $builder->where('target', 'like', 'Above Target%'),
                         'below_target' => $builder->where('target', 'like', 'Below Target%'),
-                        'pending' => $builder->where('target', 'Pending'),
-                    }
-                      
+                        'pending' => $builder->where('target', 'Pending')
+                    };  
                 }
             )
             ->with([
