@@ -180,7 +180,6 @@
 
             <tfoot style="font-size:12px;">
                 <tr style="font-weight: 800">
-                    <td></td>
                     <td>Total:{{ $totalProjects <= 0 ? 'N/A' : $totalProjects }} </td>
                     <td>Total:{{ $totalTasks <= 0 ? 'N/A' : $totalTasks }}</td>
                     <td></td>
