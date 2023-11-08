@@ -26,6 +26,7 @@ trait HasDailyReportFilters
     public ?string $date_to;
 
     public ?string $duration = null;
+    public ?string $perfomance = "all";
     public bool $has_filter = false;
 
     protected ?LengthAwarePaginator $reports = null;
@@ -52,6 +53,17 @@ trait HasDailyReportFilters
             'last_week' => 'Last week',
             'last_month' => 'Last month',
             'last year' => 'Last Year'
+        ]);
+    }
+
+    public function getPerfomanceProperty()
+    {
+        return collect([
+            'all' => 'All Perfomances',
+            'on_target' => 'On Target',
+            'above_target' => 'Above Target',
+            'below_target' => 'Below Target',
+            'pending' => 'Pending Perfomances',
         ]);
     }
 
