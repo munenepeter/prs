@@ -22,6 +22,14 @@ class DailyReportFactory extends Factory
         $date->hour(8);
         $date->minute(0);
         $date->second(0);
+
+        $targets = [
+            "Above Target by ". $this->faker->numberBetween(10, 6000) . "%",
+            "Below Target by ". $this->faker->numberBetween(10, 6000) . "%",
+            "On Target",
+            "Pending"
+        ];
+
         $project = Project::query()
             ->inRandomOrder()->take(1)
             ->with('tasks:id,project_id')
@@ -31,9 +39,7 @@ class DailyReportFactory extends Factory
             'reported_at' => $date->format('Y-m-d'),
             'started_at' => $date->format('H:i:s'),
             'ended_at' => $date->addMinutes($this->faker->numberBetween(10, 480))->format('H:i:s'),
-            //            'project_id' => $project->id ?? Project::factory()->create(),
-            //            'user_id' => User::query()->inRandomOrder()->take(1)->first('id'),
-            //            'task_id' => $project->tasks->random()->id ?? Task::factory()->create(),
+            'target' => Arr::random($targets),
         ];
     }
 }
