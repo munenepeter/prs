@@ -19,7 +19,7 @@ class TaskFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->unique()->words(nb: random_int(1, 4), asText: true),
+            'name' => $this->faker->unique()->words(nb: 1, asText: true),
             'unit_type' => Arr::random(TaskUnitTypes::cases()),
             'target' => $this->faker->numberBetween(0, 400),
         ];
