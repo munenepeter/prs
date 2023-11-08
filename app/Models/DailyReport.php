@@ -97,7 +97,13 @@ class DailyReport extends Model {
     protected function perfomanceColor(): Attribute {
         return Attribute::make(
             get: function () {
-                return "Yellow";
+                return match (true) {
+                    str_contains($this->perfomance, 'On Target') => 'blue',
+                    str_contains($this->perfomance, 'Above Target') => 'green',
+                    str_contains($this->perfomance, 'Below Target') => 'red',
+                    str_contains($this->perfomance, 'Pending') => 'pink',
+                    default => 'grey', 
+                };
             }
         );
     }
