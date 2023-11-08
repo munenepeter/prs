@@ -48,14 +48,14 @@
             <div class="uk-width-1-1@s uk-grid-margin uk-first-column">
                 <div class="uk-grid uk-grid-medium uk-child-width-1-2" uk-grid>
                     <div>
-                    <x-label for="duration" value="Filter by range duration e.g today, last week, this month" />
+                    <x-label for="duration" value="Filter by range duration e.g today" />
                    <x-select wire:model.defer="duration" id="duration" choose_text="Choose the range duration"
                     :hasError="$errors->has('duration')" :collection="$this->durations" :hasError="$errors->has('duration')" :disabled="$has_filter" />
                    <x-form-error input="duration" />
 
                     </div>
                     <div>
-                    <x-label for="duration" value="Filter by perfomance e.g On target, Below Target, tAbove Target" />
+                    <x-label for="duration" value="Filter by perfomance e.g Above target" />
                     <x-select wire:model.defer="duration" id="duration" choose_text="Choose the range duration"
                     :hasError="$errors->has('duration')" :collection="$this->durations" :hasError="$errors->has('duration')" :disabled="$has_filter" />
                     <x-form-error input="task" />
