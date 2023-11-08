@@ -15,7 +15,8 @@ class DailyReport extends Model {
         'units_completed',
         'started_at',
         'ended_at',
-        'reported_at'
+        'reported_at',
+        'target'
     ];
 
     public int $aboveTarget = 0;
@@ -62,6 +63,7 @@ class DailyReport extends Model {
             'color' => 'blue'
         ];
 
+
         if ($this->reported_at > new \DateTime()) {
             $performance = [
                 'status' => 'Pending',
@@ -99,6 +101,42 @@ class DailyReport extends Model {
 
         return $performance;
     }
+    public function calculatePerformanceDB(): string {
+        $performance = 'On Target';        
+        
+
+        if ($this->reported_at > new \DateTime()) {
+            $performance = 'Pending';
+           
+        } elseif ($this->task->target != 0 && $this->reported_at < new \DateTime()) {
+            $percentageDifference = 0;
+
+            if ($this->task->unit_type->name === 'HOUR') {
+                $percentageDifference = number_format((($this->duration->totalMinutes - $this->task->target) / $this->task->target) * 100, 1);
+            } else {
+                $percentageDifference = number_format((((int)$this->hourlyRate - $this->task->target) / $this->task->target) * 100, 1);
+            }
+
+            if ($percentageDifference > 0) {
+                $performance = 'Above Target by: ' . $percentageDifference.'%';
+               
+                $this->aboveTarget++;
+
+            } elseif ($percentageDifference < 0) {
+                $performance = 'Below Target by: ' . abs((float) $percentageDifference).'%';
+                $this->belowTarget++;
+            }
+        } else {
+            $performance = 'Target is Zero!';
+            
+        }
+
+        return $performance;
+    }
+
+
+
+
     protected function perfomance(): Attribute {
         return Attribute::make(
             get: function () {

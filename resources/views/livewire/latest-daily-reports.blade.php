@@ -100,12 +100,10 @@
                     Above Target</label>
                 <label><input class="uk-radio" type="radio" value="project_manager">&nbsp;
                     Below Target</label>
-                <label><input class="uk-radio" type="radio" value="user">&nbsp;
+                <label><input class="uk-radio" type="radio" wire:model value="user">&nbsp;
                     On Target</label>
             </div>
         </div>
-        
-         
 
         <table style="font-size:14px;"
             class="uk-table uk-table-small uk-table-divider uk-table-middle uk-table-striped uk-table-responsive">

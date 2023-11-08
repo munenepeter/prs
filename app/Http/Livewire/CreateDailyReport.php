@@ -31,6 +31,8 @@ class CreateDailyReport extends Component {
         $report->project()->associate(Project::find($validated['project']));
         $report->task()->associate(Task::find($validated['task']));
 
+        $report->target = $report->calculatePerformanceDB();
+
         $report->save();
 
         session()->flash('success', 'Report successfully created');
