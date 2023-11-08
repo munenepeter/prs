@@ -97,26 +97,7 @@
     @endphp
     <div class="uk-overflow-auto">
    
-           
-    <div class="uk-margin uk-flex uk-flex-middle uk-flex-between">
-            <form class="uk-search uk-search-default">
-                <span uk-search-icon></span>
-                <input wire:model.debounce.300ms="query" class="uk-search-input" type="search" placeholder="Search"
-                    aria-label="Search">
-            </form>
-
-            <div class="uk-form-controls uk-margin-small-left">
-                <label><input class="uk-radio" type="radio" value="all">&nbsp;
-                    All</label>
-                <label><input class="uk-radio" type="radio" value="admin">&nbsp;
-                    Above Target</label>
-                <label><input class="uk-radio" type="radio" value="project_manager">&nbsp;
-                    Below Target</label>
-                <label><input class="uk-radio" type="radio" wire:model value="user">&nbsp;
-                    On Target</label>
-            </div>
-        </div>
-
+        
         <table style="font-size:14px;"
             class="uk-table uk-table-small uk-table-divider uk-table-middle uk-table-striped uk-table-responsive">
             <thead>
@@ -143,13 +124,6 @@
 
                         // calculate above & below targets
 
-                        if ($report->perfomance['color'] === 'green') {
-                            $aboveTarget++;
-                        } elseif ($report->perfomance['color'] === 'red') {
-                            $belowTarget++;
-                        } 
-                    
-				
 
                     @endphp
                     <tr>
