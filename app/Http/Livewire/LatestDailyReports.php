@@ -21,6 +21,8 @@ class LatestDailyReports extends Component {
         $this->repopulateReports();
 
         $this->reset('user');
+        $this->reset('perfomance');
+
     }
 
     public function filter(): void {
