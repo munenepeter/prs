@@ -135,7 +135,6 @@
             font-size: 14px;
             color: #666;
         }
-
     </style>
 </head>
 
@@ -147,7 +146,7 @@
             </p>
         </div>
         <div class="center-content">
-        <p class="company-description">Productivity Reporting System</p>
+            <p class="company-description">Productivity Reporting System</p>
             <h1 class="report-title">Daily Report</h1>
         </div>
         <div class="right-content">
@@ -155,14 +154,20 @@
             <p class="page-number">Date: {{ date('d/m/Y') }}</p>
         </div>
     </div>
-  @php
+    @php
         $totalUnits = 0;
         $totalDuration = \Carbon\CarbonInterval::create(0, 0, 0, 0); // Initialize the totalDuration as a CarbonInterval;
         $totalUnitshr = 0;
-
-        $totalProjects = $reports->pluck('project.name')->unique()->count();;
-        $totalTasks = $reports->pluck('task.name')->unique()->count();
-
+        
+        $totalProjects = $reports
+            ->pluck('project.name')
+            ->unique()
+            ->count();
+        $totalTasks = $reports
+            ->pluck('task.name')
+            ->unique()
+            ->count();
+        
         $aboveTarget = $reports->filter(fn($report) => str_contains($report->perfomance, 'Above Target'))->count();
         $belowTarget = $reports->filter(fn($report) => str_contains($report->perfomance, 'Below Target'))->count();
         $onTarget = $reports->filter(fn($report) => str_contains($report->perfomance, 'On Target'))->count();
@@ -172,10 +177,10 @@
             <thead>
                 <tr>
 
-                    <th style="width: 10%">Project</th>
+                    <th style="width: 20%">Project</th>
                     <th style="width: 10%">Task</th>
-                    <th style="width: 10%">Duration</th>
-                    <th style="width: 10%">Perfomance</th>
+                    <th style="width: 20%">Duration</th>
+                    <th style="width: 25%">Perfomance</th>
                     <th style="width: 10%">Start</th>
                     <th style="width: 10%">End</th>
                     <th style="width: 10%">Date</th>
@@ -196,8 +201,8 @@
                                 href="{{ route('projects.tasks.show', $report->project->slug) }}">{{ ucfirst($report->project->name) }}</a>
                         </td>
                         <td>{{ ucfirst($report->task->name) }}</td>
-                    
-                         <td>
+
+                        <td>
                             @if ($report->task->unit_type->name === 'HOUR')
                                 <span style="font-size:12px;">{{ number_format($report->duration->totalMinutes, 2) }}
                                     mins</span>
@@ -206,8 +211,8 @@
                             @endif
 
                         </td>
-                       
-                          <td style="font-size:12px;"> 
+
+                        <td style="font-size:12px;">
 
                             <span style="color: {{ $report->perfomanceColor }}">
                                 {{ $report->perfomance }}
@@ -225,23 +230,19 @@
 
                 @empty
                     <tr class="empty-row">
-                        <td colspan="9">You don't have any reports at the moment</td>
+                        <td colspan="7">You don't have any reports at the moment</td>
                     </tr>
                 @endforelse
             </tbody>
             <tfoot style="font-size:12px;">
                 <tr style="font-weight: 800">
-
                     <td>Total:{{ $totalProjects <= 0 ? 'N/A' : $totalProjects }} </td>
                     <td>Total:{{ $totalTasks <= 0 ? 'N/A' : $totalTasks }}</td>
                     <td>Total:{{ $totalDuration->forHumans(['short' => true]) }}</td>
-                    <td>Total:{{ $totalUnitshr <= 0 ? 'N/A' : $totalUnitshr }} </td>       
-                        <td>Above: {{ $aboveTarget ?? 'N/A' }}</td>
-                        <td>Below: {{ $belowTarget ?? 'N/A' }}</td>
+                    <td>Total:{{ $totalUnitshr <= 0 ? 'N/A' : $totalUnitshr }} </td>
+                    <td>Above: {{ $aboveTarget ?? 'N/A' }}</td>
+                    <td>Below: {{ $belowTarget ?? 'N/A' }}</td>
                     <td>On Target: {{ $onTarget ?? 'N/A' }}</td>
-                    <td></td>
-                    
-
                 </tr>
         </table>
     </div>
