@@ -155,17 +155,17 @@
             <p class="page-number">Date: {{ date('d/m/Y') }}</p>
         </div>
     </div>
-    @php
+  @php
         $totalUnits = 0;
         $totalDuration = \Carbon\CarbonInterval::create(0, 0, 0, 0); // Initialize the totalDuration as a CarbonInterval;
         $totalUnitshr = 0;
 
-        $totalProjects = 0;
-        $totalTasks = 0;
+        $totalProjects = $reports->pluck('project.name')->unique()->count();;
+        $totalTasks = $reports->pluck('task.name')->unique()->count();
 
-        $aboveTarget = 0;
-        $belowTarget = 0;
-        $onTarget = 0;
+        $aboveTarget = $reports->filter(fn($report) => str_contains($report->perfomance, 'Above Target'))->count();
+        $belowTarget = $reports->filter(fn($report) => str_contains($report->perfomance, 'Below Target'))->count();
+        $onTarget = $reports->filter(fn($report) => str_contains($report->perfomance, 'On Target'))->count();
     @endphp
     <div>
         <table class="report-table">
@@ -174,15 +174,12 @@
 
                     <th style="width: 10%">Project</th>
                     <th style="width: 10%">Task</th>
-                    <th style="width: 10%">Type</th>
-                    <th style="width: 10%">Units</th>
                     <th style="width: 10%">Duration</th>
-                    <th style="width: 10%">Units/hr</th>
                     <th style="width: 10%">Perfomance</th>
-                    <th style="width: 10%">Start</th>
-                    <th style="width: 10%">End</th>
+                    <th style="width: 10%">Time</th>
                     <th style="width: 10%">Date</th>
                 </tr>
+
             </thead>
             <tbody>
                 @forelse ($reports as $report)
@@ -228,12 +225,12 @@
                                 {{ $report->hourlyRate == 0 ? 'N/A' : $report->hourlyRate }}
                             @endif
                         </td>
+                          <td style="font-size:12px;"> 
 
-                        <td>
-
-                            <span class="" style="color: {{ $report->perfomance['color'] }}">
-                                {{ $report->perfomance['status'] }}
-                            </span><br>
+                            <span style="color: {{ $report->perfomanceColor }}">
+                                {{ $report->perfomance }}
+                            </span>
+                            <br>
                             <span class="uk-text-small">Target: {{ $report->task->target }}
                                 <span> {{ $report->formattedTarget }} </span></span>
                         </td>
