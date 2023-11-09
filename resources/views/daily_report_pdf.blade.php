@@ -179,8 +179,8 @@
 
                     <th style="width: 20%">Project</th>
                     <th style="width: 10%">Task</th>
-                    <th style="width: 20%">Duration</th>
-                    <th style="width: 25%">Perfomance</th>
+                    <th style="width: 15%">Duration</th>
+                    <th style="width: 22%">Perfomance</th>
                     <th style="width: 10%">Start</th>
                     <th style="width: 10%">End</th>
                     <th style="width: 10%">Date</th>
@@ -239,10 +239,10 @@
                     <td>Total:{{ $totalProjects <= 0 ? 'N/A' : $totalProjects }} </td>
                     <td>Total:{{ $totalTasks <= 0 ? 'N/A' : $totalTasks }}</td>
                     <td>Total:{{ $totalDuration->forHumans(['short' => true]) }}</td>
-                    <td>Total:{{ $totalUnitshr <= 0 ? 'N/A' : $totalUnitshr }} </td>
                     <td>Above: {{ $aboveTarget ?? 'N/A' }}</td>
                     <td>Below: {{ $belowTarget ?? 'N/A' }}</td>
                     <td>On Target: {{ $onTarget ?? 'N/A' }}</td>
+                    <td></td>
                 </tr>
         </table>
     </div>
