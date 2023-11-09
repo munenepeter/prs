@@ -147,7 +147,7 @@
                         </td>
 
 
-                        <td>{{ $report->started_at->format('H:i:s') }} - {{ $report->ended_at->format('H:i:s') }}</td>
+                        <td>Start: {{ $report->started_at->format('H:i:s') }} <br> End:  {{ $report->ended_at->format('H:i:s') }}</td>
                         <td>{{ $report->reported_at->format('d/m/Y') }}</td>
                         <td>
                             <div class="uk-button-group">
