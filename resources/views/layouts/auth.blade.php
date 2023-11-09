@@ -7,8 +7,7 @@
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <link rel="shortcut icon" href="{{ asset('img/gmk.png') }}" type="image/png">
-
+ <link rel="icon" href="{{ asset('img/gmk.png') }}" sizes="16x16 32x32" type="image/png">
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <link rel="stylesheet" href="https://use.typekit.net/jvi3grf.css">
