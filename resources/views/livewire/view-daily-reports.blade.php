@@ -139,7 +139,7 @@
                         </td>
 
 
-                        <td>{{ $report->started_at->format('H:i:s') }} - {{ $report->ended_at->format('H:i:s') }}</td>
+                        <td>Start: {{ $report->started_at->format('H:i:s') }} <br> End:  {{ $report->ended_at->format('H:i:s') }}</td>
                         <td>{{ $report->reported_at->format('d/m/Y') }}</td>
                         <td>
                             <div class="uk-button-group">
@@ -175,9 +175,9 @@
                     <td>Total:{{ $totalProjects <= 0 ? 'N/A' : $totalProjects }} </td>
                     <td>Total:{{ $totalTasks <= 0 ? 'N/A' : $totalTasks }}</td>
                     <td>Total:{{ $totalDuration->forHumans(['short' => true]) }}</td>                       
-                    <td>Above Target: {{ $aboveTarget ?? 'N/A' }}</td>
-                    <td>Below Target: {{ $belowTarget ?? 'N/A' }}</td>
-                    <td>On Target {{$onTarget}}</td>
+                    <td>Above Target: {{ $aboveTarget ?? 'N/A' }} <br> Below Target: {{ $belowTarget ?? 'N/A' }} <br> On Target {{$onTarget}} </td>
+                    <td></td>
+                    <td></td>
                 </tr>
                 <tr>
                     <td colspan="7">
