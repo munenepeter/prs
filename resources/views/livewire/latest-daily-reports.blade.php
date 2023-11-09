@@ -181,12 +181,12 @@
             <tfoot style="font-size:12px;">
                 <tr style="font-weight: 800">
                     <td></td>
-                    <td>Total:{{ $totalProjects <= 0 ? 'N/A' : $totalProjects }} </td>
-                    <td>Total:{{ $totalTasks <= 0 ? 'N/A' : $totalTasks }}</td>
-                    <td>Total:{{ $totalDuration->forHumans(['short' => true]) }}</td>                       
-                    <td>Above Target: {{ $aboveTarget ?? 'N/A' }}</td>
-                    <td>Below Target: {{ $belowTarget ?? 'N/A' }}</td>
-                    <td>On Target {{$onTarget}}</td>
+                    <td>Total Projects:{{ $totalProjects <= 0 ? 'N/A' : $totalProjects }} </td>
+                    <td>Total Tasks:{{ $totalTasks <= 0 ? 'N/A' : $totalTasks }}</td>
+                    <td>Total Duration:{{ $totalDuration->forHumans(['short' => true]) }}</td>                       
+                    <td>Above Target: {{ $aboveTarget ?? 'N/A' }} <br> Below Target: {{ $belowTarget ?? 'N/A' }} <br> On Target {{$onTarget}} </td>
+                    <td></td>
+                    <td></td>
                 </tr>
                 <tr>
                     <td colspan="8">
