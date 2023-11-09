@@ -32,6 +32,9 @@ trait WithExportDailyReport {
 
         $reports = $reports->get();
 
+        return view('daily_report_pdf', compact('reports'));
+
+        /*
         $pdfContent = view('daily_report_pdf', compact('reports'))->render();
 
         // Generate PDF
@@ -45,7 +48,7 @@ trait WithExportDailyReport {
 
         // Provide a download link to the saved PDF
         return response()->download(public_path($this->getExportFileName() . '.pdf'))->deleteFileAfterSend();
-
+*/
     }
 
     public function getExportFileName() {
