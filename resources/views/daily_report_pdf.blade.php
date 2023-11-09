@@ -196,12 +196,7 @@
                                 href="{{ route('projects.tasks.show', $report->project->slug) }}">{{ ucfirst($report->project->name) }}</a>
                         </td>
                         <td>{{ ucfirst($report->task->name) }}</td>
-                        <td>
-                            <span style="font-size:12px;"
-                                class="uk-label uk-label-{{ $report->task->unit_type->color() }}">
-                                {{ $report->task->unit_type->name }}
-                            </span>
-                        </td>
+                    
                          <td>
                             @if ($report->task->unit_type->name === 'HOUR')
                                 <span style="font-size:12px;">{{ number_format($report->duration->totalMinutes, 2) }}
@@ -211,13 +206,7 @@
                             @endif
 
                         </td>
-                        <td>
-                            @if ($report->reported_at > new \DateTime())
-                                Pending {{ $report->hourlyRate == 0 ? 'N/A' : $report->hourlyRate }}
-                            @else
-                                {{ $report->hourlyRate == 0 ? 'N/A' : $report->hourlyRate }}
-                            @endif
-                        </td>
+                       
                           <td style="font-size:12px;"> 
 
                             <span style="color: {{ $report->perfomanceColor }}">
