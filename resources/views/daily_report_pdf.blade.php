@@ -176,7 +176,8 @@
                     <th style="width: 10%">Task</th>
                     <th style="width: 10%">Duration</th>
                     <th style="width: 10%">Perfomance</th>
-                    <th style="width: 10%">Time</th>
+                    <th style="width: 10%">Start</th>
+                    <th style="width: 10%">End</th>
                     <th style="width: 10%">Date</th>
                 </tr>
 
@@ -201,15 +202,7 @@
                                 {{ $report->task->unit_type->name }}
                             </span>
                         </td>
-                        <td>
-                            @if ($report->task->unit_type->name === 'HOUR')
-                                N/A
-                            @else
-                                {{ $report->units_completed }}
-                            @endif
-
-                        </td>
-                        <td>
+                         <td>
                             @if ($report->task->unit_type->name === 'HOUR')
                                 <span style="font-size:12px;">{{ number_format($report->duration->totalMinutes, 2) }}
                                     mins</span>
@@ -252,11 +245,8 @@
 
                     <td>Total:{{ $totalProjects <= 0 ? 'N/A' : $totalProjects }} </td>
                     <td>Total:{{ $totalTasks <= 0 ? 'N/A' : $totalTasks }}</td>
-                    <td></td>
-                    <td>Total:{{ $totalUnits <= 0 ? 'N/A' : $totalUnits }}</td>
                     <td>Total:{{ $totalDuration->forHumans(['short' => true]) }}</td>
-                    <td>Total:{{ $totalUnitshr <= 0 ? 'N/A' : $totalUnitshr }} </td>
-                            
+                    <td>Total:{{ $totalUnitshr <= 0 ? 'N/A' : $totalUnitshr }} </td>       
                         <td>Above: {{ $aboveTarget ?? 'N/A' }}</td>
                         <td>Below: {{ $belowTarget ?? 'N/A' }}</td>
                     <td>On Target: {{ $onTarget ?? 'N/A' }}</td>
