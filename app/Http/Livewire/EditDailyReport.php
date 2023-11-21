@@ -50,6 +50,9 @@ class EditDailyReport extends Component
         $this->authorize('manage-reports', $this->report);
         $this->report->loadMissing('project', 'task');
 
+        $this->report->perfomance = $this->report->calculatePerformance();
+        $this->report->save();
+
         $this->getUnitType($this->report->task->id);
 
         $this->initializeTasks($this->report->project->id);
@@ -62,7 +65,7 @@ class EditDailyReport extends Component
         }
 
         $this->validate();
-
+        $this->report->perfomance = $this->report->calculatePerformance();
         $this->report->save();
 
         session()->flash('success', "You have successfully updated your report");

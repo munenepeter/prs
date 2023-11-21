@@ -15,7 +15,7 @@
                     <th class="uk-table-shrink">#</th>
                     <th class="uk-table-expand">Name</th>
                     <th class="uk-table-expand">Target</th>
-                    <th class="uk-width-small">Unit type</th>
+                    <!-- <th class="uk-width-small">Unit type</th> -->
                     <th>Actions</th>
                 </tr>
             </thead>

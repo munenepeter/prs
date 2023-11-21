@@ -74,7 +74,7 @@ class CreateProject extends Component
 
         $this->tasks?->add([
             'name' => $this->task,
-            'unit_type' => $this->unit_type,
+            'unit_type' => 1,
             'target' => $this->target
         ]);
 
@@ -196,6 +196,7 @@ class CreateProject extends Component
         $project->push();
 
         if ($this->create_tasks && $this->tasks?->isNotEmpty()) {
+          //  dump($this->tasks);
             $project->tasks()->createMany($this->tasks?->toArray());
         }
 
