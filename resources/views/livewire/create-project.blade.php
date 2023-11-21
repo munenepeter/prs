@@ -82,12 +82,11 @@
                     <x-form-error input="task" />
                 </div>
                 <br>
-                <input type="hidden" wire:model="unit_type" value="1">
-                <!-- <div>
+                <div>
                     <x-label for="unit_type" value="Unit Type" />
                     <x-select id="unit_type" :collection="$this->taskUnitTypes" wire:model="unit_type" :hasError="$errors->has('unit_type')" />
                     <x-form-error input="unit_type" />
-                </div> -->
+                </div>
                 <br>
                 <div>
 
