@@ -35,7 +35,7 @@
 					/>
 					<x-form-error input="task.name" />
 				</div>
-				<div>
+				<!-- <div>
 					<x-label for="unit_type"
 							 value="Unit Type"
 					/>
@@ -45,7 +45,7 @@
 							  :hasError="$errors->has('task.unit_type')"
 					/>
 					<x-form-error input="task.unit_type" />
-				</div>
+				</div> -->
 				<div>
 					<x-label for="target"
 							 value="Target"
