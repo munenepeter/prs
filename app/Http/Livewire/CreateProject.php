@@ -186,6 +186,7 @@ class CreateProject extends Component {
         $project->push();
 
         if ($this->create_tasks && $this->tasks?->isNotEmpty()) {
+            dump($this->tasks);
             $project->tasks()->createMany($this->tasks?->toArray());
         }
 
