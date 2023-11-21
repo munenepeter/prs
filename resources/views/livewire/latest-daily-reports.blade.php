@@ -94,6 +94,8 @@
         $aboveTarget = $reports->filter(fn($report) => str_contains($report->perfomance, 'Above Target'))->count();
         $belowTarget = $reports->filter(fn($report) => str_contains($report->perfomance, 'Below Target'))->count();
         $onTarget = $reports->filter(fn($report) => str_contains($report->perfomance, 'On Target'))->count();
+        $pendingTarget = $reports->filter(fn($report) => str_contains($report->perfomance, 'pending'))->count();
+
     @endphp
     <div class="uk-overflow-auto">
    
@@ -184,7 +186,7 @@
                     <td>Total:{{ $totalProjects <= 0 ? 'N/A' : $totalProjects }} </td>
                     <td>Total:{{ $totalTasks <= 0 ? 'N/A' : $totalTasks }}</td>
                     <td>Total:{{ $totalDuration->forHumans(['short' => true]) }}</td>                       
-                    <td>Above Target: {{ $aboveTarget ?? 'N/A' }} <br> Below Target: {{ $belowTarget ?? 'N/A' }} <br> On Target {{$onTarget}} </td>
+                    <td>Above Target: {{ $aboveTarget ?? 'N/A' }} <br> Below Target: {{ $belowTarget ?? 'N/A' }} <br> On Target {{$onTarget}}  <br> Pending: {{$pendingTarget}}</td>
                     <td></td>
                     <td></td>
                 </tr>
