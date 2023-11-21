@@ -177,7 +177,7 @@
                     <td>Total:{{ $totalProjects <= 0 ? 'N/A' : $totalProjects }} </td>
                     <td>Total:{{ $totalTasks <= 0 ? 'N/A' : $totalTasks }}</td>
                     <td>Total:{{ $totalDuration->forHumans(['short' => true]) }}</td>                       
-                    <td>Above Target: {{ $aboveTarget ?? 'N/A' }} <br> Below Target: {{ $belowTarget ?? 'N/A' }} <br> On Target {{$onTarget}} </td>
+                    <td>Above Target: {{ $aboveTarget ?? 'N/A' }} <br> Below Target: {{ $belowTarget ?? 'N/A' }} <br> On Target {{$onTarget}}  <br> Pending: {{$pendingTarget}}</td>
                     <td></td>
                     <td></td>
                 </tr>
