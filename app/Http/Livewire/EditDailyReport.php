@@ -62,7 +62,7 @@ class EditDailyReport extends Component
         }
 
         $this->validate();
-
+        $this->report->perfomance = $this->report->calculatePerformance();
         $this->report->save();
 
         session()->flash('success', "You have successfully updated your report");
