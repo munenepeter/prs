@@ -89,8 +89,16 @@
                     <x-form-error input="unit_type" />
                 </div> -->
                 <br>
-                <div>                        <x-label for="target" value="Target" />
-                    
+                <div>
+
+                    @if ((int) $unit_type === 1)
+                        <x-label for="target" value="Target (in minutes)" />
+                    @elseif((int) $unit_type >= 1)
+                        <x-label for="target" value="Target (in {{ ((int)$unit_type  == 2) ? 'pages' : 'characters' }} in per hr)" />
+                    @else
+                        <x-label for="target" value="Target" />
+                    @endif
+
                     <x-input id="target" wire:model.defer="target" :hasError="$errors->has('target')" />
                     <x-form-error input="target" />
                 </div>
