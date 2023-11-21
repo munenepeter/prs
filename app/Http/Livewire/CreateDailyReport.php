@@ -10,14 +10,17 @@ use App\Models\DailyReport;
 use Illuminate\Validation\Rule;
 use App\Http\Livewire\Concerns\AddOrEditReport;
 
-class CreateDailyReport extends Component {
+class CreateDailyReport extends Component
+{
     use AddOrEditReport;
 
-    public function mount() {
+    public function mount()
+    {
         $this->initializeTasks();
     }
 
-    public function save() {
+    public function save()
+    {
         $validated = $this->validate();
 
         $report =  new DailyReport([
@@ -40,11 +43,13 @@ class CreateDailyReport extends Component {
         return to_route('reports.index', $report->user_id);
     }
 
-    public function render() {
+    public function render()
+    {
         return view('livewire.create-daily-report');
     }
 
-    protected function rules(): array {
+    protected function rules(): array
+    {
         return [
             'project' => [
                 'required',

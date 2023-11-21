@@ -2,13 +2,13 @@
 
 namespace App\Models;
 
-use Carbon\CarbonInterval;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class DailyReport extends Model {
+class DailyReport extends Model
+{
     use HasFactory;
 
     protected $fillable = [
@@ -28,25 +28,30 @@ class DailyReport extends Model {
         'reported_at' => 'date:Y-m-d'
     ];
 
-    public function user(): BelongsTo {
+    public function user(): BelongsTo
+    {
         return $this->belongsTo(related: User::class, foreignKey: 'user_id', ownerKey: 'id');
     }
 
-    public function task(): BelongsTo {
+    public function task(): BelongsTo
+    {
         return $this->belongsTo(related: Task::class, foreignKey: 'task_id', ownerKey: 'id');
     }
 
-    public function project(): BelongsTo {
+    public function project(): BelongsTo
+    {
         return $this->belongsTo(related: Project::class, foreignKey: 'project_id', ownerKey: 'id');
     }
 
-    protected function duration(): Attribute {
+    protected function duration(): Attribute
+    {
         return Attribute::make(
             get: fn () => $this->ended_at->diffAsCarbonInterval($this->started_at)
         );
     }
 
-    protected function hourlyRate(): Attribute {
+    protected function hourlyRate(): Attribute
+    {
         return Attribute::make(
             get: function () {
 
@@ -57,14 +62,15 @@ class DailyReport extends Model {
             }
         );
     }
-    
-    public function calculatePerformance(): string {
-       
-        $performance = 'On Target';        
-        
+
+    public function calculatePerformance(): string
+    {
+
+        $performance = 'On Target';
+
         if ($this->reported_at > new \DateTime()) {
             $performance = 'Pending';
-           
+
         } elseif ($this->task->target != 0 && $this->reported_at < new \DateTime()) {
             $percentageDifference = 0;
 
@@ -76,7 +82,7 @@ class DailyReport extends Model {
 
             if ($percentageDifference > 0) {
                 $performance = 'Above Target by: ' . $percentageDifference.'%';
-               
+
                 $this->aboveTarget++;
 
             } elseif ($percentageDifference < 0) {
@@ -85,13 +91,14 @@ class DailyReport extends Model {
             }
         } else {
             $performance = 'Target is Zero!';
-            
+
         }
 
         return $performance;
     }
 
-    protected function perfomanceColor(): Attribute {
+    protected function perfomanceColor(): Attribute
+    {
         return Attribute::make(
             get: function () {
                 return match (true) {
@@ -99,13 +106,14 @@ class DailyReport extends Model {
                     str_contains($this->perfomance, 'Above Target') => 'green',
                     str_contains($this->perfomance, 'Below Target') => 'red',
                     str_contains($this->perfomance, 'Pending') => 'orange',
-                    default => 'grey', 
+                    default => 'grey',
                 };
             }
         );
     }
 
-    protected function formattedTarget(): Attribute {
+    protected function formattedTarget(): Attribute
+    {
         return Attribute::make(
             get: function () {
                 if ($this->task->unit_type->name === 'HOUR') {
@@ -114,6 +122,6 @@ class DailyReport extends Model {
                 return ['CHARACTERS' => 'chars', 'PAGES' => 'pgs'][$this->task->unit_type->name] . "/hr";
             }
         );
-	}
-	
+    }
+
 }

@@ -7,8 +7,10 @@ use Illuminate\Support\Str;
 use App\Exports\DailyReportsExport;
 use Maatwebsite\Excel\Facades\Excel;
 
-trait WithExportDailyReport {
-    public function exportExcel() {
+trait WithExportDailyReport
+{
+    public function exportExcel()
+    {
         if ($this->has_filter) {
             $reports = $this->applyFilters();
         } else {
@@ -21,7 +23,8 @@ trait WithExportDailyReport {
         );
     }
 
-    public function exportPdf() {
+    public function exportPdf()
+    {
         if ($this->has_filter) {
             $reports = $this->applyFilters();
         } else {
@@ -49,7 +52,8 @@ trait WithExportDailyReport {
 
     }
 
-    public function getExportFileName() {
+    public function getExportFileName()
+    {
         $filename = Str::headline(static::getName());
 
         if ($this->date_from) {

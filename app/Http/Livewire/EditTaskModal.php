@@ -83,7 +83,7 @@ class EditTaskModal extends Component
                     )
                 ],
             ),
-            'task.unit_type' =>Rule::when(
+            'task.unit_type' => Rule::when(
                 condition: $this->task->isDirty('name'),
                 rules:[
                     'required',

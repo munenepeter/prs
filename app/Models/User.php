@@ -14,7 +14,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
-class User extends Authenticatable {
+class User extends Authenticatable
+{
     use HasApiTokens;
     use HasFactory;
     use Notifiable;
@@ -54,39 +55,48 @@ class User extends Authenticatable {
         'email_verified_at' => 'datetime',
     ];
 
-    public static function query(): UserBuilder {
+    public static function query(): UserBuilder
+    {
         return parent::query();
     }
 
-    public function reports(): HasMany {
+    public function reports(): HasMany
+    {
         return $this->hasMany(related: DailyReport::class, foreignKey: 'user_id', localKey: 'id');
     }
 
-    public function newEloquentBuilder($query): UserBuilder {
+    public function newEloquentBuilder($query): UserBuilder
+    {
         return new UserBuilder($query);
     }
 
-    public function hasAnyRoles(array $roles): bool {
+    public function hasAnyRoles(array $roles): bool
+    {
         return null !== $this->roles()->whereIn(column: 'name', values: $roles)->first();
     }
 
-    public function roles(): BelongsToMany {
+    public function roles(): BelongsToMany
+    {
         return $this->belongsToMany(related: Role::class, table: 'role_user');
     }
 
-    public function isAdmin(): bool {
+    public function isAdmin(): bool
+    {
         return $this->hasRole(Roles::ADMIN);
     }
 
-    public function hasRole(Roles $role): bool {
+    public function hasRole(Roles $role): bool
+    {
         return null !== $this->roles()->where(column: 'name', operator: '=', value: $role)->first();
     }
 
-    public function isProjectManager(): bool {
+    public function isProjectManager(): bool
+    {
         return $this->hasRole(Roles::PROJECT_MANAGER);
     }
 
-    public function sendNewUserCreatedNotification(string $temporary_password): void {
+    public function sendNewUserCreatedNotification(string $temporary_password): void
+    {
         $this->notify(new NewUserCreated(
             firstname: $this->firstname,
             lastname: $this->lastname,
@@ -95,7 +105,8 @@ class User extends Authenticatable {
         ));
     }
 
-    protected function fullName(): Attribute {
+    protected function fullName(): Attribute
+    {
         return Attribute::make(
             get: fn (mixed $value, array $attributes) => "{$attributes['firstname']} {$attributes['lastname']}"
         );
@@ -105,7 +116,8 @@ class User extends Authenticatable {
      *
      * @return void
      */
-    protected static function boot() {
+    protected static function boot()
+    {
         parent::boot();
 
         static::creating(function ($user) {

@@ -17,7 +17,8 @@ use App\Http\Livewire\Concerns\HasInserts;
 use Lean\LivewireAccess\WithImplicitAccess;
 use Lean\LivewireAccess\BlockFrontendAccess;
 
-class CreateProject extends Component {
+class CreateProject extends Component
+{
     use WithImplicitAccess;
     use HasInserts;
 
@@ -34,20 +35,24 @@ class CreateProject extends Component {
     #[BlockFrontendAccess]
     public ?Collection $tasks = null;
 
-    public function mount() {
+    public function mount()
+    {
         $this->status = ProjectStatuses::LIVE->value;
     }
 
-    public function render() {
+    public function render()
+    {
         return view('livewire.create-project')->layout('layouts.app', ['title' => 'Create A New Project']);
     }
 
-    public function updatedCreateNewClient(bool $value): void {
+    public function updatedCreateNewClient(bool $value): void
+    {
         !$value ? $this->reset('new_client')
             : $this->reset('client');
     }
 
-    public function updatedCreateTasks(bool $value): void {
+    public function updatedCreateTasks(bool $value): void
+    {
         if (!$value) {
             $this->reset('tasks');
             $this->reset('target');
@@ -58,7 +63,8 @@ class CreateProject extends Component {
         $this->tasks = new Collection();
     }
 
-    public function addTask(): void {
+    public function addTask(): void
+    {
         if ($this->tasks?->contains('name', $this->task)) {
             $this->taskExistsBrowserEvent();
             return;
@@ -77,7 +83,8 @@ class CreateProject extends Component {
         $this->reset('unit_type');
     }
 
-    public function removeTask(int $task): void {
+    public function removeTask(int $task): void
+    {
         if (!$this->tasks?->has($task)) {
             $this->taskDoesntExistBrowserEvent();
             return;
@@ -88,7 +95,8 @@ class CreateProject extends Component {
         $this->taskRemovedBrowserEvent();
     }
 
-    public function save() {
+    public function save()
+    {
         $validated = ($this->create_new_client)
             ? $this->validate(rules: Arr::except($this->rules(), keys: ['task', 'client']))
             : $this->validate(rules: Arr::except($this->rules(), keys: ['task', 'new_client']));
@@ -112,7 +120,8 @@ class CreateProject extends Component {
         }
     }
 
-    protected function rules(): array {
+    protected function rules(): array
+    {
         return [
             'name' => [
                 'required', 'string', 'min:3',
@@ -164,7 +173,8 @@ class CreateProject extends Component {
         ];
     }
 
-    protected function createProjectAndItsRelations(array $validated): Project {
+    protected function createProjectAndItsRelations(array $validated): Project
+    {
         $project = new Project([
             'name' => $validated['name'],
             'status' => $validated['status'],

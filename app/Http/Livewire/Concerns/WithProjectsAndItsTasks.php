@@ -9,7 +9,8 @@ use Illuminate\Support\Collection;
 use Lean\LivewireAccess\WithImplicitAccess;
 use Lean\LivewireAccess\BlockFrontendAccess;
 
-trait WithProjectsAndItsTasks {
+trait WithProjectsAndItsTasks
+{
     use WithImplicitAccess;
 
     public $project_as_model;
@@ -17,13 +18,15 @@ trait WithProjectsAndItsTasks {
     #[BlockFrontendAccess]
     public Collection $tasks;
 
-    public function getProjectsProperty() {
+    public function getProjectsProperty()
+    {
         return Project::query()
             ->where('status', '=', ProjectStatuses::LIVE)
             ->pluck(column: 'name', key: 'id')->sort();
     }
 
-    public function updatedProject(int $project_id) {
+    public function updatedProject(int $project_id)
+    {
         $this->reset('task');
 
         $this->validateOnly('project');
@@ -33,7 +36,8 @@ trait WithProjectsAndItsTasks {
         $this->fetchTasks($project_id);
     }
 
-    public function fetchTasks(int $project_id) {
+    public function fetchTasks(int $project_id)
+    {
         $this->tasks = Task::query()
             ->where('project_id', '=', $project_id)
             ->pluck('name', 'id');

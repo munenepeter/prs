@@ -16,7 +16,7 @@ class RoleUserSeeder extends Seeder
      */
     public function run()
     {
-        $users = User::query()->inRandomOrder()->take(random_int(3,5))->get();
+        $users = User::query()->inRandomOrder()->take(random_int(3, 5))->get();
         $roles = Role::query()->get();
 
         $randomUsers = $users->random(3);

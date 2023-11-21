@@ -11,7 +11,8 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules\Enum;
 use App\Http\Livewire\Concerns\HasUserInserts;
 
-class CreateNewUser extends Component {
+class CreateNewUser extends Component
+{
     use HasUserInserts;
 
     public string $firstname = '';
@@ -23,7 +24,8 @@ class CreateNewUser extends Component {
     public $phone_number;
 
 
-    public function create() {
+    public function create()
+    {
         $this->validate();
 
         $random_password = Str::random(8);
@@ -49,11 +51,13 @@ class CreateNewUser extends Component {
         return redirect()->route('users.index');
     }
 
-    public function render() {
+    public function render()
+    {
         return view('livewire.create-new-user');
     }
 
-    protected function rules(): array {
+    protected function rules(): array
+    {
         return [
             'firstname' => ['required', 'string', 'max:255'],
             'lastname' => ['required', 'string', 'max:255'],
