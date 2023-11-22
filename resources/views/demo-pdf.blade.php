@@ -45,9 +45,16 @@
 
         .report-table th,
         .report-table tfoot {
-            background: #60A7A6;
+            border: none !important;
             font-weight: bold;
             font-size: 12px !important;
+        }
+        .report-table th{
+          text-transform: uppercase;
+          color: #60A7A6;
+        }
+         .report-table tfoot{
+          background: #60A7A6;
         }
 
         .report-table table {
