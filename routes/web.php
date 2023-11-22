@@ -53,6 +53,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
 
 Route::get('/dashboard', DashboardController::class)->middleware(['auth', 'new_user'])->name('dashboard');
 
+Route::get('/dashboard/view-pdf', DashboardController::class)->middleware(['auth', 'new_user'])->name('dashboard');
 
 
 
