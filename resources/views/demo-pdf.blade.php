@@ -93,11 +93,11 @@
                         <br> {{ now() }}
                         <br /><br />
                         @if (isset($header['date']))
-                            Daily Report {{ $header['date'] }}
+                            Date: {{ $header['date'] }}
                         @elseif (isset($header['project']))
-                            Daily Report {{ $header['project'] }}
+                            Project: {{ $header['project'] }}
                         @elseif (isset($header['task']))
-                            Daily Report {{ $header['task'] }}
+                            Task: {{ $header['task'] }}
                         @endif
                     </div>
 

@@ -86,11 +86,11 @@ trait WithExportDailyReport {
         }
 
         if ($this->project >= 1) {
-            $header['project'] = " for the project " . data_get($this->projects, $this->project, '');
+            $header['project'] = data_get($this->projects, $this->project, '');
         }
 
         if ($this->task >= 1) {
-            $header['task'] = " for the task " . data_get($this->tasks, $this->task, '');
+            $header['task'] = data_get($this->tasks, $this->task, '');
         }
 
         return $header;
