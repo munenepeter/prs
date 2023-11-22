@@ -19,13 +19,11 @@ class LatestDailyReports extends Component {
 
     public function clearFilters(): void {
         $this->repopulateReports();
-
         $this->reset('user');
     }
 
     public function filter(): void {
-        $validated = $this->validate();
-
+        $this->validate();
         $this->resetPage();
 
         $this->has_filter = true;

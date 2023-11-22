@@ -43,8 +43,6 @@ trait WithExportDailyReport {
 
         $reports = $reports->get();
 
-        return view('daily_report_pdf', compact('reports', 'header'))->render();
-
         $pdfContent = view('daily_report_pdf', compact('reports', 'header'))->render();
 
         // Generate PDF

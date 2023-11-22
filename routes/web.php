@@ -1,20 +1,21 @@
 <?php
 
 
+use App\Http\Livewire\EditUser;
+use App\Http\Livewire\EditProject;
+use App\Http\Livewire\ViewAllUsers;
+use App\Http\Livewire\ViewProjects;
+use App\Http\Livewire\CreateNewUser;
+use App\Http\Livewire\CreateProject;
 use Illuminate\Support\Facades\Route;
+use App\Http\Livewire\EditDailyReport;
+use App\Http\Livewire\ViewDailyReports;
+use App\Http\Livewire\ViewProjectTasks;
+use App\Http\Livewire\CreateDailyReport;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Auth\FirstTimeLoginController;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+
 Route::permanentRedirect('/', 'login')->name('homepage');
 
 Route::prefix('login')->name('login.')->group(function () {
@@ -23,38 +24,31 @@ Route::prefix('login')->name('login.')->group(function () {
 });
 
 Route::middleware(['auth',  'new_user'])->name('reports.')->group(function () {
-    Route::get('/{user}/reports', \App\Http\Livewire\ViewDailyReports::class)
-        ->middleware('can:view-reports')
-        ->name('index');
-    Route::get('/reports/create', \App\Http\Livewire\CreateDailyReport::class)
-        ->middleware('can:view-reports')
-        ->name('create');
-    Route::get('/reports/{report}/edit', \App\Http\Livewire\EditDailyReport::class)
-        ->name('edit');
+    Route::get('/{user}/reports', ViewDailyReports::class)
+        ->middleware('can:view-reports')->name('index');
+    Route::get('/reports/create', CreateDailyReport::class)
+        ->middleware('can:view-reports')->name('create');
+    Route::get('/reports/{report}/edit', EditDailyReport::class)->name('edit');
 });
 
 Route::middleware(['auth', 'admin.project_manager'])->group(function () {
     Route::prefix('projects')->name('projects.')->group(function () {
-        Route::get('/', \App\Http\Livewire\ViewProjects::class)->name('index');
-        Route::get('/create', \App\Http\Livewire\CreateProject::class)->name('create');
-        Route::get('/{project:slug}/edit', \App\Http\Livewire\EditProject::class)->name('edit');
-        Route::get('/{project:slug}/tasks/', \App\Http\Livewire\ViewProjectTasks::class)
-            ->name('tasks.show');
+        Route::get('/', ViewProjects::class)->name('index');
+        Route::get('/create', CreateProject::class)->name('create');
+        Route::get('/{project:slug}/edit', EditProject::class)->name('edit');
+        Route::get('/{project:slug}/tasks/', ViewProjectTasks::class)->name('tasks.show');
     });
 });
 
 Route::middleware(['auth', 'admin'])->group(function () {
     Route::prefix('users/')->name('users.')->group(function () {
-        Route::get('', \App\Http\Livewire\ViewAllUsers::class)->name('index');
-        Route::get('create', \App\Http\Livewire\CreateNewUser::class)->name('create');
-        Route::get('{user}/edit', \App\Http\Livewire\EditUser::class)->name('edit');
+        Route::get('', ViewAllUsers::class)->name('index');
+        Route::get('create', CreateNewUser::class)->name('create');
+        Route::get('{user}/edit', EditUser::class)->name('edit');
     });
 });
 
 Route::get('/dashboard', DashboardController::class)->middleware(['auth', 'new_user'])->name('dashboard');
-
-Route::get('/dashboard/view-pdf', DashboardController::class)->middleware(['auth', 'new_user'])->name('dashboard');
-
 
 
 require __DIR__.'/auth.php';
