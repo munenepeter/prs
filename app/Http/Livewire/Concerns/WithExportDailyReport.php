@@ -4,7 +4,6 @@ namespace App\Http\Livewire\Concerns;
 
 use App\Models\User;
 use Illuminate\Support\Str;
-use Illuminate\Support\Facades\DB;
 use App\Exports\DailyReportsExport;
 use Maatwebsite\Excel\Facades\Excel;
 use Barryvdh\DomPDF\Facade\Pdf as PDF;
@@ -31,12 +30,7 @@ trait WithExportDailyReport {
 
         if ($this->has_filter) {
             $reports = $this->applyFilters();
-
-            //get the user that was filtered
-            $user = User::select(['firstname','lastname'])
-                        ->where('id', $this->user)->first();
-            $header['user']  = $user->firstname . ' ' . $user->lastname;
-
+            $header = $this->getHeaderDetails();
         } else {
             $reports = $this->populateReports();
         }
@@ -46,15 +40,14 @@ trait WithExportDailyReport {
         $pdfContent = view('daily_report_pdf', compact('reports', 'header'))->render();
 
         // Generate PDF
-        $pdf = PDF::loadHtml($pdfContent)->setWarnings(false);
+        $pdf = PDF::loadHtml($pdfContent)
+                    ->setWarnings(false)
+                    ->setPaper('A4', 'portrait');
 
-        // Set paper size and orientation if needed
-        $pdf->setPaper('A4', 'portrait');
-
-        // Save the PDF
+        // Save the pdf
         $pdf->save($this->getExportFileName() . '.pdf');
 
-        // Provide a download link to the saved PDF
+        // Provide a download link to the saved pdf
         return response()->download(public_path($this->getExportFileName() . '.pdf'))->deleteFileAfterSend();
     }
 
@@ -79,5 +72,30 @@ trait WithExportDailyReport {
         }
 
         return $filename;
+    }
+
+    public function getHeaderDetails():array {
+        $header = [];
+
+        if ($this->date_from) {
+            $header['date'] .= " from " . $this->date_from . " up to " . $this->date_to;
+        }
+
+        if ($this->user) {
+            $user = User::select(['firstname', 'lastname'])
+                         ->where('id', $this->user)->first();
+
+            $header['user']  = $user->firstname . ' ' . $user->lastname;
+        }
+
+        if ($this->project >= 1) {
+            $header['project'] .= " for the project " . data_get($this->projects, $this->project, '');
+        }
+
+        if ($this->task >= 1) {
+            $header['task'] .= " for the task " . data_get($this->tasks, $this->task, '');
+        }
+
+        return $header;
     }
 }
