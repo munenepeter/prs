@@ -75,7 +75,7 @@ trait WithExportDailyReport {
         $header = [];
 
         if ($this->date_from) {
-            $header['date'] = " from " . $this->date_from . " up to " . $this->date_to;
+            $header['date'] = "From " . $this->date_from . " Up to " . $this->date_to;
         }
 
         if ($this->user) {
