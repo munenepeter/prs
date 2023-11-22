@@ -56,6 +56,7 @@
         }
 
         .report-table tfoot {
+            border: none !important;
             background: #60A7A6;
         }
 
