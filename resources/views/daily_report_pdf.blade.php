@@ -20,10 +20,11 @@
             padding: 4px;
             border: 1px solid #666;
             text-align: left;
-            word-wrap: break-word;
             max-width: 150px;
             font-size: 12px !important;
-        }
+            word-wrap: break-word;
+        } 
+           
 
         .report-table th,
         tfoot {
@@ -35,6 +36,7 @@
         .report-table {
             width: 100%;
             border-collapse: collapse;
+
 
         }
 
@@ -264,6 +266,7 @@
                     <td></td>
                     <td></td>
                 </tr>
+            </tfoot>
         </table>
     </div>
 </body>

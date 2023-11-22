@@ -37,7 +37,7 @@ trait WithExportDailyReport {
 
         $reports = $reports->get();
 
-        $pdfContent = view('daily_report_pdf', compact('reports', 'header'))->render();
+        $pdfContent = view('demo-pdf', compact('reports', 'header'))->render();
 
         $pdf = PDF::loadHtml($pdfContent)
                     ->setWarnings(false)
