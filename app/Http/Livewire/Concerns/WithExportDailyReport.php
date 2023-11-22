@@ -92,6 +92,9 @@ trait WithExportDailyReport {
         if ($this->task >= 1) {
             $header['task'] = data_get($this->tasks, $this->task, '');
         }
+        if ($this->perfomance) {
+            $header['perfomance'] = data_get($this->perfomances, $this->perfomance, '');
+        }
 
         return $header;
     }
