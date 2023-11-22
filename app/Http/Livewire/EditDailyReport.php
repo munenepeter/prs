@@ -58,6 +58,8 @@ class EditDailyReport extends Component
     public function save()
     {
         if ($this->report->isClean() && $this->report->task->isClean() && $this->report->project->isClean()) {
+            $this->report->perfomance = $this->report->calculatePerformance();
+            $this->report->save();
             return to_route('reports.index', $this->report->user_id);
         }
 
