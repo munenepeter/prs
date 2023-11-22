@@ -49,18 +49,20 @@
             font-weight: bold;
             font-size: 12px !important;
         }
-        .report-table th{
-          text-transform: uppercase;
-          color: #60A7A6;
+
+        .report-table th {
+            text-transform: uppercase;
+            color: #60A7A6;
         }
-         .report-table tfoot{
-          background: #60A7A6;
+
+        .report-table tfoot {
+            background: #60A7A6;
         }
 
         .report-table table {
             width: 100%;
             border-collapse: collapse;
-            padding:5px;
+            padding: 5px;
         }
 
         .information {
@@ -98,6 +100,8 @@
                             Project: {{ $header['project'] }}
                         @elseif (isset($header['task']))
                             Task: {{ $header['task'] }}
+                        @elseif (isset($header['perfomance']))
+                            Perfomance: {{ $header['perfomance'] }}
                         @endif
                     </div>
 
