@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Invoice - #123</title>
+    <title>Daily Report</title>
 
     <style type="text/css">
         @page {
