@@ -82,7 +82,7 @@ trait WithExportDailyReport {
             $user = User::select(['firstname', 'lastname'])
                          ->where('id', $this->user)->first();
 
-            $header['user']  = $user->firstname . ' ' . $user->lastname;
+            $header['user']  = $user?->firstname . ' ' . $user?->lastname;
         }
 
         if ($this->project >= 1) {

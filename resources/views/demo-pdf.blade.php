@@ -85,7 +85,7 @@
                 <td align="left" style="width: 40%;">
                     <h3>Productivity Reporting System</h3>
                     <div>
-                        @if (empty($header))
+                        @if (empty($header) || trim($header['user']) === "")
                             General Daily Report
                         @else
                             Daily report for {{ $header['user'] }}
