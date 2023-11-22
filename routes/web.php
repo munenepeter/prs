@@ -50,5 +50,8 @@ Route::middleware(['auth', 'admin'])->group(function () {
 
 Route::get('/dashboard', DashboardController::class)->middleware(['auth', 'new_user'])->name('dashboard');
 
+Route::get('/demo-pdf', function (){
+    return view('demo-pdf');
+});
 
 require __DIR__.'/auth.php';
