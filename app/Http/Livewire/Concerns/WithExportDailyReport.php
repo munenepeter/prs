@@ -39,13 +39,10 @@ trait WithExportDailyReport {
 
         $pdfContent = view('daily_report_pdf', compact('reports', 'header'))->render();
 
-        // Generate PDF
         $pdf = PDF::loadHtml($pdfContent)
                     ->setWarnings(false)
-                    ->setPaper('A4', 'portrait');
-
-        // Save the pdf
-        $pdf->save($this->getExportFileName() . '.pdf');
+                    ->setPaper('A4', 'portrait')
+                    ->save($this->getExportFileName() . '.pdf');
 
         // Provide a download link to the saved pdf
         return response()->download(public_path($this->getExportFileName() . '.pdf'))->deleteFileAfterSend();
