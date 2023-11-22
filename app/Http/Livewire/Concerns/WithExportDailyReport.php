@@ -2,15 +2,17 @@
 
 namespace App\Http\Livewire\Concerns;
 
-use Barryvdh\DomPDF\Facade\Pdf as PDF;
+use App\Models\User;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\DB;
 use App\Exports\DailyReportsExport;
 use Maatwebsite\Excel\Facades\Excel;
+use Barryvdh\DomPDF\Facade\Pdf as PDF;
 
-trait WithExportDailyReport
-{
-    public function exportExcel()
-    {
+trait WithExportDailyReport {
+
+    public function exportExcel() {
+
         if ($this->has_filter) {
             $reports = $this->applyFilters();
         } else {
@@ -23,20 +25,25 @@ trait WithExportDailyReport
         );
     }
 
-    public function exportPdf()
-    {
+    public function exportPdf() {
+
+        $header = [];
+
         if ($this->has_filter) {
             $reports = $this->applyFilters();
+
+            //get the user that was filtered
+            $user = User::select(['firstname','lastname'])
+                        ->where('id', $this->user)->first();
+            $header['user']  = $user->firstname . ' ' . $user->lastname;
+
         } else {
             $reports = $this->populateReports();
         }
 
-        // dd($reports->get()->toArray());
-
         $reports = $reports->get();
 
-
-        $pdfContent = view('daily_report_pdf', compact('reports'))->render();
+        $pdfContent = view('daily_report_pdf', compact('reports', 'header'))->render();
 
         // Generate PDF
         $pdf = PDF::loadHtml($pdfContent)->setWarnings(false);
@@ -49,11 +56,10 @@ trait WithExportDailyReport
 
         // Provide a download link to the saved PDF
         return response()->download(public_path($this->getExportFileName() . '.pdf'))->deleteFileAfterSend();
-
     }
 
-    public function getExportFileName()
-    {
+    public function getExportFileName() {
+
         $filename = Str::headline(static::getName());
 
         if ($this->date_from) {
