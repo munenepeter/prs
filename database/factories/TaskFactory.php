@@ -20,7 +20,7 @@ class TaskFactory extends Factory
     {
         return [
             'name' => $this->faker->unique()->words(nb: 1, asText: true),
-            'unit_type' => Arr::random(TaskUnitTypes::cases()),
+            'unit_type' => 1,
             'target' => $this->faker->numberBetween(0, 400),
         ];
     }
